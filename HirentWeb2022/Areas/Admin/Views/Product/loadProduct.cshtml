@@ -1,0 +1,26 @@
+﻿
+@{
+    Layout = null;
+}
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        <tr role="row" class="odd">
+                <td class="sorting_1">1</td>
+                <td><input type="checkbox"></td>
+                <td>@item.ProductCode</td>
+                <td>@item.ProductName</td>
+                <td>@item.ProductName_EN</td>
+                <td>@item.Soluongton</td>
+                <td style="text-align: right;">@item.PricePerBlock</td>
+                <td style="text-align: right;">@item.PricePerDay</td>
+                <td width="10%"><a class="btn btn-info btn-xs fontCatNumber" style="background-color: grey;" onclick="SelectGroup1(this,'385','Đĩa cắt kim cương khô / ướt hiệu suất cao để cắt gạch xây, bê tông, đá, ngói lợp và nhiều hơn nữa')">1</a><span><a class="btn btn-info btn-xs fontCatNumber" style="background-color: grey;" onclick="SelectGroup2(this,'385','Đĩa cắt kim cương khô / ướt hiệu suất cao để cắt gạch xây, bê tông, đá, ngói lợp và nhiều hơn nữa')">2</a></span><span><a class="btn btn-info btn-xs fontCatNumber" style="background-color: grey;" onclick="SelectGroup3(this,'385','Đĩa cắt kim cương khô / ướt hiệu suất cao để cắt gạch xây, bê tông, đá, ngói lợp và nhiều hơn nữa')">3</a></span><span><a class="btn btn-info btn-xs fontCatNumber" style="background-color: grey;" onclick="SelectGroup4(this,'385','Đĩa cắt kim cương khô / ướt hiệu suất cao để cắt gạch xây, bê tông, đá, ngói lợp và nhiều hơn nữa')">4</a></span><span><a class="btn btn-info btn-xs fontCatNumber" style="background-color: grey;" onclick="SelectGroup5(this,'385','Đĩa cắt kim cương khô / ướt hiệu suất cao để cắt gạch xây, bê tông, đá, ngói lợp và nhiều hơn nữa')">5</a></span><span><a class="btn btn-info btn-xs fontCatNumber" style="background-color: grey;" onclick="SelectGroup6(this,'385','Đĩa cắt kim cương khô / ướt hiệu suất cao để cắt gạch xây, bê tông, đá, ngói lợp và nhiều hơn nữa')">6</a></span><span><a class="btn btn-info btn-xs fontCatNumber" style="background-color: grey;" onclick="SelectGroup7(this,'385','Đĩa cắt kim cương khô / ướt hiệu suất cao để cắt gạch xây, bê tông, đá, ngói lợp và nhiều hơn nữa')">7</a></span></td>
+                <td><img src="@item.ProductAvatar" class="imgBannerInTable"></td>
+                <td><a href="../productdetail?productID=385" target="_blank" class="btn btn-primary btn-xs"><i class="fa fa-info-circle"></i>&nbsp; Xem</a><span><a href="product_edit?productID=@item.ProductID" class="btn btn-info btn-xs"><i class="fa fa-edit"></i>&nbsp; Sửa</a></span><span><a class="btn btn-warning btn-xs" onclick="ViewCategory()"><i class="fa fa-edit"></i>&nbsp; Thuộc Category</a></span><span><a class="btn btn-danger btn-xs" onclick="Delete(this,'385','Đĩa cắt kim cương khô / ướt hiệu suất cao để cắt gạch xây, bê tông, đá, ngói lợp và nhiều hơn nữa')"><i class="fa fa-remove"></i>&nbsp; Xóa SP</a></span><button type="button" class="btn btn-primary" onclick="nhapkho('385','1000')" data-toggle="modal" data-target="#exampleModal">Nhập kho</button></td>
+            </tr>
+
+    }
+
+}

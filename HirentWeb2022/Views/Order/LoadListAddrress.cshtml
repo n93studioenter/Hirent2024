@@ -1,0 +1,71 @@
+﻿@if (Model != null)
+{
+    foreach (HirentWeb2022.Models.tb_CustomerDeliveryAddress item in Model)
+    {
+        <tr>
+            <td>
+                @item.FullName
+            </td>
+            <td>
+                @item.Address
+            </td>
+            <td>
+                @item.PhoneNumber
+            </td>
+            <td>
+                @if (item.IsMacdinh == 1)
+                {
+                    <input type="radio"  name="radAddress" checked onclick="setMacdinh('@item.ID')" />
+                }
+                else
+                {
+                    <input type="radio" name="radAddress" onclick="setMacdinh('@item.ID')" />
+                }
+            </td>
+            <td>
+                <a onclick="DeleteAdress('@item.ID')">Xóa</a>
+            </td>
+        </tr>
+    }
+}
+<script>
+
+    function DeleteAdress(id) {
+        var param = {
+            "ID": id
+        }
+        $.ajax({
+            url: '/Order/DeleteAddress',
+            dataType: 'html',
+            data: param,
+            type: "POST",
+            async: false,
+            success: function (data, status, xhr) {
+                loadDanhsachdiachi();
+                LoadMacDinh('@ViewBag.CustomerID')
+            },
+            error: function (xhr, status, error) {
+                alert(status);
+            }
+        });
+    }
+    function setMacdinh(id) {
+        var param = {
+            "ID":id
+        }
+        $.ajax({
+            url: '/Order/SetActive',
+            dataType: 'html',
+            data: param,
+            type: "POST",
+            async: false,
+            success: function (data, status, xhr) {
+                loadDanhsachdiachi();
+                LoadMacDinh('@ViewBag.CustomerID');
+            },
+            error: function (xhr, status, error) {
+                alert(status);
+            }
+        });
+    }
+</script>
