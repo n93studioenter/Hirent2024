@@ -21,38 +21,95 @@
                     }
                 </a>
             </li>
-            @if (ViewBag.tb_CategoryMain != null && ViewBag.tb_CategorySub1.SubCate1Name == null && ViewBag.tb_CategorySub2.SubCate2Name==null)
+            @if (ViewBag.tb_CategoryMain != null && ViewBag.tb_CategorySub1.SubCate1Name == null && ViewBag.tb_CategorySub2.SubCate2Name == null)
             {
-                <li>
-                    <span>@ViewBag.tb_CategoryMain.MainCateName</span>
-                </li>
+                if (ViewBag.lang == "vi")
+                {
+                    <li>
+                        <span>@ViewBag.tb_CategoryMain.MainCateName</span>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <span>@ViewBag.tb_CategoryMain.Language</span>
+                    </li>
+                }
+
             }
             else
             {
                 if (ViewBag.tb_CategorySub1 != null && ViewBag.tb_CategorySub2.SubCate2Name == null)
                 {
                     <li>
-                        <a href="/productcate?MainCateID=@ViewBag.tb_CategoryMain.MainCateID">@ViewBag.tb_CategoryMain.MainCateName</a>
+                        @if (ViewBag.lang == "vi")
+                        {
+                            <a href="/productcate?MainCateID=@ViewBag.tb_CategoryMain.MainCateID">
+                                @ViewBag.tb_CategoryMain.MainCateName
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/productcate?MainCateID=@ViewBag.tb_CategoryMain.MainCateID">
+                                @ViewBag.tb_CategoryMain.Language
+                            </a>
+                        }
+
                     </li>
                     <li>
-                        <span>
-                            @ViewBag.tb_CategorySub1.SubCate1Name
-                        </span>
+                        @if (ViewBag.lang == "vi")
+                        {
+                            <span>
+                                @ViewBag.tb_CategorySub1.SubCate1Name
+                            </span>
+                        }
+                        else
+                        {
+                            <span>
+                                @ViewBag.tb_CategorySub1.Language
+                            </span>
+                        }
                     </li>
                 }
 
                 if (ViewBag.tb_CategorySub2.SubCate2Name != null)
                 {
                     <li>
-                        <a href="/productcate?MainCateID=@ViewBag.tb_CategoryMain.MainCateID">@ViewBag.tb_CategoryMain.MainCateName</a>
+                        @if (ViewBag.lang == "vi")
+                        {
+                            <a href="/productcate?MainCateID=@ViewBag.tb_CategoryMain.MainCateID">
+                                @ViewBag.tb_CategoryMain.MainCateName
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/productcate?MainCateID=@ViewBag.tb_CategoryMain.MainCateID">
+                                @ViewBag.tb_CategoryMain.Language
+                            </a>
+                        }
                     </li>
                     <li>
                         <a href="productcate?ProductSubCate1=@ViewBag.tb_CategorySub1.SubCate1ID">
-                            @ViewBag.tb_CategorySub1.SubCate1Name
+                            @if (ViewBag.lang == "vi")
+                            {
+                                @ViewBag.tb_CategorySub1.SubCate1Name
+                            }
+                            else
+                            {
+                                @ViewBag.tb_CategorySub1.Language
+                            }
                         </a>
                     </li>
                     <li>
-                        <span>  @ViewBag.tb_CategorySub2.SubCate2Name</span>
+                        @if (ViewBag.lang == "vi")
+                        {
+                            <span>  @ViewBag.tb_CategorySub2.SubCate2Name</span>
+                        }
+                        else
+                        {
+                            <span>  @ViewBag.tb_CategorySub2.Language</span>
+                        }
+
                     </li>
                 }
             }
@@ -62,11 +119,10 @@
 </div>
 <div class="container">
     <div class="dssp_title">
-        Danh sách sản phẩm
+        @(ViewBag.lang == "vi"? "Danh sách sản phẩm" : "Product list") 
     </div>
-
     <div class="totalproduct">
-      <span>Có tổng cộng </span>  <span>@ViewBag.Count</span> <span> sản phẩm</span>
+        <span>@(ViewBag.lang == "vi"? "Có tổng cộng" : "There are")  </span>  <span>@ViewBag.Count</span> <span>  @(ViewBag.lang == "vi"? "sản phẩm" : "products") </span>
     </div>
     <div class="row">
         @if (Model != null)
@@ -78,9 +134,9 @@
                 if (ViewBag.lang == "vi")
                 {
                     <div class="col-md-15">
-                        <div class="index_productlistbox productseach_box">
+                        <div class="index_productlistbox">
                             <div class="product-btns">
-                                <span class="product-statuspercentage">Mới&nbsp;90 %</span>
+                                <span class="product-statuspercentage">Mới&nbsp;@item.tb_Product.StatusPercentage %</span>
                             </div>
                             <div class="index_productlistimage">
                                 <a href="/ProductDetail?productID=@item.tb_Product.ProductID">
@@ -116,6 +172,9 @@
                 {
                     <div class="col-md-15">
                         <div class="index_productlistbox">
+                            <div class="product-btns">
+                                <span class="product-statuspercentage">New&nbsp;@item.tb_Product.StatusPercentage %</span>
+                            </div>
                             <div class="index_productlistimage">
                                 <a href="/ProductDetail?productID=@item.tb_Product.ProductID">
                                     <img src="@item.tb_Product.ProductAvatar" class="img-responsive" />
@@ -138,9 +197,9 @@
                                     <span>@item.tb_Product_Translation.PricePerDay_EN</span>
                                 }
                             </div>
-                            @*<div class="index_map">
-                                   <i class="fas fa-map-marker"></i> <span>@item.WarehouseName</span>
-                                </div>*@
+                            <div class="index_map">
+                                <i class="fas fa-map-marker"></i> <span>@item.tb_WareHouse.WarehouseName</span>
+                            </div>
                         </div>
                     </div>
 
@@ -150,3 +209,13 @@
         }
     </div>
 </div>
+<style>
+    .index_productlistbox {
+        margin-bottom: 30px !important;
+        border-bottom: 3px solid #ffffff;
+    }
+
+        .index_productlistbox:hover {
+            border-bottom: 3px solid #214F39;
+        }
+</style>

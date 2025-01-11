@@ -29,15 +29,31 @@
             <div class="x_panel">
                 <div class="x_title">
                     <div class="col-md-6 col-sm-6 sol-xs-12">
-                        <p style="margin-bottom: 2px;">Số 1: Sản phẩm sẽ hiển thị ở group SẢN PHẨM MỚI NHẤT  </p>
-                        <p style="margin-bottom: 2px;">Số 2: Sản phẩm sẽ hiển thị ở group NHIỀU NGƯỜI TÌM NHẤT  </p>
-                        <p style="margin-bottom: 2px;">Số 3: Sản phẩm sẽ hiển thị ở group SẢN PHẨM ĐỘC, LẠ </p>
-                        <p style="margin-bottom: 2px;">Số 4: Sản phẩm sẽ hiển thị ở group CÓ GIÁ THUÊ RẺ NHẤT </p>
+                        <p style="margin-bottom: 2px;">
+                            Số 1: SẢN PHẨM MỚI NHẤT
+                        </p>
+                        <p style="margin-bottom: 2px;">
+                            Số 2: NHIỀU NGƯỜI TÌM NHẤT
+                        </p>
+                        <p style="margin-bottom: 2px;">
+                            Số 3: SẢN PHẨM CHẤT LƯỢNG
+                        </p>
+                        <p style="margin-bottom: 2px;">
+                            Số 4: CÓ GIÁ THUÊ RẺ NHẤT
+                        </p>
                     </div>
                     <div class="col-md-6 col-sm-6 sol-xs-12">
-                        <p style="margin-bottom: 2px;">Số 5: Sản phẩm sẽ hiển thị ở group SẢN PHẨM GẦN BẠN </p>
-                        <p style="margin-bottom: 2px;">Số 6: Sản phẩm sẽ hiển thị ở group RAO VẶT MIỄN PHÍ  </p>
-                        <p style="margin-bottom: 2px;">Số 7: Sản phẩm sẽ hiển thị ở group SẢN PHẨM CHO TẶNG </p>
+                        <p style="margin-bottom: 2px;">
+                            Số 5: SẢN PHẨM GẦN BẠN
+
+                        </p>
+                        <p style="margin-bottom: 2px;">
+                            Số 6: RAO VẶT MIỄN PHÍ
+
+                        </p>
+                        <p style="margin-bottom: 2px;">
+                            Số 7: SẢN PHẨM CHO TẶNG
+                        </p>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -158,7 +174,9 @@
                 //$('#datatable').DataTable();
                 $('#datatable').DataTable().destroy();
                 $("#tbody").html(result);
-                $('#datatable   ').DataTable().draw();
+                $('#datatable').DataTable({
+                    ordering: false  // Hủy chức năng sắp xếp
+                }).draw();
 
 
             }

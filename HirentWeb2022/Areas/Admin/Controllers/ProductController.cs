@@ -47,9 +47,9 @@ namespace HirentWeb2022.Areas.Admin.Controllers
                                  ProductID = p.ProductID,
                                  ProductName = p.ProductName,
                                  Soluongton = p.Soluongton,
-                                 ProductName_EN = pts2!=null?pts2.ProductName_EN:""
+                                 ProductName_EN = pts2!=null?pts2.ProductName_EN:"" 
                              }
-                             ).ToList();
+                             ).OrderByDescending(m=>m.ProductID).ToList();
                 return PartialView(model);
             }
         }
@@ -376,13 +376,13 @@ namespace HirentWeb2022.Areas.Admin.Controllers
                     db.SaveChanges();
 
                 }
-                //tb_Product_Translation
+               // tb_Product_Translation
                 tb_Product_Translation tb_Product_Translation = db.tb_Product_Translation.Where(m => m.Idproduct == it.ProductID).FirstOrDefault();
                 if (tb_Product_Translation == null)
                 {
                     tb_Product_Translation = new tb_Product_Translation();
                     tb_Product_Translation.Idproduct = int.Parse(it.ProductID.ToString());
-                    tb_Product_Translation.ShortDescription = model.ShortDescription;
+                    tb_Product_Translation.ShortDescription = model.ShortDescription_EN;
                     tb_Product_Translation.PricePerBlock_EN = model.PricePerBlock_EN;
                     tb_Product_Translation.PricePerDay_EN = model.PricePerDay_EN;
                     tb_Product_Translation.PricePerMonth_EN = model.PricePerMonth_EN;
@@ -395,7 +395,7 @@ namespace HirentWeb2022.Areas.Admin.Controllers
                 else
                 {
                     tb_Product_Translation.Idproduct = int.Parse(it.ProductID.ToString());
-                    tb_Product_Translation.ShortDescription = model.ShortDescription;
+                    tb_Product_Translation.ShortDescription = model.ShortDescription_EN;
                     tb_Product_Translation.PricePerBlock_EN = model.PricePerBlock_EN;
                     tb_Product_Translation.PricePerDay_EN = model.PricePerDay_EN;
                     tb_Product_Translation.PricePerMonth_EN = model.PricePerMonth_EN;
@@ -504,5 +504,38 @@ namespace HirentWeb2022.Areas.Admin.Controllers
             return arraytotals;
         }
         #endregion
+
+        [HttpPost]
+        public void SelectGroup(int id,int type)
+        {
+            using (var db = new HirentEntities())
+            {
+                var tb_product = db.tb_Product.Find(id);
+                if (tb_product != null)
+                {
+                    if (type == 1)
+                        tb_product.ListBy1 = tb_product.ListBy1 == "active" ? null : "active";
+                    if (type == 2)
+                        tb_product.ListBy2 = tb_product.ListBy2 == "active" ? null : "active";
+                    if (type == 3)
+                        tb_product.ListBy3 = tb_product.ListBy3 == "active" ? null : "active";
+                    if (type == 4)
+                        tb_product.ListBy4 = tb_product.ListBy4 == "active" ? null : "active";
+                    if (type == 5)
+                        tb_product.ListBy5 = tb_product.ListBy5 == "active" ? null : "active";
+                    if (type == 6)
+                        tb_product.ListBy6 = tb_product.ListBy6 == "active" ? null : "active";
+                    if (type == 7)
+                        tb_product.ListBy7 = tb_product.ListBy7 == "active" ? null : "active";
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        [HttpPost]
+        public bool DeleteProduct(int id)
+        {
+            return true;
+        }
     }
 }

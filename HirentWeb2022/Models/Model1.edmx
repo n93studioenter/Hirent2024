@@ -917,6 +917,7 @@ warning 6013: The table/view 'hirent.dbo.Tinhthanhpho' does not have a primary k
           </ReferentialConstraint>
         </Association>
         <Function Name="sp_GetProductList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="testStored1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="hirentModelStoreContainer">
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_About" EntityType="Self.tb_About" Schema="dbo" store:Type="Tables" />
@@ -1969,6 +1970,7 @@ warning 6013: The table/view 'hirent.dbo.Tinhthanhpho' does not have a primary k
             <End Role="tb_Ward" EntitySet="tb_Ward" />
           </AssociationSet>
           <FunctionImport Name="sp_GetProductList" ReturnType="Collection(hirentModel.sp_GetProductList_Result)" />
+          <FunctionImport Name="testStored1" ReturnType="Collection(hirentModel.testStored1_Result)" />
         </EntityContainer>
         <ComplexType Name="sp_GetProductList_Result">
           <Property Type="Int64" Name="ProductID" Nullable="false" />
@@ -2011,6 +2013,18 @@ warning 6013: The table/view 'hirent.dbo.Tinhthanhpho' does not have a primary k
           <Property Type="Double" Name="Cocbanggiaytovahopdongprice" Nullable="true" />
           <Property Type="Int32" Name="Cocbangtaisan" Nullable="true" />
           <Property Type="Int32" Name="Soluongton" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="testStored1_Result">
+          <Property Type="Int64" Name="MainCateID" Nullable="false" />
+          <Property Type="String" Name="MainCateName" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="Sort" Nullable="true" />
+          <Property Type="String" Name="MainCateDesc" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="true" />
+          <Property Type="Boolean" Name="IsDisplay" Nullable="true" />
+          <Property Type="String" Name="MainCateIcon" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="MainCateBanner" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Language" Nullable="true" MaxLength="100" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2981,6 +2995,22 @@ warning 6013: The table/view 'hirent.dbo.Tinhthanhpho' does not have a primary k
                 <ScalarProperty Name="Cocbanggiaytovahopdongprice" ColumnName="Cocbanggiaytovahopdongprice" />
                 <ScalarProperty Name="Cocbangtaisan" ColumnName="Cocbangtaisan" />
                 <ScalarProperty Name="Soluongton" ColumnName="Soluongton" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="testStored1" FunctionName="hirentModel.Store.testStored1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="hirentModel.testStored1_Result">
+                <ScalarProperty Name="MainCateID" ColumnName="MainCateID" />
+                <ScalarProperty Name="MainCateName" ColumnName="MainCateName" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="MainCateDesc" ColumnName="MainCateDesc" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsDisplay" ColumnName="IsDisplay" />
+                <ScalarProperty Name="MainCateIcon" ColumnName="MainCateIcon" />
+                <ScalarProperty Name="MainCateBanner" ColumnName="MainCateBanner" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

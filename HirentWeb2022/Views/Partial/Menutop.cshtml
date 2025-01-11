@@ -38,18 +38,19 @@
                 <div class="col2 hidden-sm hidden-xs">
                     <ul>
                         <li class="lidanhmuc text-capitalize">
-                            <a onclick="toogle_menu()">
-                                <i class="fa fa-bars lidanhmuc_i"></i><span id="lidanhmuc_span" class="lidanhmuc_span">
-                                    @if (ViewBag.lang == "vi")
-                                    {
+                            <a onclick="toogle_menu()" id="toggleButton">
+                                <i class="fa fa-bars lidanhmuc_i" id="lidanhmuc_i"></i>
+                                @if (ViewBag.lang == "vi")
+                                {
+                                    <span id="lidanhmuc_span" class="lidanhmuc_span">
+                                        Danh mục
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span id="lidanhmuc_span" class="lidanhmuc_span">Category</span>
+                                }
 
-                                        <span>Danh mục</span> }
-                                    else
-                                    {
-
-                                        <span>Category</span>}
-
-                                </span>
                             </a>
                             <div class="category-nav text-left">
                                 <span class="category-header" style="display: none"><span id="mnCategory">Danh mục</span> <i class="fa fa-list"></i></span>
@@ -506,6 +507,13 @@ else
         $(".btn-menu i").toggleClass("fa-bars");
         $(".btn-menu i").toggleClass("fa-times");
     }
+
+    $(document).on('click', function (event) {
+        if (!$(event.target).closest('.category-list').length && !$(event.target).is('#toggleButton') && !$(event.target).is('#lidanhmuc_span') && !$(event.target).is('#lidanhmuc_i')) {
+            $('.category-list').hide(); // Ẩn div nếu click ngoài
+        }
+    });
+       
 </script>
 
 <div id="loading">

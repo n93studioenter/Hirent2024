@@ -37,19 +37,23 @@ namespace HirentWeb2022.Controllers
                     StatusPercentage = p.StatusPercentage,
                     ProductAvatar = p.ProductAvatar,
                     Soluongton=p.Soluongton,
-
+                    ShortDescription = p.ShortDescription,
+                    FullDescription = p.FullDescription,
+                    ProductSpecification = p.ProductSpecification,
+                    ProductInstruction= p.ProductInstruction
                 }).ToList();
                 ViewBag.productID = productID;
                 var model = productList.Where(m => m.ProductID == productID).ToList();
+                ViewBag.Translate = db.tb_Product_Translation.ToList().Where(m => m.Idproduct == productID).FirstOrDefault();
                 //Main
                 var main = db.tb_ProductCategorySelection.Where(m => m.ProductId == productID).FirstOrDefault();
-                var getmainname = db.tb_CategoryMain.Where(m => m.MainCateID == main.ProductMainCate).FirstOrDefault().MainCateName;
+                var getmainname = db.tb_CategoryMain.Where(m => m.MainCateID == main.ProductMainCate).FirstOrDefault();
                 ViewBag.getmainname = getmainname;
                 // Sub 1
-                var getmainname1 = db.tb_CategorySub1.Where(m => m.SubCate1ID == main.ProductSubCate1).FirstOrDefault().SubCate1Name;
+                var getmainname1 = db.tb_CategorySub1.Where(m => m.SubCate1ID == main.ProductSubCate1).FirstOrDefault();
                 ViewBag.getmainname1 = getmainname1;
                 //Sub 2
-                var getmainname2 = db.tb_CategorySub2.Where(m => m.SubCate2ID == main.ProductSubCate2).FirstOrDefault().SubCate2Name;
+                var getmainname2 = db.tb_CategorySub2.Where(m => m.SubCate2ID == main.ProductSubCate2).FirstOrDefault();
                 ViewBag.getmainname2 = getmainname2;
                 //
                 var getlang = Session["Lang"];
@@ -71,6 +75,7 @@ namespace HirentWeb2022.Controllers
                 ViewBag.ListWTime = lstWht;
                 tb_WareHouse tb_WareHouse = db.tb_WareHouse.Where(m => m.whId == tb_ProductTermConditionDetails.WarehouseId).FirstOrDefault();
                 ViewBag.tb_WareHouse = tb_WareHouse;
+                ViewBag.ListTime = db.tb_WareHouse_Time.Where(m => m.whId == tb_WareHouse.whId).ToList();
                 var HirentEntities= db.tb_ProductAccessorySelection.Where(m => m.ProductID == productID).ToList();
                 ViewBag.ListAcess = (from m in HirentEntities
                               join p in productList
@@ -131,8 +136,8 @@ namespace HirentWeb2022.Controllers
                                     tb_Pre_Order_Details.pOrderId = tb_Pre_Order.pOrderId;
                                     tb_Pre_Order_Details.rentalType = type;
                                     tb_Pre_Order_Details.productQty = Qty;
-                                    tb_Pre_Order_Details.timePickup = timePickup.ToString();
-                                    tb_Pre_Order_Details.timeReturn = timeReturn.ToString();
+                                    tb_Pre_Order_Details.timePickup = timePickup.ToString("dd/MM/yyyy HH:mm");
+                                    tb_Pre_Order_Details.timeReturn = timeReturn.ToString("dd/MM/yyyy HH:mm");
                                     tb_Pre_Order_Details.OrderCode = DateTime.Now.ToString("yyyyMMddHHmmss");
                                     tb_Pre_Order_Details.Totals = total;
                                     db.tb_Pre_Order_Details.Add(tb_Pre_Order_Details);

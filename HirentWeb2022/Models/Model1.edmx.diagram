@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="312c1aadc8d2427bb966cdc98b2067de" Name="Diagram1">
+      <Diagram DiagramId="0b915631006b4246b9608bcf484d1158" Name="Diagram1">
         <EntityTypeShape EntityType="hirentModel.Country" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="hirentModel.tb_About" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="hirentModel.tb_Access" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />

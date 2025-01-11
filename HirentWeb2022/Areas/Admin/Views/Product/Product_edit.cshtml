@@ -13,25 +13,16 @@
 <div class="right_col" role="main" style="min-height: 684px;">
     <div class="page-title">
         <div class="title_left">
-            <h3>CHINH SUA SAN PHAM</h3>
+            <h3>Chỉnh sửa sản phẩm</h3>
         </div>
-        <div class="title_right">
-            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Setharch!</button>
-                    </span>
-                </div>
-            </div>
-        </div>
+       
     </div>
     <div class="clearfix">
 
     </div>
     <div class="w3-bar w3-black">
         <button class="w3-bar-item w3-button tablink" onclick="openCity('London')">Tiếng việt</button>
-        <button class="w3-bar-item w3-button tablink" onclick="openCity('Paris')">Tiếng Anh</button>
+        <button class="w3-bar-item w3-button tablink" onclick="openCity('Paris')">Tiếng anh</button>
     </div>
     <form method="post" action="./product_edit?productID=385" id="form2" class="form-horizontal form-label-left" enctype="multipart/form-data">
 
@@ -96,7 +87,7 @@
 
                                             <input type="file" class="btn-group btn btn-info btn-xs upload" id="uploadAvatar" accept="image/png, image/jpeg"><br>
                                             <div class="myUploadedAvatar" style="margin-top: 20px;">
-                                                <img src="@(Model!=null?@Model.tb_Product.ProductAvatar:"")" id="BannerImage" alt="Photo" style="width: 110px;  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);">
+                                                <img src="@(Model!=null?@Model.tb_Product.ProductAvatar:"/Assets/Images/No_Image_Available.jpg")" id="BannerImage" alt="Photo" style="width: 110px;  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);">
                                             </div>
                                         </div>
                                     </div>
@@ -230,7 +221,7 @@
                                             <!-- Sản phẩm đính kèm -->
                                             <label class="control-label">Chọn kho cho sản phẩm này:</label>
                                             <select id="slwh" class="form-control" onchange="selectWarehouse()">
-                                                <option>
+                                                <option value="0">
                                                     Chọn một kho hàng cho sản phẩm
                                                 </option>
                                                 @if (ViewBag.Warehouse != null)
@@ -486,6 +477,9 @@
                                                         {
                                                             <input name="ctl00$ContentPlaceHolder1$priceblock1" type="text" id="ContentPlaceHolder1_priceblock1" class="has-feedback-right  numberFormat">
                                                         }
+                                                        <a onclick="syncHour()" style="margin-left:5px;cursor:pointer">
+                                                        <i class="fa fa-arrow-down"></i>
+                                                        </a>
                                                     </td>
 
                                                 </tr>
@@ -863,6 +857,9 @@
                                                             <input name="ctl00$ContentPlaceHolder1$priceDayBlock1" type="text" id="ContentPlaceHolder1_priceDayBlock1" class="has-feedback-right  numberFormat">
 
                                                         }
+                                                    <a onclick="syncDay()" style="margin-left:5px;cursor:pointer">
+                                                        <i class="fa fa-arrow-down"></i>
+                                                    </a>
                                                     </td>
                                                 </tr>
                                                 <tr class="block-2">
@@ -1321,14 +1318,16 @@
                                                         @if (ViewBag.tb_ProductPricePerMonth != null)
                                                         {
                                                             <input value="@ViewBag.tb_ProductPricePerMonth.Block1" name="ctl00$ContentPlaceHolder1$priceMonthBlock1" type="text" id="ContentPlaceHolder1_priceMonthBlock1" class="has-feedback-right  numberFormat">
-                                                            
-                                                                                                    }
+
+                                                        }
                                                         else
                                                         {
                                                             <input name="ctl00$ContentPlaceHolder1$priceMonthBlock1" type="text" id="ContentPlaceHolder1_priceMonthBlock1" class="has-feedback-right  numberFormat">
 
                                                         }
-
+                                                        <a onclick="syncMonth()" style="margin-left:5px;cursor:pointer">
+                                                            <i class="fa fa-arrow-down"></i>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                                 <tr class="block-2">
@@ -1551,15 +1550,13 @@
                 </div>
             </div>
         </div>
-        <div id="Paris" class="w3-container w3-border city" style="display: none;">
+       <div id="Paris" class="w3-container w3-border city">
 
             <div class="x_panel">
-                <!-- add thông tin chung -->
                 <div class="x_content">
                     <br>
 
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <!-- /Column on the left -->
                         <div class="form-group">
                             <label class="control-label col-md-4 col-sm-4 col-xs-12">Product name</label>
                             <div class="col-md-8 col-sm-8 col-xs-12">
@@ -1579,10 +1576,8 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /Column on the left -->
 
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <!-- Column on the middle-->
                         <div class="form-group">
                             <label class="control-label col-md-5 col-sm-5 col-xs-12">Description</label>
                             <div class="col-md-7 col-sm-7 col-xs-12">
@@ -1694,7 +1689,6 @@
 
                     </div>
                 </div>
-                <!-- //x_content -->
             </div>
 
             <div class="x_content">
@@ -1836,7 +1830,7 @@
             success: function (status) {
                 if (status != 'error') {
                     var my_path = "/image_product/" + status;
-                    $("#ContentPlaceHolder1_myUploadedAvatar").attr("src", my_path);
+                    $("#BannerImage").attr("src", my_path);
                     $(".myUploadedAvatar").css("display", "block");
                     $("#ContentPlaceHolder1_avatarPathTemp").val(my_path).change();
 
@@ -2063,6 +2057,57 @@
                 strpmonth += $("#ContentPlaceHolder1_priceMonthBlock" + i).val();
             }
         }
+        //Validate
+       
+        if ($('#ContentPlaceHolder1_productCode').val() == '')
+        {
+            alert("Vui lòng nhập mã sản phẩm");
+            return;
+        }
+        if ($('#ContentPlaceHolder1_productName').val() == '') {
+            alert("Vui lòng nhập mã sản phẩm");
+            return;
+        }
+        if ($("#sltMainCate").val() == 0) {
+            alert("Vui lòng chọn Main Category");
+            return;
+        }
+        if ($("#sltSubCate1").val() == 0) {
+            alert("Vui lòng chọn Sub Category 1");
+            return;
+        }
+        if ($("#sltSubCate2").val() == 0) {
+            alert("Vui lòng chọn Sub Category 2");
+            return;
+        }
+        if ($("#slwh").val() == 0) {
+            alert("Vui lòng chọn kho hàng");
+            return;
+        }
+        //Validate Price
+        //ContentPlaceHolder1_priceblock1
+        for (i = 1; i < 25; i++) {
+            let val = $("#ContentPlaceHolder1_priceblock" + i).val();
+            if (val == '') {
+                alert("Vui lòng nhập giá thuê theo giờ");
+                return;
+            }
+        }
+        for (i = 1; i < 31; i++) {
+            let val = $("#ContentPlaceHolder1_priceDayBlock" + i).val();
+            if (val == '') {
+                alert("Vui lòng nhập giá thuê theo ngày");
+                return;
+            }
+        }
+        for (i = 1; i < 13; i++) {
+            let val = $("#ContentPlaceHolder1_priceMonthBlock" + i).val();
+            if (val == '') {
+                alert("Vui lòng nhập giá thuê theo tháng");
+                return;
+            }
+        }
+
         var param = {
             //tinymce.get("content_PrFullDesc").getContent()
             //tb_Product
@@ -2105,7 +2150,7 @@
         }
 
         $.post("/Admin/Product/SaveData", { "data": "" + JSON.stringify(param) + "" }, function (result) {
-            //  window.location.reload();
+            window.location.href= "/Admin/Product/ProductList";
         });
     }
 
@@ -2352,6 +2397,35 @@
         if ('@ViewBag.IdWareHouse' != '') {
             $("#slwh").val('@ViewBag.IdWareHouse').change();
         }
-       
+        
     });
+</script>
+<script>
+    function syncHour() {
+        let value = $("#ContentPlaceHolder1_priceblock1").val();
+        if (value != '') {
+            for (i = 2; i < 25; i++) {
+                $("#ContentPlaceHolder1_priceblock" + i).val(value)
+            }
+        }
+        
+    }
+    function syncDay() {
+        let value = $("#ContentPlaceHolder1_priceDayBlock1").val();
+        if (value != '') {
+            for (i = 2; i < 31; i++) {
+                $("#ContentPlaceHolder1_priceDayBlock" + i).val(value)
+            }
+        }
+            
+    }
+    function syncMonth() {
+        let value = $("#ContentPlaceHolder1_priceMonthBlock1").val();
+        if (value != '') {
+            for (i = 2; i <13; i++) {
+                $("#ContentPlaceHolder1_priceMonthBlock" + i).val(value)
+            }
+        }
+
+    }
 </script>

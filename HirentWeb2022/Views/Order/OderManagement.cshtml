@@ -1,10 +1,8 @@
 ﻿<div class="container">
     <div class="ttctsp">
-        @(ViewBag.lang == "vi"? "Thông tin chi tiết sản phẩm" : "Detailed product information")
+        @(ViewBag.lang == "vi"? "Thông tin đơn hàng" : "Detailed orders")
     </div>
-    <div class="vuilongxemttdh">
-        @(ViewBag.lang == "vi"? "Vui lòng xem lại thông tin đơn hàng và giá trị thanh toán trước khi tiến hành tạo đơn hàng" : "Please review the order details and payment amount before proceeding to create the order")
-    </div>
+  
     <div class="orderbox">
         @if (Model != null)
         {
@@ -93,7 +91,7 @@
                                             var timepsan = DateTime.Parse(item.tb_Pre_Order_Details.timeReturn) - DateTime.Parse(item.tb_Pre_Order_Details.timePickup);
                                             if (item.tb_Pre_Order_Details.rentalType.Value == 1)
                                             {
-                                                <span>@timepsan.TotalHours</span> <span>  @(ViewBag.lang == "vi"? "Giờ" : "Hour")</span>
+                                                <span>@timepsan.TotalHours</span> <span> Giờ</span>
                                             }
                                             if (item.tb_Pre_Order_Details.rentalType.Value == 2)
                                             {
@@ -106,13 +104,13 @@
                                     </td>
                                     <td>
                                     </td>
-                                    <td class="text-right">
+                                    <td>
                                         @item.tb_Pre_Order_Details.Totals.Value.ToString("#,##0")
                                         @{
                                             productTotal = item.tb_Pre_Order_Details.Totals.Value;
                                         }
                                     </td>
-                                    <td class="text-right">
+                                    <td>
                                         @item.tb_Product.ProductValue.Value.ToString("#,##0")
                                         @{
                                             giatrisp = item.tb_Product.ProductValue.Value;
@@ -174,13 +172,13 @@
                                         </td>
                                         <td>
                                         </td>
-                                        <td class="text-right">
+                                        <td>
                                             @it.Totals.Value.ToString("#,##0")
                                             @{
                                                 producdetailtotal += it.Totals.Value;
                                             }
                                         </td>
-                                        <td class="text-right">
+                                        <td>
                                             @prod.ProductValue.Value.ToString("#,##0")
                                             @{
                                                 giatrispdt += prod.ProductValue.Value;
@@ -199,12 +197,12 @@
                                             @item.tb_CustomerDeliveryAddress.FullName  <span> |</span> @item.tb_CustomerDeliveryAddress.PhoneNumber <span> | </span>  @item.tb_CustomerDeliveryAddress.Address
                                         </td>
                                         <td>
-                                            @(ViewBag.lang == "vi"? "Vận chuyển" : "Shipping") 
+                                            @(ViewBag.lang == "vi"? "Vận chuyển" : "Shipping")
                                         </td>
                                         <td colspan="4"></td>
                                         @if (item.tb_Pre_Order_Details.TotalDelivery.HasValue)
                                         {
-                                            <td class="text-right">@item.tb_Pre_Order_Details.TotalDelivery.Value.ToString("#,##0")</td>
+                                            <td>@item.tb_Pre_Order_Details.TotalDelivery.Value.ToString("#,##0")</td>
                                         }
                                         else
                                         {
@@ -221,16 +219,16 @@
                                             @item.tb_CustomerDeliveryAddress.FullName  <span> |</span> @item.tb_CustomerDeliveryAddress.PhoneNumber <span> | </span>  @item.tb_CustomerDeliveryAddress.Address
                                         </td>
                                         <td>
-                                            @(ViewBag.lang == "vi"? "Lắp đặt" : "Installation") 
+                                            @(ViewBag.lang == "vi"? "Lắp đặt" : "Installation")
                                         </td>
                                         <td colspan="4"></td>
                                         @if (item.tb_Pre_Order_Details.TotalInstall.HasValue)
                                         {
-                                            <td class="text-right">@item.tb_Pre_Order_Details.TotalInstall.Value.ToString("#,##0")</td>
+                                            <td>@item.tb_Pre_Order_Details.TotalInstall.Value.ToString("#,##0")</td>
                                         }
                                         else
                                         {
-                                            <td class="text-right">0</td>
+                                            <td>0</td>
                                         }
                                         <td></td>
                                         <td></td>
@@ -239,21 +237,21 @@
                                         <td colspan="4">
                                         </td>
                                         <td colspan="3" class="text-right">
-                                            @(ViewBag.lang == "vi"? "Tổng" : "Total") 
+                                            @(ViewBag.lang == "vi"? "Tổng" : "Total")
                                         </td>
-                                        <td class="text-right">
+                                        <td>
                                             @{
                                                 var value = item.tb_Pre_Order_Details.TotalDelivery.Value + item.tb_Pre_Order_Details.TotalInstall.Value;
                                             }
                                             <span>@value.ToString("#,##0")</span>
                                         </td>
-                                        <td class="text-right">
+                                        <td>
                                             @{
                                                 var gettotal = productTotal + producdetailtotal;
                                                 <span>@gettotal.ToString("#,##0")</span>
                                             }
                                         </td>
-                                        <td class="text-right">
+                                        <td>
                                             @{
                                                 var gettotal2 = giatrisp + giatrispdt;
                                                 <span>@gettotal2.ToString("#,##0")</span>
@@ -265,10 +263,10 @@
                                         <td colspan="4">
                                         </td>
                                         <td colspan="3" class="text-right">
-                                            @(ViewBag.lang == "vi"? "Tiền thuê và dịch vụ tạm tính" : "Subtotal for rental and services") 
+                                            @(ViewBag.lang == "vi"? "Tiền thuê và dịch vụ tạm tính" : "Subtotal for rental and services")
                                         </td>
                                         <td></td>
-                                        <td class="text-right">
+                                        <td>
                                             @{
                                                 var gettotal3 = value + gettotal;
                                                 <span>@gettotal3.ToString("#,##0")</span>
@@ -279,13 +277,13 @@
                                         <td colspan="4">
                                         </td>
                                         <td colspan="3" class="text-right">
-                                            @(ViewBag.lang == "vi"? "Số tiền đật cọc là" : "The deposit amount is") 
+                                            @(ViewBag.lang == "vi"? "Số tiền đật cọc là" : "The deposit amount is")
                                         </td>
                                         <td>
                                         </td>
                                         <td>
                                         </td>
-                                        <td class="text-right">
+                                        <td>
                                             @{
                                                 var gettotal4 = gettotal - gettotal2;
                                                 <span>@Math.Abs(gettotal4).ToString("#,##0")</span>
@@ -298,10 +296,7 @@
                         </table>
 
                     </div>
-                    <div class="text-right" style="margin-bottom:30px;">
-                        <a class="btn btn-danger" onclick="huydonhang()"> @(ViewBag.lang == "vi"? "Hủy đơn hàng" : "Cancel order") </a>
-                        <a class="btn btngreen" onclick="hoantatdonhang()">@(ViewBag.lang == "vi"? "Hoàn tất đơn hàng" : "Complete order")</a>
-                    </div>
+                 
                 }
 
             }
@@ -362,3 +357,8 @@
         }
     }
 </script>
+<style>
+    .ordertitle {
+        background-color: #161616;
+    }
+</style>

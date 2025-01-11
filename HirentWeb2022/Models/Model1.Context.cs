@@ -87,5 +87,10 @@ namespace HirentWeb2022.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetProductList_Result>("sp_GetProductList");
         }
+    
+        public virtual ObjectResult<testStored1_Result> testStored1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<testStored1_Result>("testStored1");
+        }
     }
 }

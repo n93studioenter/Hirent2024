@@ -167,7 +167,7 @@
                                                 <td><a href="#" class="btn btn-info btn-xs" style="background-color: teal;" onclick="btnChangeDisable(this,'4','Dụng cụ, thiết bị')">Enable</a></td>
                                                 <td class=" ">@item.CreateDate.ToShortDateString()</td>
                                                 <td class=" last"><a class="btn btn-info btn-xs" onclick="Edit(@item.MainCateID)"><i class="fa fa-edit"></i> Edit</a></td>
-                                                <td class=" last"><a class="btn btn-danger btn-xs" onclick="Delete(this,'4','Dụng cụ, thiết bị')"><i class="fa fa-trash-o"></i> Delete</a></td>
+                                                <td class=" last"><a class="btn btn-danger btn-xs" onclick="Delete(@item.MainCateID)"><i class="fa fa-trash-o"></i> Delete</a></td>
                                                 <td> </td>
                                                 <td> </td>
                                             </tr>
@@ -246,5 +246,10 @@
         });
 
     }
-
+    function Delete(MainCateID) {
+        if (confirm('Bạn có muốn xóa danh mục này?')) {
+            alert(MainCateID)
+        }
+        
+    }
 </script>

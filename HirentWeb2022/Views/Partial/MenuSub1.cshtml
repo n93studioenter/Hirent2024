@@ -10,7 +10,14 @@
                     <ul class="list-links listfirst">
                         <li>
                             <a href="productcate?ProductSubCate1=@item.SubCate1ID">
-                                <h3 class="list-links-title">@item.SubCate1Name</h3>
+                                @if (ViewBag.lang == "vi")
+                                {
+                                    <h3 class="list-links-title">@item.SubCate1Name</h3>
+                                }
+                                else
+                                {
+                                    <h3 class="list-links-title">@item.Language</h3>
+                                }
                             </a>
                         </li>
                     </ul><hr class="hidden-md hidden-lg">

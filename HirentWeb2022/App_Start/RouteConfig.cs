@@ -34,6 +34,11 @@ namespace HirentWeb2022
    defaults: new { controller = "Order", action = "YourCart2" }
 );
             routes.MapRoute(
+  name: "Quản lý đơn hàng",
+  url: "ordermanagement",
+  defaults: new { controller = "Order", action = "OderManagement" }
+);
+            routes.MapRoute(
    name: "User info",
    url: "userinfo",
    defaults: new { controller = "Partial", action = "Userinfor" }

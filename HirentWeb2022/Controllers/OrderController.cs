@@ -5,6 +5,8 @@ using HirentWeb2022.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -25,6 +27,7 @@ namespace HirentWeb2022.Controllers
             HirentEntities db = new HirentEntities();
             ViewBag.pOrderId = pOrderId;
             var model = db.tb_ProductTermConditionDetails.Where(m => m.ProductId == productID).ToList();
+            ViewBag.tran = db.tb_ProductTermConditionDetails_Translation.Where(m => m.ProductId == productID).FirstOrDefault();
             HttpCookie reqCookies = Request.Cookies["HirentLogin"];
             if (reqCookies != null)
             {
@@ -72,17 +75,29 @@ namespace HirentWeb2022.Controllers
             try
             {
                 HirentEntities db = new HirentEntities();
-                data.CreateDate = DateTime.Now;
-                data.Status = 0;
-                if (!db.tb_CustomerDeliveryAddress.Any(m => m.CustomerID==data.CustomerID))
+                if (data.ID != 0 && data.ID!=null)
                 {
-                    data.IsMacdinh = 1;
+                    var getdata = db.tb_CustomerDeliveryAddress.Find(data.ID);
+                    getdata.FullName = data.FullName;
+                    getdata.PhoneNumber = data.PhoneNumber;
+                    getdata.Address=data.Address;
+                    db.SaveChanges();
                 }
                 else
                 {
-                    data.IsMacdinh = 0;
+                  
+                    data.CreateDate = DateTime.Now;
+                    data.Status = 0;
+                    if (!db.tb_CustomerDeliveryAddress.Any(m => m.CustomerID == data.CustomerID))
+                    {
+                        data.IsMacdinh = 1;
+                    }
+                    else
+                    {
+                        data.IsMacdinh = 0;
+                    }
+                    db.tb_CustomerDeliveryAddress.Add(data);
                 }
-                db.tb_CustomerDeliveryAddress.Add(data);
                 db.SaveChanges();
                 return true;
             }
@@ -300,6 +315,53 @@ namespace HirentWeb2022.Controllers
         [HttpPost]
         public bool HoanTatDonHang(int pOrderId)
         {
+            HirentEntities dbs = new HirentEntities();
+            tb_Pre_Order pre = dbs.tb_Pre_Order.Find(pOrderId);
+            if (pre != null)
+            {
+                tb_Customer tb_Customer = dbs.tb_Customer.Find(pre.customerId);
+                if (tb_Customer != null)
+                {
+                    // Thông tin gửi email
+                    string smtpServer = "smtp.gmail.com"; // Thay đổi thành máy chủ SMTP của bạn
+                    int port = 587; // Cổng SMTP (thường là 587 hoặc 465)
+                    string username = "ltnghiep93@gmail.com"; // Địa chỉ email của bạn
+                    string password = "jaof avbp kpqe vjcx"; // Mật khẩu email của bạn
+
+                    // Thông tin email
+                    string fromAddress = "your_email@example.com"; // Địa chỉ gửi
+                    string toAddress = tb_Customer.Email; // Địa chỉ nhận
+                    string subject = "Đơn xác nhận đơn hàng tại Hirent";
+                    string body = "Cảm ơn bạn đã đặt thuê sản phẩm tại hirent, vui lòng vào link sau để kiểm tra lại đơn hàng http://103.77.166.219:8088/ordermanagement";
+
+                    try
+                    {
+                        using (MailMessage mail = new MailMessage())
+                        {
+                            mail.From = new MailAddress(fromAddress);
+                            mail.To.Add(toAddress);
+                            mail.Subject = subject;
+                            mail.Body = body;
+                            mail.IsBodyHtml = true; // Nếu bạn muốn gửi HTML, hãy đặt thành true
+
+                            using (SmtpClient smtp = new SmtpClient(smtpServer, port))
+                            {
+                                smtp.Credentials = new NetworkCredential(username, password);
+                                smtp.EnableSsl = true; // Bật SSL nếu cần thiết
+                                    
+                                smtp.Send(mail);
+                            }
+                        }
+
+                        Console.WriteLine("Email đã được gửi thành công.");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Có lỗi xảy ra: " + ex.Message);
+                    }
+                }
+               
+            } 
             try
             {
                 using (var db = new HirentEntities())
@@ -319,6 +381,53 @@ namespace HirentWeb2022.Controllers
             {
                 return false;
             }
+        }
+
+        public ActionResult OderManagement()
+        {
+            var getlang = Session["Lang"];
+            if (getlang == null)
+            {
+                getlang = "vi";
+                Session["Lang"] = "vi";
+            }
+            ViewBag.lang = getlang;
+            HttpCookie reqCookies = Request.Cookies["HirentLogin"];
+            List<ProductOrder> model = new List<ProductOrder>();
+            HirentEntities db = new HirentEntities();
+            if (reqCookies != null)
+            {
+                var email = reqCookies["username"].ToString();
+                tb_Customer tb_Customer = db.tb_Customer.Where(m => m.Email == email).FirstOrDefault();
+                if (tb_Customer != null)
+                {
+
+                    var getlistordr = db.tb_Pre_Order.Where(m => m.customerId == tb_Customer.CustomerID && m.status == 2).OrderByDescending(m => m.pOrderId).ToList();
+                    foreach (var item in getlistordr)
+                    {
+                        ProductOrder ProductOrder = new ProductOrder();
+                        ProductOrder.tb_Pre_Order = item;
+                        ProductOrder.tb_Pre_Order_Details = db.tb_Pre_Order_Details.Where(m => m.pOrderId == item.pOrderId).FirstOrDefault();
+                        ProductOrder.tb_Product = db.tb_Product.Where(m => m.ProductID == item.productId).FirstOrDefault();
+                        ProductOrder.tb_Pre_Order_Accompanying = db.tb_Pre_Order_accompanying.Where(m => m.pOrderId == item.pOrderId).ToList();
+                        ProductOrder.tb_CustomerDeliveryAddress = db.tb_CustomerDeliveryAddress.Where(m => m.CustomerID == tb_Customer.CustomerID && m.IsMacdinh == 1).FirstOrDefault();
+                        model.Add(ProductOrder);
+                    }
+                }
+            }
+            else
+            {
+
+            }
+            return View(model);
+        }
+
+        public string GetAddress(int id)
+        {
+            HirentEntities db = new HirentEntities();
+            var getcus = db.tb_CustomerDeliveryAddress.Find(id);
+
+            return getcus.FullName+"|"+ getcus.PhoneNumber+"|"+ getcus.Address;
         }
     }
 }

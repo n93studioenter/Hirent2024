@@ -6,7 +6,14 @@
 
             <li>
                 <a href="productcate?ProductSubCate2=@item.SubCate2ID">
-                    @item.SubCate2Name
+                    @if (ViewBag.lang == "vi")
+                    {
+                        @item.SubCate2Name
+                    }
+                    else
+                    {
+                        @item.Language
+                    }
                 </a>
             </li>
         }

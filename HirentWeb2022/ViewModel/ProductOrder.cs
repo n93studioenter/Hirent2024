@@ -8,6 +8,7 @@ namespace HirentWeb2022.ViewModel
 {
     public class ProductOrder
     {
+        public tb_Customer tb_Customer;
         public tb_Product tb_Product { get; set; }  
         public tb_Pre_Order tb_Pre_Order { get; set; } 
         public tb_Pre_Order_Details tb_Pre_Order_Details { get; set; }

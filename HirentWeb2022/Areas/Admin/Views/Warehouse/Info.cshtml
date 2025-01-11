@@ -78,7 +78,6 @@
                                 <label class="control-label col-md-2 col-sm-2 col-xs-12">Chính sách cửa hàng</label>
                                 <div class="col-md-10 col-sm-10 col-xs-12">
                                     <textarea tabindex="2" cols="50" rows="5" class="field textarea small content_Preditor" id="content_Policy" name="content_Policy" style="width: 100%"></textarea>
-
                                 </div>
                             </div>
                             <div class="form-group">
@@ -104,6 +103,8 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2 col-sm-2 col-xs-2">Chính sách cửa hàng</label>
+                                <input type="hidden" id="txtChinhsach" />
+                                <a id="achinhsich" href="" target="_blank"></a>
                                 <input style="display:inline-block" type="file" class="btn-group btn btn-info btn-xs upload" id="uploadChinhsach" accept=".doc,.docx,application/mswordapplication/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain, application/pdf,"><br>
                                 <div class="col-md-10 col-sm-10 col-xs-10 myUploadedChinhsach" style="margin-top: 20px; display: none;">
                                     <strong><a id="myUploadedChinhsach" download=""></a></strong> <span> ( Nhấn vào để tải xuống )</span>
@@ -161,7 +162,7 @@
                                         foreach (var item in (IEnumerable<HirentWeb2022.Models.tb_WareHouse>)Model)
                                         {
                                             <tr>
-                                                <td class="columnCenter"><img style="width: 200px;padding: 10px;" src="/image_Waswhouse/@item.Images"></td>
+                                                <td class="columnCenter"><img style="width: 100px;padding: 10px;" src="@item.Images"></td>
                                                 <td class="columnCenter">@item.WarehouseCode</td>
                                                 <td class="columnCenter" style="color: darksalmon; text-decoration: underline; ">@item.WarehouseName</td>
                                                 <td class="columnCenter">@item.WarehouseAddress</td>
@@ -185,6 +186,26 @@
     </form>
 </div>
 <script>
+    function callDelete(id) {
+        if (confirm('Bạn có chắc muốn xóa shop này?')) {
+            var param = {
+                "whId": id
+            }
+            $.ajax({
+                url: '/Warehouse/DeleteWasehouse',
+                dataType: 'html',
+                data: param,
+                success: function (data, status, xhr) {
+                    if (data == 'True') {
+                        window.location.reload();
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert(status);
+                }
+            });
+        } 
+    }
     function callEdit(id) {
         $("#btnSave_Check").val("Cập nhật");
         var param = {
@@ -204,6 +225,7 @@
                 $("#Messenger").val(data.Messenger);
                 $("#Skype").val(data.Skype);
                 $("#Email").val(data.Email);
+                $("#txtChinhsach").val(data.ChinhSach);
                 $("#LocationMap").val(data.LocationMap);
                 //Images
                 $(".myUploadedAvatar2").show();
@@ -211,6 +233,8 @@
                 //Images Banner
                 $(".myUploadedAvatar").show();
                 $("#BannerImage").attr("src", data.BannerImage);
+                $("#achinhsich").html(data.ChinhSach);
+                $("#achinhsich").attr("href", data.ChinhSach);
             },
             error: function (xhr, status, error) {
                 alert(status);
@@ -233,6 +257,7 @@
                 "Skype": $("#Skype").val(),
                 "Email": $("#Email").val(),
                 "LocationMap": $("#LocationMap").val(),
+                "ChinhSach": $("#txtChinhsach").val()
             }
             $.ajax({
                 url: '/Admin/Warehouse/SaveData',
@@ -314,6 +339,43 @@
                     var my_path = "/image_Waswhouse/" + status;
                     $("#Images").attr("src", my_path);
                     $(".myUploadedAvatar2").css("display", "block");
+                }
+            },
+            processData: false,
+            contentType: false,
+            error: function () {
+                alert("Whoops something went wrong!");
+            }
+        });
+    }
+
+    //
+    $("#uploadChinhsach").on('change', function () {
+        var file;
+
+        if ((file = this.files[0])) {
+            // Kiểm tra loại file
+            if (file.type === "application/pdf") {
+                // Gọi hàm sendFile3 với file PDF
+                sendFile3(file);
+            } else {
+                alert("Not a valid file: " + file.type);
+            }
+        }
+    });
+    function sendFile3(file) {
+        var formData = new FormData();
+        formData.append('file', $('#uploadChinhsach')[0].files[0]);
+        $.ajax({
+            url: "/Tools/UploadWasehouseBanner.ashx",
+            type: "POST",
+            data: formData,
+            success: function (status) {
+                if (status != 'error') {
+                   var my_path = "/image_Waswhouse/" + status;
+                //    $("#Images").attr("src", my_path);
+                    //    $(".myUploadedAvatar2").css("display", "block");
+                    $("#txtChinhsach").val(my_path)
                 }
             },
             processData: false,

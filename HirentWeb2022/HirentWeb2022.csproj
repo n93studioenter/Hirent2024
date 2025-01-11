@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -60,6 +60,9 @@
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -126,16 +129,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\WarehouseController.cs" />
@@ -328,6 +327,9 @@
     <Compile Include="Models\tb_WishList.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\testStored1_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TimeBlock.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -346,7 +348,31 @@
     <Compile Include="ViewModel\VM_Chatbot.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Images\ai_helper.png" />
+    <Content Include="Assets\Images\flag-US.jpg" />
+    <Content Include="Assets\Images\flag-VN.jpg" />
+    <Content Include="Assets\Images\Hirent.ico" />
     <Content Include="Assets\Images\Hirent.svg" />
+    <Content Include="Assets\Images\loading.gif" />
+    <Content Include="Assets\Images\logogiohang.png" />
+    <Content Include="Assets\Images\No_Image_Available.jpg" />
+    <Content Include="Assets\Images\yourcart\giao hang.png" />
+    <Content Include="Assets\Images\yourcart\giao va nhan tra.png" />
+    <Content Include="Assets\Images\yourcart\nhan hang.png" />
+    <Content Include="Assets\Images\yourcart\tho den go.png" />
+    <Content Include="Assets\Images\yourcart\tho den lap va go.png" />
+    <Content Include="Assets\Images\yourcart\tho den lap.png" />
+    <Content Include="Assets\Images\yourcart\tho den sua 2.jpg" />
+    <Content Include="Assets\js\Slick\ajax-loader.gif" />
+    <Content Include="Assets\js\Slick\fonts\slick.svg" />
+    <Content Include="Assets\js\Slick\next.png" />
+    <Content Include="Assets\js\Slick\nivoslider.ascx" />
+    <Content Include="Assets\js\Slick\previous.png" />
+    <Content Include="Assets\js\Slick\slick-theme.css" />
+    <Content Include="Assets\js\Slick\slick.css" />
+    <Content Include="Assets\js\Slick\slick.js" />
+    <Content Include="Assets\js\Slick\slick.min.js" />
+    <Content Include="Assets\js\Slick\truot.js" />
     <Content Include="backend\build\animate.css\animate.css" />
     <Content Include="backend\build\animate.css\animate.min.css" />
     <Content Include="backend\build\animate.css\gulpfile.js" />
@@ -2208,9 +2234,6 @@
     <Content Include="backend\build\gauge.js\dist\gauge.min.js" />
     <Content Include="backend\build\gauge.js\favicon.ico" />
     <Content Include="backend\build\gauge.js\index.html" />
-    <Content Include="backend\build\google-code-prettify\bin\prettify.min.css" />
-    <Content Include="backend\build\google-code-prettify\bin\prettify.min.js" />
-    <Content Include="backend\build\google-code-prettify\bin\run_prettify.min.js" />
     <Content Include="backend\build\google-code-prettify\CHANGES.html" />
     <Content Include="backend\build\google-code-prettify\examples\quine.html" />
     <Content Include="backend\build\google-code-prettify\README-zh-Hans.html" />
@@ -3889,13 +3912,24 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\Responsive.css" />
+    <Content Include="Content\slick-theme.css" />
+    <Content Include="Content\slick.css" />
     <Content Include="Content\toast.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="image_banner\banner_mainbanner01.png" />
+    <Content Include="image_banner\banner_mainbanner02.jpg" />
+    <Content Include="image_banner\banner_right1.png" />
+    <Content Include="image_banner\banner_right2.png" />
+    <Content Include="image_product\2227086.jpg" />
+    <Content Include="image_product\3344-1.jpg" />
+    <Content Include="image_product\433110383_963043205276386_3216808385827723698_n.jpg" />
+    <Content Include="image_product\61jnrafz7zl._ac_sl1457__272e42c39407421085450d2a0e0ad8ea.jpg" />
     <Content Include="image_product\Chainsaws.jpg" />
     <Content Include="image_product\Chén cước 75 mm đánh gỉ sắt.jpg" />
+    <Content Include="image_product\david-caetano-topdown1.jpg" />
     <Content Include="image_product\dia-nham-xep.jpg" />
     <Content Include="image_product\ha0001 may-bat-oc-vit 2.jpg" />
     <Content Include="image_product\HA0001 may-bat-oc-vit 3.jpg" />
@@ -4065,6 +4099,10 @@
     <Content Include="image_product\HA0213 kim-bam-lo-day-da.jpg" />
     <Content Include="image_product\HA0214 khoen-tron.jpg" />
     <Content Include="image_product\HA0215 kim-bam-khoen-tron.jpg" />
+    <Content Include="image_product\image03.jfif" />
+    <Content Include="image_product\images.jfif" />
+    <Content Include="image_product\images.png" />
+    <Content Include="image_product\indexleft.png" />
     <Content Include="image_product\LogoIcons\chuong.svg" />
     <Content Include="image_product\LogoIcons\gio hang.svg" />
     <Content Include="image_product\LogoIcons\Hirent.svg" />
@@ -4072,8 +4110,33 @@
     <Content Include="image_product\LogoIcons\Log in.svg" />
     <Content Include="image_product\LogoIcons\Log out.svg" />
     <Content Include="image_product\LogoIcons\Menu.svg" />
+    <Content Include="image_product\LogoIcons\SiYoSa-Logo-notext.png" />
     <Content Include="image_product\LogoIcons\tim kiem.svg" />
     <Content Include="image_product\LogoIcons\Tinhtrangdonhang.png" />
+    <Content Include="image_product\Product-gallery-2022021503460758.jfif" />
+    <Content Include="image_product\Product-gallery-2022021503460959.jpg" />
+    <Content Include="image_product\Product-gallery-2022021505132712.jpg" />
+    <Content Include="image_product\Product-gallery-2022021505132832.jpg" />
+    <Content Include="image_product\Product-gallery-2022021505134635.jpg" />
+    <Content Include="image_product\Product-gallery-2022021505134835.jpg" />
+    <Content Include="image_product\Product-gallery-2022021505201574.png" />
+    <Content Include="image_product\Product-gallery-2022021505210970.jpg" />
+    <Content Include="image_product\Product-gallery-2022021505211577.png" />
+    <Content Include="image_product\Product-gallery-2022021601505109.jpg" />
+    <Content Include="image_product\Product-gallery-2022040602300226.jpg" />
+    <Content Include="image_product\Product-gallery-2022040602300426.png" />
+    <Content Include="image_product\Product-gallery-2022040602343319.jpg" />
+    <Content Include="image_product\Product-gallery-2022040602343519.png" />
+    <Content Include="image_product\Product-gallery-2022040602372571.jpg" />
+    <Content Include="image_product\Product-gallery-2022040602372770.png" />
+    <Content Include="image_product\Product-gallery-2022040603271028.jpg" />
+    <Content Include="image_product\Product-gallery-2022040603271229.png" />
+    <Content Include="image_product\Product-gallery-2022040604025279.jpg" />
+    <Content Include="image_product\Product-gallery-2022040604025479.png" />
+    <Content Include="image_product\Product-gallery-2022040604110473.jpg" />
+    <Content Include="image_product\Product-gallery-2022040604110674.png" />
+    <Content Include="image_product\Product-gallery-2022110911415845.png" />
+    <Content Include="image_product\Product-gallery-2024122005042514.jpg" />
     <Content Include="image_product\WaseHouse\icon contract.png" />
     <Content Include="image_product\WaseHouse\icon instagram.png" />
     <Content Include="image_product\WaseHouse\icon kakaotalk.png" />
@@ -4089,6 +4152,13 @@
     <Content Include="image_product\WaseHouse\icon wechat.png" />
     <Content Include="image_product\WaseHouse\icon whatsapp.png" />
     <Content Include="image_product\WaseHouse\icon zalo.png" />
+    <Content Include="image_Waswhouse\1683254769200_640.jpg" />
+    <Content Include="image_Waswhouse\b22bac11901d6a43330c.jpg" />
+    <Content Include="image_Waswhouse\baby-shark-24-teile-supercolor-puzzle_wubozak-01381241_dde45aec.jpg" />
+    <Content Include="image_Waswhouse\babyshark1_1280x720-800-resize.jpg" />
+    <Content Include="image_Waswhouse\Product-avatar-2021102003570049.png" />
+    <Content Include="image_Waswhouse\Product-avatar-2021111003453993.jpg" />
+    <Content Include="image_Waswhouse\SiYoSa-Logo-notext.png" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -4099,6 +4169,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\accounting.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
@@ -4349,7 +4420,6 @@
     <Content Include="backend\build\DateJS\LICENSE" />
     <Content Include="backend\build\DateJS\package.json" />
     <Content Include="backend\build\DateJS\README.md" />
-    <Content Include="backend\build\DateJS\reports\coverage.json" />
     <Content Include="backend\build\DateJS\reports\lcov.info" />
     <Content Include="backend\build\devbridge-autocomplete\.bower.json" />
     <Content Include="backend\build\devbridge-autocomplete\bower.json" />
@@ -4960,6 +5030,38 @@
     <Content Include="Areas\Admin\Views\Product\Loadwarehouse.cshtml" />
     <Content Include="Areas\Admin\Views\Warehouse\Info.cshtml" />
     <Content Include="Areas\Admin\Views\Warehouse\WasehouseTime.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\OrderList.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\OrderDetail.cshtml" />
+    <Content Include="Assets\js\Slick\fonts\slick.eot" />
+    <Content Include="Assets\js\Slick\fonts\slick.ttf" />
+    <Content Include="Assets\js\Slick\fonts\slick.woff" />
+    <Content Include="Assets\js\Slick\slick.css.map" />
+    <Content Include="image_product\Product-avatar-2022021403064746.xlsx" />
+    <Content Include="image_product\Product-avatar-2022021403074916.xlsx" />
+    <Content Include="image_product\Product-avatar-2022021403432018.xlsx" />
+    <Content Include="image_product\Product-avatar-2022021403435460.xlsx" />
+    <Content Include="image_product\Product-avatar-2022021403453778.xlsx" />
+    <Content Include="image_product\Product-avatar-2022021403471213.xlsx" />
+    <Content Include="image_product\Product-avatar-2022021403495728.xlsx" />
+    <Content Include="image_product\Product-avatar-2022021403570292.xlsx" />
+    <Content Include="image_product\Product-avatar-2022021403573556.xlsx" />
+    <Content Include="image_product\Product-avatar-2022021404070734.xlsx" />
+    <Content Include="image_product\Product-avatar-2022021404232355.xlsx" />
+    <Content Include="image_product\Product-avatar-2022021404254495.xlsx" />
+    <Content Include="image_product\Product-avatar-2022021405082834.xlsx" />
+    <Content Include="image_product\Product-avatar-2022021405235686.xlsx" />
+    <Content Include="image_product\Product-avatar-2022021503471091.xlsx" />
+    <Content Include="image_product\Product-avatar-2022040104183091.xls" />
+    <Content Include="image_product\Product-avatar-2022040104185917.xls" />
+    <Content Include="image_product\Product-avatar-2022040104201607.xlsx" />
+    <Content Include="image_product\Product-avatar-2022040104260107.xlsx" />
+    <Content Include="image_product\Product-avatar-2022040104272218.xlsx" />
+    <Content Include="image_product\Product-avatar-2022040602262950.xlsx" />
+    <Content Include="image_product\Product-avatar-2022040602350885.xlsx" />
+    <Content Include="image_product\Product-avatar-2022040602374772.xlsx" />
+    <Content Include="image_product\Product-avatar-2022040603273633.xlsx" />
+    <Content Include="image_product\Product-avatar-2022040604092221.xlsx" />
+    <Content Include="image_product\Product-avatar-2022040604121512.xlsx" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -4977,7 +5079,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\slick.min.js" />
     <Content Include="Scripts\toast.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -5014,12 +5118,14 @@
     <Content Include="Views\Partial\Helper.cshtml" />
     <Content Include="Views\Partial\Botanswer.cshtml" />
     <Content Include="Views\Partial\Userinfor.cshtml" />
+    <Content Include="Views\Partial\ChangePassword.cshtml" />
+    <Content Include="Views\Order\OderManagement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="image_banner\" />
-    <Folder Include="image_Waswhouse\" />
+    <Folder Include="Areas\Admin\Views\OrderList\" />
+    <Folder Include="backend\build\google-code-prettify\bin\" />
     <Folder Include="NewFolder1\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\YourCart\" />
@@ -5078,9 +5184,9 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

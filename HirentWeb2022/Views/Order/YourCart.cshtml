@@ -52,6 +52,13 @@
                     </div>
                     <div class="steptitle">
                         <span id="ctl00_MainContent_chondichvuvanchuyen">1.@(ViewBag.lang == "vi"? "chọn dịch vụ vận chuyển" : "Select a shipping service")</span>
+
+                    </div>
+                    <div class="steptitle_right">
+                        <span id="cpDelivery" data-value="0">0</span> <span>đ</span>
+                    </div>
+                    <div class="clearfix">
+
                     </div>
                     <div class="row myrow">
                         <div class="col-sm-3 col-xs-12">
@@ -115,14 +122,14 @@
                                         <div class="glamviec">
                                             <a onclick="glv()">
                                                 <i class="fa fa-clock-o"></i><span>
-                                                                                 <span id="ctl00_MainContent_giolamviec">@(ViewBag.lang == "vi"? "Giờ làm việc" : "Working hours")</span>
+                                                    <span id="ctl00_MainContent_giolamviec">@(ViewBag.lang == "vi"? "Giờ làm việc" : "Working hours")</span>
                                                 </span>
                                             </a>
                                         </div>
                                         <div class="glamviec">
                                             <a href="https://goo.gl/maps/2jzSGg1THTmEgNMP6" id="ctl00_MainContent_csch" target="_blank">
                                                 <i class="fa fa-map-marker"></i><span>
-                                                                                    <span id="ctl00_MainContent_bandovitri">@(ViewBag.lang == "vi"? "Bản đồ vị trí" : "Location map")</span>
+                                                    <span id="ctl00_MainContent_bandovitri">@(ViewBag.lang == "vi"? "Bản đồ vị trí" : "Location map")</span>
                                                 </span>
                                             </a>
                                         </div>
@@ -166,18 +173,17 @@
                         <div class="clearfix">
 
                         </div>       <hr />
-                                     <div class="col-sm-3 col-xs-4">
-                                         <div style="font-size:17px;">
-                                             Tổng :
-                                         </div>
-                                     </div>
-                        <div class="col-sm-9 col-xs-8">
-                            <span id="cpDelivery" data-value="0">0</span> <span>đ</span>
-                        </div>
+
                     </div>
-                    
+
                     <div class="steptitle">
                         2.@(ViewBag.lang == "vi"? "Chọn dịch vụ khác" : "Choose another service")
+                    </div>
+                    <div class="steptitle_right">
+                        <span id="cpService" data-value="0">0</span> <span>đ</span>
+                    </div>
+                    <div class="clearfix">
+
                     </div>
                     <div class="row myrow">
                         <div class="col-sm-3 col-xs-9">
@@ -287,26 +293,15 @@
                         <div class="clearfix">
 
                         </div>       <hr />
-                        <div class="col-sm-3 col-xs-4">
-                            <div style="font-size:17px;">
-                                @(ViewBag.lang == "vi"? "Tổng" : "Total") :
-                            </div>
-                        </div>
-                        <div class="col-sm-9 col-xs-8">
-                            <span id="cpService" data-value="0">0</span> <span>đ</span>
-                        </div>
+                        
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12" style="padding-bottom: 10px;">
-                            <div class="rowtotal">
-                            </div>
+                    <div class="">
+                       
+                        <div class="steptitle">
+                            <span style="color:black" class="tongcong"><span id="ctl00_MainContent_tongcong"> </span> </span>
                         </div>
-                        <div class="col-sm-3 col-xs-6">
-                            <span class="tongcong"><span id="ctl00_MainContent_tongcong"> @(ViewBag.lang == "vi"? "Tổng" : "Total") :</span> </span>
-
-                        </div>
-                        <div class="col-sm-9 col-xs-6 text-right padding-right62 backprice" style=" font-size: 15px;">
-                            <span id="total_price" style="    margin-left:5px;">0</span><span> đ</span>
+                        <div class="steptitle_right">
+                            <span style="color:red;font-weight:bold;">@(ViewBag.lang == "vi"? "Tổng" : "Total") :</span>   <span style="color:red;font-weight:bold;" id="total_price" class="">0</span><span style="color:red;font-weight:bold;"> đ</span>
                         </div>
                     </div>
 
@@ -372,6 +367,7 @@
                     <div class="clearfix">
 
                     </div>
+                    <hr />
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -402,11 +398,12 @@
                             Thêm địa chỉ nhận hàng mới
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group">
                                 <label for="inputEmail4">Tên</label>
+                                <input type="hidden" id="txtcustomerid2" value="0" />
                                 <input type="text" class="form-control" id="txtName" placeholder="Họ tên" data-listener-added_e4a91bf7="true">
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group">
                                 <label for="inputPassword4">Số điện thoại</label>
                                 <input type="text" class="form-control" id="txtPhone" placeholder="Xin vui lòng điền số điện thoại của bạn">
                             </div>
@@ -442,7 +439,20 @@
         $(".tab2").hide();
         LoadMacDinh('@ViewBag.CustomerID');
     });
-
+    function loadDanhsachdiachi() {
+        $.ajax({
+            url: '/Order/LoadListAddrress',
+            dataType: 'html',
+            type: "GET",
+            async: false,
+            success: function (data, status, xhr) {
+                $("#tbody").html(data);
+            },
+            error: function (xhr, status, error) {
+                alert(status);
+            }
+        });
+    }
     function LoadMacDinh() {
          var param = {
             "CustomerID": '@ViewBag.CustomerID',
@@ -454,8 +464,7 @@
             type: "POST",
             async: false,
             success: function (data, status, xhr) {
-                $("#txtCustommerAddress").html(data)
-                $("#txtCustomerAddress2").html(data)
+                $("#txtAddress").html(data)
             },
             error: function (xhr, status, error) {
                 alert(status);
@@ -465,6 +474,7 @@
     function insertAdress() {
 
         var param = {
+            "ID": $("#txtcustomerid2").val(),
             "CustomerID": '@ViewBag.CustomerID',
             "Address": $("#txtAddress").val(),
             "FullName": $("#txtName").val(),
@@ -494,6 +504,9 @@
     function themdiachi() {
         $(".tab1").hide();
         $(".tab2").show();
+        $("#txtName").val('');
+        $("#txtAddress").val('');
+        $("#txtPhone").val('');
     }
     function autoclickRad2() {
         $("#tuvanchuyen").trigger("click");
@@ -501,20 +514,7 @@
     function autoclickRad() {
         $("#dvvanchuyen").trigger("click");
     }
-    function loadDanhsachdiachi() {
-         $.ajax({
-             url: '/Order/LoadListAddrress',
-            dataType: 'html',
-            type: "GET",
-            async: false,
-            success: function (data, status, xhr) {
-                $("#tbody").html(data);
-            },
-            error: function (xhr, status, error) {
-                alert(status);
-            }
-        });
-    }
+  
     function closeradcha(){
         tuvanchuuyen();
         deliveryId = 1;
@@ -687,3 +687,11 @@
         });
     }
 </script>
+<style>
+    @@media (min-width: 768px) {
+        .modal-dialog {
+            width: 669px;
+            margin: 30px auto;
+        }
+    }
+</style>

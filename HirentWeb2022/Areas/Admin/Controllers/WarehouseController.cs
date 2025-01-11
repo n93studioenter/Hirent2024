@@ -46,7 +46,20 @@ namespace HirentWeb2022.Areas.Admin.Controllers
             }
            
         }
-
+        public bool DeleteWasehouse(int whId)
+        {
+            using (var db = new HirentEntities())
+            {
+                tb_WareHouse tb_WareHouse = db.tb_WareHouse.Find(whId);
+                if(tb_WareHouse != null)
+                {
+                    db.tb_WareHouse.Remove(tb_WareHouse);
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            return false;
+        }
         public JsonResult GetWasehouseById(int whId)
         {
             using (var db = new HirentEntities())

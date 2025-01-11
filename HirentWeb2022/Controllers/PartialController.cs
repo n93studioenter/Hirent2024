@@ -120,7 +120,7 @@ namespace HirentWeb2022.Controllers
             ViewBag.lang = getlang;
             using (var db = new HirentEntities())
             {
-                ViewBag.tb_CategoryMain = db.tb_CategoryMain.ToList();
+                ViewBag.tb_CategoryMain = db.tb_CategoryMain.OrderBy(m=>m.Sort).ToList();
             }
             return PartialView();
         }
@@ -138,6 +138,13 @@ namespace HirentWeb2022.Controllers
 
         public ActionResult MenuSub1(int MainCateID)
         {
+            var getlang = Session["Lang"];
+            if (getlang == null)
+            {
+                getlang = "vi";
+                Session["Lang"] = "vi";
+            }
+            ViewBag.lang = getlang;
             using (var db = new HirentEntities())
             {
                 ViewBag.tb_CategorySub1 = db.tb_CategorySub1.Where(m => m.MainCateID == MainCateID).ToList();
@@ -146,6 +153,13 @@ namespace HirentWeb2022.Controllers
         }
         public ActionResult MenuMobileSub1(int MainCateID)
         {
+            var getlang = Session["Lang"];
+            if (getlang == null)
+            {
+                getlang = "vi";
+                Session["Lang"] = "vi";
+            }
+            ViewBag.lang = getlang;
             using (var db = new HirentEntities())
             {
                 var model = db.tb_CategorySub1.Where(m => m.MainCateID == MainCateID).ToList();
@@ -155,6 +169,13 @@ namespace HirentWeb2022.Controllers
         }
         public ActionResult MenuSub2(int SubCate1ID)
         {
+            var getlang = Session["Lang"];
+            if (getlang == null)
+            {
+                getlang = "vi";
+                Session["Lang"] = "vi";
+            }
+            ViewBag.lang = getlang;
             using (var db = new HirentEntities())
             {
                 ViewBag.tb_CategorySub2 = db.tb_CategorySub2.Where(m => m.SubCate1ID == SubCate1ID).ToList();
@@ -265,7 +286,10 @@ namespace HirentWeb2022.Controllers
         //        return PartialView(result);
         //    }
         //}
-
+        public ActionResult Test()
+        {
+            return View();
+        }
         public ActionResult Userinfor()
         {
             var getlang = Session["Lang"];
@@ -284,6 +308,9 @@ namespace HirentWeb2022.Controllers
                 if (tb_Customer != null)
                 {
                     ViewBag.Info = tb_Customer;
+                    @ViewBag.CustomerID= tb_Customer.CustomerID;
+                    ViewBag.Address = db.tb_CustomerDeliveryAddress.Where(m => m.CustomerID == tb_Customer.CustomerID && m.IsMacdinh==1).FirstOrDefault();
+                    ViewBag.ListAddress = db.tb_CustomerDeliveryAddress.Where(m => m.CustomerID == tb_Customer.CustomerID).ToList();
                     return View();
                 }
 
@@ -305,6 +332,25 @@ namespace HirentWeb2022.Controllers
                         findCustomer.FirstName = tb_Customer.FirstName;
                         findCustomer.Phone = tb_Customer.Phone; 
                         findCustomer.Birthday = tb_Customer.Birthday;
+                        if (db.tb_CustomerDeliveryAddress.Any(m => m.CustomerID == findCustomer.CustomerID && m.IsMacdinh==1))
+                        {
+                            tb_CustomerDeliveryAddress tb_CustomerDeliveryAddress = db.tb_CustomerDeliveryAddress.Where(m => m.CustomerID == findCustomer.CustomerID && m.IsMacdinh == 1).FirstOrDefault();
+                            if (tb_CustomerDeliveryAddress != null)
+                            {
+                                tb_CustomerDeliveryAddress.Address= tb_Customer.Address;
+                            }
+                        }
+                        else
+                        {
+                            tb_CustomerDeliveryAddress tb_CustomerDeliveryAddress = new tb_CustomerDeliveryAddress();
+                            tb_CustomerDeliveryAddress.Address= tb_Customer.Address;
+                            tb_CustomerDeliveryAddress.CustomerID=findCustomer.CustomerID;
+                            tb_CustomerDeliveryAddress.CreateDate = DateTime.Now;
+                            tb_CustomerDeliveryAddress.FullName = findCustomer.FirstName;
+                            tb_CustomerDeliveryAddress.PhoneNumber = findCustomer.Phone;
+                            tb_CustomerDeliveryAddress.IsMacdinh = 1;
+                            db.tb_CustomerDeliveryAddress.Add(tb_CustomerDeliveryAddress);
+                        }
                         await db.SaveChangesAsync();
                     }
                 }
@@ -314,6 +360,62 @@ namespace HirentWeb2022.Controllers
             {
                 return false;
             }
+        }
+
+        
+        public ActionResult ChangePassword()
+        {
+            var getlang = Session["Lang"];
+            if (getlang == null)
+            {
+                getlang = "vi";
+                Session["Lang"] = "vi";
+            }
+            ViewBag.lang = getlang;
+            HttpCookie reqCookies = Request.Cookies["HirentLogin"];
+            if (reqCookies != null)
+            {
+               
+                string getEmail = reqCookies["username"].ToString();
+                HirentEntities db = new HirentEntities();
+                tb_Customer tb_Customer = db.tb_Customer.Where(m => m.Email == getEmail).FirstOrDefault();
+                if (tb_Customer != null)
+                {
+                    ViewBag.Info = tb_Customer;
+
+                }
+            }
+           
+            return View();
+        }
+
+        public bool Checkpassword(int CustomerID,string currentPassword)
+        {
+            using (var db = new HirentEntities())
+            {
+                var check = db.tb_Customer.Find(CustomerID);
+                if (check != null)
+                {
+                    if(check.Password!=currentPassword)
+                    return true;
+                }
+               
+            }
+            return false;
+        }
+        public bool UpdatePasswod(int CustomerID, string newPassword)
+        {
+            using (var db = new HirentEntities())
+            {
+                var check = db.tb_Customer.Find(CustomerID);
+                if (check != null)
+                {
+                    check.Password = newPassword;
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

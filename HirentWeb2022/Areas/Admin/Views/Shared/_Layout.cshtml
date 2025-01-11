@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Savina Website | Admin page</title>
+    <title>Hirent Website | Admin page</title>
     <!-- Bootstrap -->
     <link href="~/backend/build/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Font Awesome -->
@@ -53,21 +53,13 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="glyphicon glyphicon-home"></i> <span>Savina Website</span></a>
+                        <a href="index.html" class="site_title"><i class="glyphicon glyphicon-home"></i> <span>Hirent Website</span></a>
                     </div>
 
                     <div class="clearfix"></div>
 
                     <!-- menu profile quick info -->
-                    <div class="profile clearfix">
-                        <div class="profile_pic">
-                            <img src="/image_product/LogoIcons/SiYoSa-Logo-notext.png" alt="..." class="img-circle profile_img" />
-                        </div>
-                        <div class="profile_info">
-                            <span>Welcome,</span>
-                            <h2>Admin Savina</h2>
-                        </div>
-                    </div>
+                  
                     <!-- /menu profile quick info -->
 
                     <br />
@@ -78,13 +70,12 @@
                             <h3>General</h3>
                             <ul class="nav side-menu">
                                 <li>
-                                    <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
+                                    <a href="/administrator"><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                                    @*<ul class="nav child_menu">
                                         <li><a href="index.html">Thống kê tổng hợp</a></li>
                                         <li><a href="login.html">Login</a></li>
-                                    </ul>
+                                    </ul>*@
                                 </li>
-                                <li><a href="/Admin/Warehouse/Info"><i class="fa fa-list"></i> Quản lý Kho </a></li>
                                 <li>
                                     <a><i class="fa fa-list"></i> Quản lý Category <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
@@ -93,28 +84,26 @@
                                         <li><a href="/Admin/ProductCategory/CategorySub2">Category Sub 2</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="Sitemap_management"><i class="fa fa-list"></i> Quản lý Sitemap </a></li>
+                                @*<li><a href="Sitemap_management"><i class="fa fa-list"></i> Quản lý Sitemap </a></li>*@
                                 <li>
                                     <a><i class="fa fa-cubes"></i> Quản lý sản phẩm <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="/Admin/Product/product_edit">Tạo sản phẩm</a></li>
                                         <li><a href="/Admin/Product/ProductList">Danh sách sản phẩm</a></li>
-                                        <li><a href="warehouse_info">Tạo địa chỉ kho</a></li>
+                                       
                                     </ul>
                                 </li>
                                 <li>
                                     <a><i class="fa fa-suitcase"></i> Quản lý đơn hàng <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="order_createnew">Tạo đơn hàng</a></li>
-                                        <li><a href="order_list">Danh sách đơn hàng</a></li>
+                                        @*<li><a href="order_createnew">Tạo đơn hàng</a></li>*@
+                                        <li><a href="/Admin/Orders/OrderList">Danh sách đơn hàng</a></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a><i class="fa fa-users"></i> Quản lý khách hàng <span class="fa fa-chevron-down"></span></a>
+                                    <a><i class="fa fa-users"></i> Quản lý kho <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="customer_group">Nhóm khách hàng</a></li>
-                                        <li><a href="customer_list">Danh sách khách hàng</a></li>
-                                        <li><a href="customer_createnew">Tạo khách hàng mới</a></li>
+                                        <li><a href="/Admin/Warehouse/Info">Tạo địa chỉ kho</a></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -125,15 +114,15 @@
                                         <li><a href="banner_mainCategory">Các banner của maincategory</a></li>
                                     </ul>
                                 </li>
-                                <li>
+                                @*<li>
                                     <a><i class="fa fa-envelope-o"></i> Quản lý tin nhắn  <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="message_contact">Tin nhắn từ Contact</a></li>
                                         <li><a href="message_chat">Tin nhắn từ CHAT</a></li>
                                         <li><a href="message_other">Tin nhắn khác</a></li>
                                     </ul>
-                                </li>
-                                <li>
+                                </li>*@
+                                @*<li>
                                     <a><i class="fa fa-cogs"></i>Quản lý hệ thống <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="account_group">Tạo nhóm TK local</a></li>
@@ -142,7 +131,7 @@
                                         <li><a href="get_link">Get link image</a></li>
                                         <li><a href="seo_management">Quản lý SEO</a></li>
                                     </ul>
-                                </li>
+                                </li>*@
                             </ul>
                         </div>
                     </div>
@@ -200,7 +189,7 @@
             <!-- footer content -->
             <footer>
                 <div class="pull-right">
-                    Savina - Bootstrap Admin Backend by <a href="http://siyosa.net">Siyosa Co., Ltd</a>
+                    Hirent - Bootstrap Admin Backend by <a href="http://siyosa.net">Siyosa Co., Ltd</a>
                 </div>
                 <div class="clearfix"></div>
             </footer>
@@ -213,7 +202,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title" style="text-align:center;">SAVINA</h4>
+                            <h4 class="modal-title" style="text-align:center;">Hirent</h4>
                         </div>
                         <div class="modal-body">
                         </div>
@@ -294,3 +283,9 @@
 </body>
 
 </html>
+<script>
+
+    $('#datatable').DataTable({
+        ordering: false  // Hủy chức năng sắp xếp
+    })
+</script>

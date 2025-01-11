@@ -195,6 +195,7 @@ namespace HirentWeb2022.Controllers
         }
         public async Task<ActionResult> LoadProductByCate(int MainCateID, int Type)
         { 
+           
             var getlang = Session["Lang"];
             if (getlang == null)
             {
