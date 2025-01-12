@@ -18,8 +18,8 @@ namespace HirentWeb2022.Models
         public Nullable<int> pOrderId { get; set; }
         public Nullable<int> rentalType { get; set; }
         public Nullable<int> productQty { get; set; }
-        public string timePickup { get; set; }
-        public string timeReturn { get; set; }
+        public Nullable<System.DateTime> timePickup { get; set; }
+        public Nullable<System.DateTime> timeReturn { get; set; }
         public Nullable<int> serviceId { get; set; }
         public Nullable<int> depositId { get; set; }
         public Nullable<int> deliveryId { get; set; }

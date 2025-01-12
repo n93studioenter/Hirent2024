@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="hirentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="hirentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="Id" />
@@ -436,8 +436,8 @@
           <Property Name="pOrderId" Type="int" />
           <Property Name="rentalType" Type="int" />
           <Property Name="productQty" Type="int" />
-          <Property Name="timePickup" Type="varchar" MaxLength="50" />
-          <Property Name="timeReturn" Type="varchar" MaxLength="50" />
+          <Property Name="timePickup" Type="datetime" />
+          <Property Name="timeReturn" Type="datetime" />
           <Property Name="serviceId" Type="int" />
           <Property Name="depositId" Type="int" />
           <Property Name="deliveryId" Type="int" />
@@ -870,14 +870,6 @@
           <Property Name="whId" Type="int" />
           <Property Name="DisplayOrder" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'hirent.dbo.Tinhthanhpho' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Tinhthanhpho">
-          <Property Name="MaTP" Type="nvarchar" MaxLength="255" />
-          <Property Name="Name" Type="nvarchar" MaxLength="255" />
-          <Property Name="Type" Type="nvarchar" MaxLength="255" />
-          <Property Name="Slug" Type="nvarchar" MaxLength="255" />
-        </EntityType>-->
         <Association Name="FK_District_Province">
           <End Role="tb_Province" Type="Self.tb_Province" Multiplicity="1" />
           <End Role="tb_District" Type="Self.tb_District" Multiplicity="*" />
@@ -987,8 +979,7 @@ warning 6013: The table/view 'hirent.dbo.Tinhthanhpho' does not have a primary k
             <End Role="tb_Ward" EntitySet="tb_Ward" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="hirentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1417,39 +1408,6 @@ warning 6013: The table/view 'hirent.dbo.Tinhthanhpho' does not have a primary k
           <Property Name="status" Type="Int32" />
           <Property Name="createTimeClone" Type="DateTime" Precision="3" />
           <Property Name="Totals" Type="Double" />
-        </EntityType>
-        <EntityType Name="tb_Pre_Order_Details">
-          <Key>
-            <PropertyRef Name="pOrderDetailId" />
-          </Key>
-          <Property Name="pOrderDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="pOrderId" Type="Int32" />
-          <Property Name="rentalType" Type="Int32" />
-          <Property Name="productQty" Type="Int32" />
-          <Property Name="timePickup" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="timeReturn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="serviceId" Type="Int32" />
-          <Property Name="depositId" Type="Int32" />
-          <Property Name="deliveryId" Type="Int32" />
-          <Property Name="deliveryAddress" Type="Int32" />
-          <Property Name="deliveryNote" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="paymentMethodId" Type="Int32" />
-          <Property Name="createTimeClone" Type="DateTime" Precision="3" />
-          <Property Name="OrderCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Totals" Type="Double" />
-          <Property Name="TotalInstall" Type="Double" />
-          <Property Name="TotalDelivery" Type="Double" />
-          <Property Name="Dichvuvanchuyen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Dichvulapdat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Totaldeposit" Type="Double" />
-          <Property Name="hinhthuc" Type="Int32" />
-          <Property Name="hinhthuccontent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="GhichuDichVu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="GhiChuVanChuyen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Ghichucoc1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Ghichucoc2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Imagegc1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Imagegc2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tb_Product">
           <Key>
@@ -1932,7 +1890,6 @@ warning 6013: The table/view 'hirent.dbo.Tinhthanhpho' does not have a primary k
           <EntitySet Name="tb_Permission" EntityType="Self.tb_Permission" />
           <EntitySet Name="tb_Pre_Order" EntityType="Self.tb_Pre_Order" />
           <EntitySet Name="tb_Pre_Order_accompanying" EntityType="Self.tb_Pre_Order_accompanying" />
-          <EntitySet Name="tb_Pre_Order_Details" EntityType="Self.tb_Pre_Order_Details" />
           <EntitySet Name="tb_Product" EntityType="Self.tb_Product" />
           <EntitySet Name="tb_Product_Translation" EntityType="Self.tb_Product_Translation" />
           <EntitySet Name="tb_ProductAccessorySelection" EntityType="Self.tb_ProductAccessorySelection" />
@@ -1971,6 +1928,7 @@ warning 6013: The table/view 'hirent.dbo.Tinhthanhpho' does not have a primary k
           </AssociationSet>
           <FunctionImport Name="sp_GetProductList" ReturnType="Collection(hirentModel.sp_GetProductList_Result)" />
           <FunctionImport Name="testStored1" ReturnType="Collection(hirentModel.testStored1_Result)" />
+          <EntitySet Name="tb_Pre_Order_Details" EntityType="hirentModel.tb_Pre_Order_Details" />
         </EntityContainer>
         <ComplexType Name="sp_GetProductList_Result">
           <Property Type="Int64" Name="ProductID" Nullable="false" />
@@ -2026,6 +1984,39 @@ warning 6013: The table/view 'hirent.dbo.Tinhthanhpho' does not have a primary k
           <Property Type="String" Name="MainCateBanner" Nullable="true" MaxLength="Max" />
           <Property Type="String" Name="Language" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <EntityType Name="tb_Pre_Order_Details">
+          <Key>
+            <PropertyRef Name="pOrderDetailId" />
+          </Key>
+          <Property Name="pOrderDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pOrderId" Type="Int32" />
+          <Property Name="rentalType" Type="Int32" />
+          <Property Name="productQty" Type="Int32" />
+          <Property Name="timePickup" Type="DateTime" Precision="3" />
+          <Property Name="timeReturn" Type="DateTime" Precision="3" />
+          <Property Name="serviceId" Type="Int32" />
+          <Property Name="depositId" Type="Int32" />
+          <Property Name="deliveryId" Type="Int32" />
+          <Property Name="deliveryAddress" Type="Int32" />
+          <Property Name="deliveryNote" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="paymentMethodId" Type="Int32" />
+          <Property Name="createTimeClone" Type="DateTime" Precision="3" />
+          <Property Name="OrderCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Totals" Type="Double" />
+          <Property Name="TotalInstall" Type="Double" />
+          <Property Name="TotalDelivery" Type="Double" />
+          <Property Name="Dichvuvanchuyen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Dichvulapdat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Totaldeposit" Type="Double" />
+          <Property Name="hinhthuc" Type="Int32" />
+          <Property Name="hinhthuccontent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GhichuDichVu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChuVanChuyen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ghichucoc1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ghichucoc2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Imagegc1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Imagegc2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2482,40 +2473,6 @@ warning 6013: The table/view 'hirent.dbo.Tinhthanhpho' does not have a primary k
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="createTimeClone" ColumnName="createTimeClone" />
                 <ScalarProperty Name="Totals" ColumnName="Totals" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_Pre_Order_Details">
-            <EntityTypeMapping TypeName="hirentModel.tb_Pre_Order_Details">
-              <MappingFragment StoreEntitySet="tb_Pre_Order_Details">
-                <ScalarProperty Name="pOrderDetailId" ColumnName="pOrderDetailId" />
-                <ScalarProperty Name="pOrderId" ColumnName="pOrderId" />
-                <ScalarProperty Name="rentalType" ColumnName="rentalType" />
-                <ScalarProperty Name="productQty" ColumnName="productQty" />
-                <ScalarProperty Name="timePickup" ColumnName="timePickup" />
-                <ScalarProperty Name="timeReturn" ColumnName="timeReturn" />
-                <ScalarProperty Name="serviceId" ColumnName="serviceId" />
-                <ScalarProperty Name="depositId" ColumnName="depositId" />
-                <ScalarProperty Name="deliveryId" ColumnName="deliveryId" />
-                <ScalarProperty Name="deliveryAddress" ColumnName="deliveryAddress" />
-                <ScalarProperty Name="deliveryNote" ColumnName="deliveryNote" />
-                <ScalarProperty Name="paymentMethodId" ColumnName="paymentMethodId" />
-                <ScalarProperty Name="createTimeClone" ColumnName="createTimeClone" />
-                <ScalarProperty Name="OrderCode" ColumnName="OrderCode" />
-                <ScalarProperty Name="Totals" ColumnName="Totals" />
-                <ScalarProperty Name="TotalInstall" ColumnName="TotalInstall" />
-                <ScalarProperty Name="TotalDelivery" ColumnName="TotalDelivery" />
-                <ScalarProperty Name="Dichvuvanchuyen" ColumnName="Dichvuvanchuyen" />
-                <ScalarProperty Name="Dichvulapdat" ColumnName="Dichvulapdat" />
-                <ScalarProperty Name="Totaldeposit" ColumnName="Totaldeposit" />
-                <ScalarProperty Name="hinhthuc" ColumnName="hinhthuc" />
-                <ScalarProperty Name="hinhthuccontent" ColumnName="hinhthuccontent" />
-                <ScalarProperty Name="GhichuDichVu" ColumnName="GhichuDichVu" />
-                <ScalarProperty Name="GhiChuVanChuyen" ColumnName="GhiChuVanChuyen" />
-                <ScalarProperty Name="Ghichucoc1" ColumnName="Ghichucoc1" />
-                <ScalarProperty Name="Ghichucoc2" ColumnName="Ghichucoc2" />
-                <ScalarProperty Name="Imagegc1" ColumnName="Imagegc1" />
-                <ScalarProperty Name="Imagegc2" ColumnName="Imagegc2" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3014,6 +2971,40 @@ warning 6013: The table/view 'hirent.dbo.Tinhthanhpho' does not have a primary k
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="tb_Pre_Order_Details">
+            <EntityTypeMapping TypeName="hirentModel.tb_Pre_Order_Details">
+              <MappingFragment StoreEntitySet="tb_Pre_Order_Details">
+                <ScalarProperty Name="Imagegc2" ColumnName="Imagegc2" />
+                <ScalarProperty Name="Imagegc1" ColumnName="Imagegc1" />
+                <ScalarProperty Name="Ghichucoc2" ColumnName="Ghichucoc2" />
+                <ScalarProperty Name="Ghichucoc1" ColumnName="Ghichucoc1" />
+                <ScalarProperty Name="GhiChuVanChuyen" ColumnName="GhiChuVanChuyen" />
+                <ScalarProperty Name="GhichuDichVu" ColumnName="GhichuDichVu" />
+                <ScalarProperty Name="hinhthuccontent" ColumnName="hinhthuccontent" />
+                <ScalarProperty Name="hinhthuc" ColumnName="hinhthuc" />
+                <ScalarProperty Name="Totaldeposit" ColumnName="Totaldeposit" />
+                <ScalarProperty Name="Dichvulapdat" ColumnName="Dichvulapdat" />
+                <ScalarProperty Name="Dichvuvanchuyen" ColumnName="Dichvuvanchuyen" />
+                <ScalarProperty Name="TotalDelivery" ColumnName="TotalDelivery" />
+                <ScalarProperty Name="TotalInstall" ColumnName="TotalInstall" />
+                <ScalarProperty Name="Totals" ColumnName="Totals" />
+                <ScalarProperty Name="OrderCode" ColumnName="OrderCode" />
+                <ScalarProperty Name="createTimeClone" ColumnName="createTimeClone" />
+                <ScalarProperty Name="paymentMethodId" ColumnName="paymentMethodId" />
+                <ScalarProperty Name="deliveryNote" ColumnName="deliveryNote" />
+                <ScalarProperty Name="deliveryAddress" ColumnName="deliveryAddress" />
+                <ScalarProperty Name="deliveryId" ColumnName="deliveryId" />
+                <ScalarProperty Name="depositId" ColumnName="depositId" />
+                <ScalarProperty Name="serviceId" ColumnName="serviceId" />
+                <ScalarProperty Name="timeReturn" ColumnName="timeReturn" />
+                <ScalarProperty Name="timePickup" ColumnName="timePickup" />
+                <ScalarProperty Name="productQty" ColumnName="productQty" />
+                <ScalarProperty Name="rentalType" ColumnName="rentalType" />
+                <ScalarProperty Name="pOrderId" ColumnName="pOrderId" />
+                <ScalarProperty Name="pOrderDetailId" ColumnName="pOrderDetailId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

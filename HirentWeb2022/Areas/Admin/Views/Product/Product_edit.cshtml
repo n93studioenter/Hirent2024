@@ -2068,18 +2068,21 @@
             alert("Vui lòng nhập mã sản phẩm");
             return;
         }
-        if ($("#sltMainCate").val() == 0) {
-            alert("Vui lòng chọn Main Category");
-            return;
+        if (lstRowcate.length === 0) {
+            if ($("#sltMainCate").val() == 0) {
+                alert("Vui lòng chọn Main Category");
+                return;
+            }
+            if ($("#sltSubCate1").val() == 0) {
+                alert("Vui lòng chọn Sub Category 1");
+                return;
+            }
+            if ($("#sltSubCate2").val() == 0) {
+                alert("Vui lòng chọn Sub Category 2");
+                return;
+            }
         }
-        if ($("#sltSubCate1").val() == 0) {
-            alert("Vui lòng chọn Sub Category 1");
-            return;
-        }
-        if ($("#sltSubCate2").val() == 0) {
-            alert("Vui lòng chọn Sub Category 2");
-            return;
-        }
+       
         if ($("#slwh").val() == 0) {
             alert("Vui lòng chọn kho hàng");
             return;

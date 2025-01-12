@@ -136,8 +136,8 @@ namespace HirentWeb2022.Controllers
                                     tb_Pre_Order_Details.pOrderId = tb_Pre_Order.pOrderId;
                                     tb_Pre_Order_Details.rentalType = type;
                                     tb_Pre_Order_Details.productQty = Qty;
-                                    tb_Pre_Order_Details.timePickup = timePickup.ToString("dd/MM/yyyy HH:mm");
-                                    tb_Pre_Order_Details.timeReturn = timeReturn.ToString("dd/MM/yyyy HH:mm");
+                                    tb_Pre_Order_Details.timePickup = timePickup;
+                                    tb_Pre_Order_Details.timeReturn = timeReturn;
                                     tb_Pre_Order_Details.OrderCode = DateTime.Now.ToString("yyyyMMddHHmmss");
                                     tb_Pre_Order_Details.Totals = total;
                                     db.tb_Pre_Order_Details.Add(tb_Pre_Order_Details);

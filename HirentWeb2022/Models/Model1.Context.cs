@@ -57,7 +57,6 @@ namespace HirentWeb2022.Models
         public virtual DbSet<tb_Permission> tb_Permission { get; set; }
         public virtual DbSet<tb_Pre_Order> tb_Pre_Order { get; set; }
         public virtual DbSet<tb_Pre_Order_accompanying> tb_Pre_Order_accompanying { get; set; }
-        public virtual DbSet<tb_Pre_Order_Details> tb_Pre_Order_Details { get; set; }
         public virtual DbSet<tb_Product> tb_Product { get; set; }
         public virtual DbSet<tb_Product_Translation> tb_Product_Translation { get; set; }
         public virtual DbSet<tb_ProductAccessorySelection> tb_ProductAccessorySelection { get; set; }
@@ -82,6 +81,7 @@ namespace HirentWeb2022.Models
         public virtual DbSet<tb_WareHouse_Time> tb_WareHouse_Time { get; set; }
         public virtual DbSet<tb_WishList> tb_WishList { get; set; }
         public virtual DbSet<TimeBlock> TimeBlocks { get; set; }
+        public virtual DbSet<tb_Pre_Order_Details> tb_Pre_Order_Details { get; set; }
     
         public virtual ObjectResult<sp_GetProductList_Result> sp_GetProductList()
         {

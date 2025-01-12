@@ -8,7 +8,7 @@
     foreach (HirentWeb2022.ViewModel.ProductInfo item in Model)
     {
         <tr role="row" class="odd">
-            <td class="sorting_1">1</td>
+            <td class="sorting_1">@item.ProductID</td>
             <td><input type="checkbox"></td>
             <td>@item.ProductCode</td>
             <td>@item.ProductName</td>

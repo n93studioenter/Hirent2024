@@ -83,14 +83,14 @@
                                         }
                                     </td>
                                     <td>
-                                        @item.tb_Pre_Order_Details.timePickup
+                                        @item.tb_Pre_Order_Details.timePickup.Value.ToString("dd/MM/yyyy HH:ss")
                                     </td>
                                     <td>
-                                        @item.tb_Pre_Order_Details.timeReturn
+                                        @item.tb_Pre_Order_Details.timeReturn.Value.ToString("dd/MM/yyyy HH:ss")
                                     </td>
                                     <td>
                                         @{
-                                            var timepsan = DateTime.Parse(item.tb_Pre_Order_Details.timeReturn) - DateTime.Parse(item.tb_Pre_Order_Details.timePickup);
+                                            var timepsan = item.tb_Pre_Order_Details.timeReturn.Value - item.tb_Pre_Order_Details.timePickup.Value;
                                             if (item.tb_Pre_Order_Details.rentalType.Value == 1)
                                             {
                                                 <span>@timepsan.TotalHours</span> <span>  @(ViewBag.lang == "vi"? "Giờ" : "Hour")</span>
@@ -152,10 +152,10 @@
                                             }
                                         </td>
                                         <td>
-                                            @item.tb_Pre_Order_Details.timePickup
+                                            @item.tb_Pre_Order_Details.timePickup.Value.ToString("dd/MM/yyyy HH:ss")
                                         </td>
                                         <td>
-                                            @item.tb_Pre_Order_Details.timeReturn
+                                            @item.tb_Pre_Order_Details.timeReturn.Value.ToString("dd/MM/yyyy HH:ss")
                                         </td>
                                         <td>
                                             @{

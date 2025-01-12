@@ -35,7 +35,6 @@
         <EntityTypeShape EntityType="hirentModel.tb_Permission" Width="1.5" PointX="15.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="hirentModel.tb_Pre_Order" Width="1.5" PointX="15.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="hirentModel.tb_Pre_Order_accompanying" Width="1.5" PointX="15.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="hirentModel.tb_Pre_Order_Details" Width="1.5" PointX="4.75" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="hirentModel.tb_Product" Width="1.5" PointX="16.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="hirentModel.tb_Product_Translation" Width="1.5" PointX="17.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="hirentModel.tb_ProductAccessorySelection" Width="1.5" PointX="17.75" PointY="4.75" IsExpanded="true" />
@@ -63,6 +62,7 @@
         <AssociationConnector Association="hirentModel.FK_Province_Country" ManuallyRouted="false" />
         <AssociationConnector Association="hirentModel.FK_District_Province" ManuallyRouted="false" />
         <AssociationConnector Association="hirentModel.FK_Ward_District" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="hirentModel.tb_Pre_Order_Details" Width="1.5" PointX="3.375" PointY="18.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
