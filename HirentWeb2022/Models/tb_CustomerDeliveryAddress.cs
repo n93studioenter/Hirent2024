@@ -22,5 +22,8 @@ namespace HirentWeb2022.Models
         public string FullName { get; set; }
         public string PhoneNumber { get; set; }
         public Nullable<int> IsMacdinh { get; set; }
+        public string provinces { get; set; }
+        public string districts { get; set; }
+        public string wards { get; set; }
     }
 }

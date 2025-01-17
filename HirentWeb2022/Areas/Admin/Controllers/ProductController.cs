@@ -47,9 +47,9 @@ namespace HirentWeb2022.Areas.Admin.Controllers
                                  ProductID = p.ProductID,
                                  ProductName = p.ProductName,
                                  Soluongton = p.Soluongton,
-                                 ProductName_EN = pts2!=null?pts2.ProductName_EN:"" 
+                                 ProductName_EN = pts2 != null ? pts2.ProductName_EN : ""
                              }
-                             ).OrderByDescending(m=>m.ProductID).ToList();
+                             ).OrderByDescending(m => m.ProductID).ToList();
                 return PartialView(model);
             }
         }
@@ -63,13 +63,15 @@ namespace HirentWeb2022.Areas.Admin.Controllers
                 var model = (from p in db.tb_Product
                              select new ProductSave()
                              {
-                                 tb_Product = p
+                                 tb_Product = p,
+                                 tb_ProductTermConditionDetails=db.tb_ProductTermConditionDetails.Where(m=>m.ProductId==p.ProductID).FirstOrDefault(),
+                                 tb_ProductTermConditionDetails_Translation = db.tb_ProductTermConditionDetails_Translation.Where(m => m.ProductId == p.ProductID).FirstOrDefault()
                              }
                              ).Where(m => m.tb_Product.ProductID == productID).FirstOrDefault();
                 //tb_ProductTermConditionDetails 
                 var moacc = db.tb_ProductAccessorySelection.Where(m => m.ProductID == productID).ToList();
                 List<objsub> lstobjsub = new List<objsub>();
-                foreach(var item in moacc)
+                foreach (var item in moacc)
                 {
                     objsub _objsub = new objsub();
                     tb_Product tb = db.tb_Product.Where(m => m.ProductName == item.ProductName).FirstOrDefault();
@@ -79,8 +81,8 @@ namespace HirentWeb2022.Areas.Admin.Controllers
 
                 }
                 ViewBag.ListAcess = lstobjsub;
-                if (productID!=0)
-                ViewBag.IdWareHouse = db.tb_ProductTermConditionDetails.Where(m => m.ProductId == productID).FirstOrDefault().WarehouseId;
+                if (productID != 0)
+                    ViewBag.IdWareHouse = db.tb_ProductTermConditionDetails.Where(m => m.ProductId == productID).FirstOrDefault().WarehouseId;
                 ViewBag.tb_ProductTermConditionDetails = db.tb_ProductTermConditionDetails.Where(m => m.ProductId == productID).FirstOrDefault();
                 ViewBag.maincate = db.tb_CategoryMain.ToList();
                 ViewBag.Warehouse = db.tb_WareHouse.ToList();
@@ -89,25 +91,25 @@ namespace HirentWeb2022.Areas.Admin.Controllers
                 ViewBag.tb_ProductPricePerMonth = db.tb_ProductPricePerMonth.Where(m => m.ProductID == productID).FirstOrDefault();
                 ViewBag.tb_ProductGallery = db.tb_ProductGallery.Where(m => m.ProductID == productID).ToList();
                 ViewBag.tb_Product_Translation = db.tb_Product_Translation.Where(m => m.Idproduct == productID).FirstOrDefault();
-                ViewBag.lsttb_ProductCategorySelection =(from pd in db.tb_ProductCategorySelection.ToList()
-                                                         
-                                                         join cm in db.tb_CategoryMain
-                                                         on pd.ProductMainCate equals cm.MainCateID
-                                                         join c1 in db.tb_CategorySub1.ToList()
-                                                         on pd.ProductSubCate1 equals c1.SubCate1ID
-                                                         join c2 in db.tb_CategorySub2.ToList()
-                                                         on pd.ProductSubCate2 equals c2.SubCate2ID
-                                                         select new ProductCategorySelection()
-                                                         {
-                                                              ProductId=int.Parse(pd.ProductId.ToString()),
-                                                              ProductMainCateID=int.Parse(pd.ProductMainCate.ToString()),
-                                                              ProductMainCateName=cm.MainCateName,
-                                                              ProductSubCate1ID=int.Parse(c1.SubCate1ID.ToString()),
-                                                              ProductSubCate1Name=c1.SubCate1Name,
-                                                              ProductSubCate2ID=int.Parse(c2.SubCate2ID.ToString()),
-                                                              ProductSubCate2Name=c2.SubCate2Name
-                                                         }
-                                                         ).Where(m=>m.ProductId==productID).ToList();
+                ViewBag.lsttb_ProductCategorySelection = (from pd in db.tb_ProductCategorySelection.ToList()
+
+                                                          join cm in db.tb_CategoryMain
+                                                          on pd.ProductMainCate equals cm.MainCateID
+                                                          join c1 in db.tb_CategorySub1.ToList()
+                                                          on pd.ProductSubCate1 equals c1.SubCate1ID
+                                                          join c2 in db.tb_CategorySub2.ToList()
+                                                          on pd.ProductSubCate2 equals c2.SubCate2ID
+                                                          select new ProductCategorySelection()
+                                                          {
+                                                              ProductId = int.Parse(pd.ProductId.ToString()),
+                                                              ProductMainCateID = int.Parse(pd.ProductMainCate.ToString()),
+                                                              ProductMainCateName = cm.MainCateName,
+                                                              ProductSubCate1ID = int.Parse(c1.SubCate1ID.ToString()),
+                                                              ProductSubCate1Name = c1.SubCate1Name,
+                                                              ProductSubCate2ID = int.Parse(c2.SubCate2ID.ToString()),
+                                                              ProductSubCate2Name = c2.SubCate2Name
+                                                          }
+                                                         ).Where(m => m.ProductId == productID).ToList();
                 return View(model);
             }
         }
@@ -137,7 +139,7 @@ namespace HirentWeb2022.Areas.Admin.Controllers
                 bool isAdd = false;
                 tb_Product it;
                 //
-              
+
                 if (model.ProductID == 0)
                 {
                     isAdd = true;
@@ -168,7 +170,7 @@ namespace HirentWeb2022.Areas.Admin.Controllers
                 //
                 foreach (var item in model.lstsub.ToList())
                 {
-                    tb_ProductCategorySelection _tb_ProductCategorySelection = db.tb_ProductCategorySelection.Where(m=>m.ProductId== it.ProductID && m.ProductMainCate==item.submain.id && m.ProductSubCate1==item.sub1.id && m.ProductSubCate2==item.sub2.id ).FirstOrDefault();
+                    tb_ProductCategorySelection _tb_ProductCategorySelection = db.tb_ProductCategorySelection.Where(m => m.ProductId == it.ProductID && m.ProductMainCate == item.submain.id && m.ProductSubCate1 == item.sub1.id && m.ProductSubCate2 == item.sub2.id).FirstOrDefault();
                     if (_tb_ProductCategorySelection == null)
                     {
                         _tb_ProductCategorySelection = new tb_ProductCategorySelection();
@@ -178,13 +180,13 @@ namespace HirentWeb2022.Areas.Admin.Controllers
                         _tb_ProductCategorySelection.ProductSubCate2 = item.sub2.id;
                         db.tb_ProductCategorySelection.Add(_tb_ProductCategorySelection);
                         db.SaveChanges();
-                    } 
+                    }
                 }
                 //Xóa bị xóa
                 var lstselect = db.tb_ProductCategorySelection.Where(m => m.ProductId == it.ProductID).ToList();
                 var lstdeleteselecttion = lstselect.Where(m => !model.lstsub.Any(n => n.submain.id == m.ProductMainCate && n.sub1.id == m.ProductSubCate1 && n.sub2.id == m.ProductSubCate2)).ToList();
 
-                foreach(var item in lstdeleteselecttion)
+                foreach (var item in lstdeleteselecttion)
                 {
                     var its = db.tb_ProductCategorySelection.Where(m => m.ProductMainCate == item.ProductMainCate && m.ProductSubCate1 == item.ProductSubCate1 && m.ProductSubCate2 == item.ProductSubCate2).FirstOrDefault();
                     if (its != null)
@@ -197,7 +199,7 @@ namespace HirentWeb2022.Areas.Admin.Controllers
                 var lstpriceblock = model.strPriceByBlock.Split(',');
                 tb_ProductPricePerHour tb_ProductPricePerHour = db.tb_ProductPricePerHour.Where(m => m.ProductID == it.ProductID).FirstOrDefault();
                 bool ispriceblock = false;
-                if (tb_ProductPricePerHour==null)
+                if (tb_ProductPricePerHour == null)
                 {
                     tb_ProductPricePerHour = new tb_ProductPricePerHour();
                     ispriceblock = true;
@@ -222,11 +224,11 @@ namespace HirentWeb2022.Areas.Admin.Controllers
                 tb_ProductPricePerHour.Block17 = double.Parse(lstpriceblock[16].ToString());
                 tb_ProductPricePerHour.Block18 = double.Parse(lstpriceblock[17].ToString());
                 tb_ProductPricePerHour.Block19 = double.Parse(lstpriceblock[18].ToString());
-                tb_ProductPricePerHour.Block20= double.Parse(lstpriceblock[19].ToString());
+                tb_ProductPricePerHour.Block20 = double.Parse(lstpriceblock[19].ToString());
                 tb_ProductPricePerHour.Block21 = double.Parse(lstpriceblock[20].ToString());
                 tb_ProductPricePerHour.Block22 = double.Parse(lstpriceblock[21].ToString());
-                tb_ProductPricePerHour.Block23= double.Parse(lstpriceblock[22].ToString());
-                tb_ProductPricePerHour.Block24= double.Parse(lstpriceblock[23].ToString());
+                tb_ProductPricePerHour.Block23 = double.Parse(lstpriceblock[22].ToString());
+                tb_ProductPricePerHour.Block24 = double.Parse(lstpriceblock[23].ToString());
                 if (ispriceblock)
                 {
                     db.tb_ProductPricePerHour.Add(tb_ProductPricePerHour);
@@ -307,7 +309,7 @@ namespace HirentWeb2022.Areas.Admin.Controllers
                 //tb_ProductTermConditionDetails
                 foreach (var pt in model.lstProductAccessorySelection.ToList())
                 {
-                    var chk = db.tb_ProductAccessorySelection.Where(m => m.ProductName == pt.name && m.ProductID== it.ProductID).FirstOrDefault();
+                    var chk = db.tb_ProductAccessorySelection.Where(m => m.ProductName == pt.name && m.ProductID == it.ProductID).FirstOrDefault();
                     if (chk == null)
                     {
                         tb_ProductAccessorySelection _tb_ProductAccessorySelection = new tb_ProductAccessorySelection();
@@ -329,7 +331,7 @@ namespace HirentWeb2022.Areas.Admin.Controllers
                     lstobjsub.Add(objsub);
                 }
                 var lstdelete = lstobjsub.Where(m => !model.lstProductAccessorySelection.Any(n => n.id == m.id)).ToList();
-                foreach(var idl in lstdelete)
+                foreach (var idl in lstdelete)
                 {
                     tb_ProductAccessorySelection tb_ProductAccessorySelection = db.tb_ProductAccessorySelection.Where(m => m.ProductID == it.ProductID && m.ProductName == idl.name).FirstOrDefault();
                     db.tb_ProductAccessorySelection.Remove(tb_ProductAccessorySelection);
@@ -376,7 +378,7 @@ namespace HirentWeb2022.Areas.Admin.Controllers
                     db.SaveChanges();
 
                 }
-               // tb_Product_Translation
+                // tb_Product_Translation
                 tb_Product_Translation tb_Product_Translation = db.tb_Product_Translation.Where(m => m.Idproduct == it.ProductID).FirstOrDefault();
                 if (tb_Product_Translation == null)
                 {
@@ -404,7 +406,30 @@ namespace HirentWeb2022.Areas.Admin.Controllers
                     db.SaveChanges();
 
                 }
-
+                //tb_ProductTermConditionDetails_Translation
+                tb_ProductTermConditionDetails_Translation tb_ProductTermConditionDetails_Translation = db.tb_ProductTermConditionDetails_Translation.Where(m => m.ProductId == it.ProductID).FirstOrDefault();
+                var add = false;
+                if (tb_ProductTermConditionDetails_Translation == null)
+                {
+                    add = true;
+                    tb_ProductTermConditionDetails_Translation = new tb_ProductTermConditionDetails_Translation();
+                }
+                tb_ProductTermConditionDetails_Translation.ProductId = int.Parse(model.ProductID.ToString());
+                tb_ProductTermConditionDetails_Translation.CostInstallation = model.CostInstallationEN;
+                tb_ProductTermConditionDetails_Translation.CostDelivery = model.CostDeliveryEN;
+                tb_ProductTermConditionDetails_Translation.CostInstallAndDelivery = model.CostInstallAndDeliveryEN;
+                tb_ProductTermConditionDetails_Translation.Tuvanchuyen = model.TuvanchuyenEN;
+                tb_ProductTermConditionDetails_Translation.Giaotannha = model.GiaotannhaEN;
+                tb_ProductTermConditionDetails_Translation.Nhantratannha= model.NhantratannhaEN;
+                tb_ProductTermConditionDetails_Translation.Giaovanhantratannha = model.GiaovanhantratannhaEN;
+                tb_ProductTermConditionDetails_Translation.Tulapdat = model.TulapdatEN;
+                tb_ProductTermConditionDetails_Translation.Huongdansudung = model.HuongdansudungEN;
+                tb_ProductTermConditionDetails_Translation.Thotoilap = model.ThotoilapEN;
+                tb_ProductTermConditionDetails_Translation.Thotoithao = model.ThotoithaoEN;
+                tb_ProductTermConditionDetails_Translation.Thodenlapvathao = model.ThodenlapvathaoEN;
+                if (add)
+                    db.tb_ProductTermConditionDetails_Translation.Add(tb_ProductTermConditionDetails_Translation);
+                db.SaveChanges();
             }
         }
 
@@ -420,7 +445,7 @@ namespace HirentWeb2022.Areas.Admin.Controllers
                                  WarehouseId = int.Parse(wh.WarehouseId.ToString()),
                                  ProductID = pd.ProductID,
                                  ProductName = pd.ProductName,
-                                 ProductAvatar=pd.ProductAvatar 
+                                 ProductAvatar = pd.ProductAvatar
                              }
                              ).Where(m => m.WarehouseId == WarehouseId).ToList();
                 return PartialView(model);
@@ -471,7 +496,7 @@ namespace HirentWeb2022.Areas.Admin.Controllers
                     string arrayhour = "";
                     string arrayday = "";
                     string arraymonth = "";
-                   
+
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         if (i < dt.Rows.Count - 1)
@@ -506,7 +531,7 @@ namespace HirentWeb2022.Areas.Admin.Controllers
         #endregion
 
         [HttpPost]
-        public void SelectGroup(int id,int type)
+        public void SelectGroup(int id, int type)
         {
             using (var db = new HirentEntities())
             {

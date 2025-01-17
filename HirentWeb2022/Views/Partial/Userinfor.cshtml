@@ -101,77 +101,7 @@
         selectGender = id;
     }
 </script>
-
-<div class="modal fade" id="modalAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-
-            <div class="modal-body">
-                <div class="tab1">
-                    <span>
-                        @(ViewBag.lang == "vi"? " Địa chỉ nhận hàng" : "Delivery address")
-                    </span>
-                    <a class="floatright btn btn-xs btngreen" onclick="themdiachi()"> @(ViewBag.lang == "vi"? "Thêm địa chỉ" : "Add address")</a>
-                    <div class="clearfix">
-
-                    </div>
-                    <hr />
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        @(ViewBag.lang == "vi"? "Tên" : "Name")
-                                    </th>
-                                    <th>
-                                        @(ViewBag.lang == "vi"? "Địa chỉ" : "Address")
-                                    </th>
-                                    <th>
-                                        @(ViewBag.lang == "vi"? "Số điện thoại" : "Phone")
-                                    </th>
-                                    <th>
-                                        @(ViewBag.lang == "vi"? "Mặc định" : "Default") 
-                                    </th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbody">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="tab2">
-                    <div>
-                        <div>
-                            Thêm địa chỉ nhận hàng mới
-                        </div>
-                        <hr />
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="inputEmail4">Tên</label>
-                                <input type="hidden" id="txtcustomerid2" value="0" />
-                                <input type="text" class="form-control" id="txtName2" placeholder="Họ tên" data-listener-added_e4a91bf7="true">
-                            </div>
-                            <div class="form-group">
-                                <label for="inputPassword4">Số điện thoại</label>
-                                <input type="text" class="form-control" id="txtPhone2" placeholder="Xin vui lòng điền số điện thoại của bạn">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputAddress">Address</label>
-                            <input type="text" class="form-control" id="txtAddress2" placeholder="Vui lòng nhập địa chỉ của bạn">
-                        </div>
-                        <div class="text-right">
-                            <a onclick="insertHuyAdress()" class="btn_huyadress btn-sm">Hủy</a>
-                            <a onclick="insertAdress()" class="btn_selectadress btn-sm">Lưu</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
+@Html.Action("CustomerAddressInfo", "Partial")
 <script>
     loadDanhsachdiachi()
     $('.tab2').hide();
@@ -196,19 +126,30 @@
         $("#txtName2").val('');
         $("#txtAddress2").val('');
         $("#txtPhone2").val('');
+        changeProvinces();
     }
     function insertHuyAdress() {
         $(".tab1").show();
         $(".tab2").hide();
     }
-     function insertAdress() {
-
+    function insertAdress() {
+        if ($("#slDistricts").val() == null) {
+            alert("Vui lòng nhập thông tin địa chỉ");
+            return;
+        }
+         if ($("#slWards").val() == null) {
+             alert("Vui lòng nhập thông tin địa chỉ");
+             return;
+         }
          var param = {
              "ID": $("#txtcustomerid2").val(),
          "CustomerID": '@ViewBag.CustomerID',
          "Address": $("#txtAddress2").val(),
          "FullName": $("#txtName2").val(),
          "PhoneNumber": $("#txtPhone2").val(),
+             "provinces": $("#slProvinces").val(),
+             "districts": $("#slDistricts").val(),
+             "wards": $("#slWards").val(),
      }
      $.ajax({
          url: '/Order/InsertAdress',
@@ -256,3 +197,4 @@
     }
 }
 </style>
+

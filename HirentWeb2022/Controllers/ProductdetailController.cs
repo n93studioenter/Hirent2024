@@ -85,6 +85,7 @@ namespace HirentWeb2022.Controllers
                               where te.WarehouseId == tb_ProductTermConditionDetails.WarehouseId
                               select p
                               ).OrderBy(m=>m.ProductID).ToList();
+                ViewBag.Listmaincate = db.tb_CategoryMain.ToList();
                 return View(model);
             }
         }
@@ -112,6 +113,7 @@ namespace HirentWeb2022.Controllers
                             {
                                 int id = (int)row["productId"];
                                 int type = (int)row["Type"];
+                                int rentalType = (int)row["rentalType"];
                                 int Qty = (int)row["Qty"];
                                 var total = (float)row["Totals"];
                                 DateTime timePickup = (DateTime)row["FromDate"];
@@ -134,7 +136,7 @@ namespace HirentWeb2022.Controllers
                                     //Insert Table tb_Pre_Order_Details
                                     tb_Pre_Order_Details tb_Pre_Order_Details = new tb_Pre_Order_Details();
                                     tb_Pre_Order_Details.pOrderId = tb_Pre_Order.pOrderId;
-                                    tb_Pre_Order_Details.rentalType = type;
+                                    tb_Pre_Order_Details.rentalType = rentalType;
                                     tb_Pre_Order_Details.productQty = Qty;
                                     tb_Pre_Order_Details.timePickup = timePickup;
                                     tb_Pre_Order_Details.timeReturn = timeReturn;
@@ -190,6 +192,7 @@ namespace HirentWeb2022.Controllers
                 dataTable.Columns.Add("ProductID", typeof(int));
                 dataTable.Columns.Add("Qty", typeof(int));
                 dataTable.Columns.Add("Type", typeof(int));
+                dataTable.Columns.Add("rentalType", typeof(int));
                 dataTable.Columns.Add("FromDate", typeof(DateTime));
                 dataTable.Columns.Add("ToDate", typeof(DateTime));
                 dataTable.Columns.Add("Totals", typeof(float));
@@ -318,6 +321,7 @@ namespace HirentWeb2022.Controllers
                 row1["ProductID"] = productId;
                 row1["Qty"] = Qty;
                 row1["Type"] = type;
+                row1["rentalType"] = chkChon;
                 row1["FromDate"] = tn;
                 row1["ToDate"] = dn;
                 row1["Totals"] = TotaltienTheogio*Qty;
@@ -330,6 +334,51 @@ namespace HirentWeb2022.Controllers
             }
             Session["Order"] = dataTable;
             return result;
+        }
+        
+        public ActionResult ProductShopList(int MainCateID)
+        {
+            var getlang = Session["Lang"];
+            if (getlang == null)
+                getlang = "vi";
+            ViewBag.lang = getlang;
+            HirentEntities db = new HirentEntities();
+            var model = (from p in db.tb_Product
+                         join m in db.tb_ProductCategorySelection
+                         on p.ProductID equals m.ProductId.Value
+                         where (MainCateID==0 || m.ProductMainCate.Value == MainCateID)
+                         select p
+                       ).ToList();
+            return PartialView(model);
+        }
+        public ActionResult ProductAddmore(string id)
+        {
+            var getlang = Session["Lang"];
+            if (getlang == null)
+                getlang = "vi";
+            ViewBag.lang = getlang;
+            var lstSplit = id.Split(',');
+            List<tb_Product> lst = new List<tb_Product>();
+            HirentEntities db = new HirentEntities();
+            foreach (var it in lstSplit)
+            {
+                if (it != "," && !string.IsNullOrEmpty(it))
+                {
+                    tb_Product tb_Product =db.tb_Product.ToList().Where(m=>m.ProductID==int.Parse(it)).FirstOrDefault();
+                    if(tb_Product != null)
+                    {
+                        lst.Add(tb_Product);
+                    }
+                }
+            }
+            return PartialView(lst);
+        }
+
+        public ActionResult WasehouseTime(int whId)
+        {
+            HirentEntities db = new HirentEntities();
+            ViewBag.ListTime = db.tb_WareHouse_Time.Where(m => m.whId == whId).ToList();
+            return PartialView();
         }
     }
 }

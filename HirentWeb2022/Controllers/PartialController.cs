@@ -417,5 +417,48 @@ namespace HirentWeb2022.Controllers
             }
             return false;
         }
+
+        public ActionResult CustomerAddressInfo()
+        {
+            var getlang = Session["Lang"];
+            if (getlang == null)
+            {
+                getlang = "vi";
+                Session["Lang"] = "vi";
+            }
+            ViewBag.lang = getlang;
+            var db = new HirentEntities();
+            ViewBag.Listprovinces = db.provinces.ToList();
+            return PartialView();
+        }
+
+        public ActionResult ChangeProvinces(string code)
+        {
+            var getlang = Session["Lang"];
+            if (getlang == null)
+            {
+                getlang = "vi";
+                Session["Lang"] = "vi";
+            }
+            ViewBag.lang = getlang;
+            var db = new HirentEntities();
+            var model=db.districts.Where(m=>m.province_code==code).ToList();
+
+            return PartialView(model);
+        }
+        public ActionResult ChangeeDistricts(string code)
+        {
+            var getlang = Session["Lang"];
+            if (getlang == null)
+            {
+                getlang = "vi";
+                Session["Lang"] = "vi";
+            }
+            ViewBag.lang = getlang;
+            var db = new HirentEntities();
+            var model = db.wards.Where(m => m.district_code == code).ToList();
+
+            return PartialView(model);
+        }
     }
 }

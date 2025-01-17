@@ -39,7 +39,6 @@ namespace HirentWeb2022.Models
         public virtual DbSet<tb_Counteronline> tb_Counteronline { get; set; }
         public virtual DbSet<tb_Country> tb_Country { get; set; }
         public virtual DbSet<tb_Customer> tb_Customer { get; set; }
-        public virtual DbSet<tb_CustomerDeliveryAddress> tb_CustomerDeliveryAddress { get; set; }
         public virtual DbSet<tb_DeliverySelection> tb_DeliverySelection { get; set; }
         public virtual DbSet<tb_Deposit> tb_Deposit { get; set; }
         public virtual DbSet<tb_District> tb_District { get; set; }
@@ -82,6 +81,10 @@ namespace HirentWeb2022.Models
         public virtual DbSet<tb_WishList> tb_WishList { get; set; }
         public virtual DbSet<TimeBlock> TimeBlocks { get; set; }
         public virtual DbSet<tb_Pre_Order_Details> tb_Pre_Order_Details { get; set; }
+        public virtual DbSet<district> districts { get; set; }
+        public virtual DbSet<province> provinces { get; set; }
+        public virtual DbSet<ward> wards { get; set; }
+        public virtual DbSet<tb_CustomerDeliveryAddress> tb_CustomerDeliveryAddress { get; set; }
     
         public virtual ObjectResult<sp_GetProductList_Result> sp_GetProductList()
         {

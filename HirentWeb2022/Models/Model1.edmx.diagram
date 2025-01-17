@@ -17,7 +17,6 @@
         <EntityTypeShape EntityType="hirentModel.tb_Counteronline" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="hirentModel.tb_Country" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="hirentModel.tb_Customer" Width="1.5" PointX="11.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="hirentModel.tb_CustomerDeliveryAddress" Width="1.5" PointX="4.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="hirentModel.tb_DeliverySelection" Width="1.5" PointX="11.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="hirentModel.tb_Deposit" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="hirentModel.tb_District" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
@@ -63,6 +62,12 @@
         <AssociationConnector Association="hirentModel.FK_District_Province" ManuallyRouted="false" />
         <AssociationConnector Association="hirentModel.FK_Ward_District" ManuallyRouted="false" />
         <EntityTypeShape EntityType="hirentModel.tb_Pre_Order_Details" Width="1.5" PointX="3.375" PointY="18.75" />
+        <EntityTypeShape EntityType="hirentModel.district" Width="1.5" PointX="25.625" PointY="15" />
+        <EntityTypeShape EntityType="hirentModel.province" Width="1.5" PointX="23.375" PointY="15.125" />
+        <EntityTypeShape EntityType="hirentModel.ward" Width="1.5" PointX="27.875" PointY="15.125" />
+        <AssociationConnector Association="hirentModel.districts_province_code_fkey" />
+        <AssociationConnector Association="hirentModel.wards_district_code_fkey" />
+        <EntityTypeShape EntityType="hirentModel.tb_CustomerDeliveryAddress" Width="1.5" PointX="15.375" PointY="23.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

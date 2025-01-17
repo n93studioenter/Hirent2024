@@ -120,7 +120,7 @@
                                 <div class="col-sm-3">
                                     <div id="glv1">
                                         <div class="glamviec">
-                                            <a onclick="glv()">
+                                            <a onclick="tgTGLV()" style="display:block;">
                                                 <i class="fa fa-clock-o"></i><span>
                                                     <span id="ctl00_MainContent_giolamviec">@(ViewBag.lang == "vi"? "Giờ làm việc" : "Working hours")</span>
                                                 </span>
@@ -293,10 +293,10 @@
                         <div class="clearfix">
 
                         </div>       <hr />
-                        
+
                     </div>
                     <div class="">
-                       
+
                         <div class="steptitle">
                             <span style="color:black" class="tongcong"><span id="ctl00_MainContent_tongcong"> </span> </span>
                         </div>
@@ -345,7 +345,7 @@
                 <div class="row" style="margin-bottom: 20px; text-align: right">
 
                     <div class="col-md-6 col-lg-6 col-md-offset-6">
-                        <input type="button" class="btn btn-sm btn-success" style="font-weight: 600" onclick="javascript: return proceedAddToCartStep3();" value="@(ViewBag.lang == "vi"? "TIẾP THEO" : "Next")">
+                        <input type="button" class="btn btn-sm btngreen" style="font-weight: 600;border-radius:0px" onclick="javascript: return proceedAddToCartStep3();" value="@(ViewBag.lang == "vi"? "TIẾP THEO" : "Next")">
                     </div>
                 </div>
             </div>
@@ -353,76 +353,7 @@
         </div>
     }
 }
-
-<div class="modal fade" id="modalAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-
-            <div class="modal-body">
-                <div class="tab1">
-                    <span>
-                        Địa chỉ nhận hàng
-                    </span>
-                    <a class="floatright btn btn-xs btn-primary" onclick="themdiachi()"> Thêm địa chỉ</a>
-                    <div class="clearfix">
-
-                    </div>
-                    <hr />
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        Tên
-                                    </th>
-                                    <th>
-                                        Địa chỉ
-                                    </th>
-                                    <th>
-                                        Số điện thoại
-                                    </th>
-                                    <th>
-                                        Mặc định
-                                    </th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbody">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="tab2">
-                    <div>
-                        <div>
-                            Thêm địa chỉ nhận hàng mới
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="inputEmail4">Tên</label>
-                                <input type="hidden" id="txtcustomerid2" value="0" />
-                                <input type="text" class="form-control" id="txtName" placeholder="Họ tên" data-listener-added_e4a91bf7="true">
-                            </div>
-                            <div class="form-group">
-                                <label for="inputPassword4">Số điện thoại</label>
-                                <input type="text" class="form-control" id="txtPhone" placeholder="Xin vui lòng điền số điện thoại của bạn">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputAddress">Address</label>
-                            <input type="text" class="form-control" id="txtAddress" placeholder="Vui lòng nhập địa chỉ của bạn">
-                        </div>
-                        <div class="text-right">
-                            <a onclick="insertHuyAdress()" class="btn_huyadress btn-sm">Hủy</a>
-                            <a onclick="insertAdress()" class="btn_selectadress btn-sm">Lưu</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
+@Html.Action("CustomerAddressInfo", "Partial")
 
 
 <script>
@@ -433,7 +364,7 @@
     var deliveryId = 1;
     var priceDelivery = parseInt('@ViewBag.costVanChuyen');
     var priceLap = parseInt('@ViewBag.costLaprap');
-    var priceThao = parseInt('@ViewBag.costThao'); 
+    var priceThao = parseInt('@ViewBag.costThao');
     $(document).ready(function () {
         loadDanhsachdiachi();
         $(".tab2").hide();
@@ -465,6 +396,9 @@
             async: false,
             success: function (data, status, xhr) {
                 $("#txtAddress").html(data)
+                //txtCustommerAddress
+                $("#txtCustommerAddress").html(data)
+                $("#txtCustomerAddress2").html(data)
             },
             error: function (xhr, status, error) {
                 alert(status);
@@ -476,9 +410,12 @@
         var param = {
             "ID": $("#txtcustomerid2").val(),
             "CustomerID": '@ViewBag.CustomerID',
-            "Address": $("#txtAddress").val(),
-            "FullName": $("#txtName").val(),
-            "PhoneNumber": $("#txtPhone").val(),
+            "Address": $("#txtAddress2").val(),
+            "FullName": $("#txtName2").val(),
+            "PhoneNumber": $("#txtPhone2").val(),
+            "provinces": $("#slProvinces").val(),
+            "districts": $("#slDistricts").val(),
+            "wards": $("#slWards").val(),
         }
         $.ajax({
             url: '/Order/InsertAdress',
@@ -504,9 +441,10 @@
     function themdiachi() {
         $(".tab1").hide();
         $(".tab2").show();
-        $("#txtName").val('');
-        $("#txtAddress").val('');
-        $("#txtPhone").val('');
+        $("#txtName2").val('');
+        $("#txtAddress2").val('');
+        $("#txtPhone2").val('');
+        changeProvinces();
     }
     function autoclickRad2() {
         $("#tuvanchuyen").trigger("click");
@@ -514,7 +452,7 @@
     function autoclickRad() {
         $("#dvvanchuyen").trigger("click");
     }
-  
+
     function closeradcha(){
         tuvanchuuyen();
         deliveryId = 1;
@@ -686,6 +624,9 @@
             }
         });
     }
+    function tgTGLV() {
+        $("#mdTGLV").modal("toggle");
+    }
 </script>
 <style>
     @@media (min-width: 768px) {
@@ -695,3 +636,4 @@
         }
     }
 </style>
+@Html.Action("WasehouseTime", "Productdetail", new { whId = ViewBag.whId })

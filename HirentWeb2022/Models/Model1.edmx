@@ -28,6 +28,32 @@
           <Property Name="Flags" Type="nvarchar" MaxLength="50" />
           <Property Name="IsDeleted" Type="bit" />
         </EntityType>
+        <EntityType Name="districts">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="name_en" Type="nvarchar" MaxLength="255" />
+          <Property Name="full_name" Type="nvarchar" MaxLength="255" />
+          <Property Name="full_name_en" Type="nvarchar" MaxLength="255" />
+          <Property Name="code_name" Type="nvarchar" MaxLength="255" />
+          <Property Name="province_code" Type="varchar" MaxLength="20" />
+          <Property Name="administrative_unit_id" Type="int" />
+        </EntityType>
+        <EntityType Name="provinces">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="name_en" Type="nvarchar" MaxLength="255" />
+          <Property Name="full_name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="full_name_en" Type="nvarchar" MaxLength="255" />
+          <Property Name="code_name" Type="nvarchar" MaxLength="255" />
+          <Property Name="administrative_unit_id" Type="int" />
+          <Property Name="administrative_region_id" Type="int" />
+        </EntityType>
         <EntityType Name="tb_About">
           <Key>
             <PropertyRef Name="AboutArticleID" />
@@ -213,6 +239,9 @@
           <Property Name="FullName" Type="nvarchar" MaxLength="100" />
           <Property Name="PhoneNumber" Type="varchar" MaxLength="15" />
           <Property Name="IsMacdinh" Type="int" />
+          <Property Name="provinces" Type="varchar" MaxLength="255" />
+          <Property Name="districts" Type="varchar" MaxLength="255" />
+          <Property Name="wards" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="tb_DeliverySelection">
           <Key>
@@ -870,6 +899,31 @@
           <Property Name="whId" Type="int" />
           <Property Name="DisplayOrder" Type="int" />
         </EntityType>
+        <EntityType Name="wards">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="name_en" Type="nvarchar" MaxLength="255" />
+          <Property Name="full_name" Type="nvarchar" MaxLength="255" />
+          <Property Name="full_name_en" Type="nvarchar" MaxLength="255" />
+          <Property Name="code_name" Type="nvarchar" MaxLength="255" />
+          <Property Name="district_code" Type="varchar" MaxLength="20" />
+          <Property Name="administrative_unit_id" Type="int" />
+        </EntityType>
+        <Association Name="districts_province_code_fkey">
+          <End Role="provinces" Type="Self.provinces" Multiplicity="0..1" />
+          <End Role="districts" Type="Self.districts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="provinces">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="districts">
+              <PropertyRef Name="province_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_District_Province">
           <End Role="tb_Province" Type="Self.tb_Province" Multiplicity="1" />
           <End Role="tb_District" Type="Self.tb_District" Multiplicity="*" />
@@ -908,10 +962,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="wards_district_code_fkey">
+          <End Role="districts" Type="Self.districts" Multiplicity="0..1" />
+          <End Role="wards" Type="Self.wards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="districts">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="wards">
+              <PropertyRef Name="district_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="sp_GetProductList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="testStored1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="hirentModelStoreContainer">
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="districts" EntityType="Self.districts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="provinces" EntityType="Self.provinces" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_About" EntityType="Self.tb_About" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Access" EntityType="Self.tb_Access" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_CategoryMain" EntityType="Self.tb_CategoryMain" Schema="dbo" store:Type="Tables" />
@@ -966,6 +1034,11 @@
           <EntitySet Name="tb_WareHouse_Time" EntityType="Self.tb_WareHouse_Time" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_WishList" EntityType="Self.tb_WishList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TimeBlock" EntityType="Self.TimeBlock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="wards" EntityType="Self.wards" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="districts_province_code_fkey" Association="Self.districts_province_code_fkey">
+            <End Role="provinces" EntitySet="provinces" />
+            <End Role="districts" EntitySet="districts" />
+          </AssociationSet>
           <AssociationSet Name="FK_District_Province" Association="Self.FK_District_Province">
             <End Role="tb_Province" EntitySet="tb_Province" />
             <End Role="tb_District" EntitySet="tb_District" />
@@ -977,6 +1050,10 @@
           <AssociationSet Name="FK_Ward_District" Association="Self.FK_Ward_District">
             <End Role="tb_District" EntitySet="tb_District" />
             <End Role="tb_Ward" EntitySet="tb_Ward" />
+          </AssociationSet>
+          <AssociationSet Name="wards_district_code_fkey" Association="Self.wards_district_code_fkey">
+            <End Role="districts" EntitySet="districts" />
+            <End Role="wards" EntitySet="wards" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1179,19 +1256,6 @@
           <Property Name="ResetCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ResetStatus" Type="Boolean" />
           <Property Name="ResetLastTime" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="tb_CustomerDeliveryAddress">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CustomerID" Type="Int64" />
-          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="IsMacdinh" Type="Int32" />
         </EntityType>
         <EntityType Name="tb_DeliverySelection">
           <Key>
@@ -1872,7 +1936,6 @@
           <EntitySet Name="tb_Counteronline" EntityType="Self.tb_Counteronline" />
           <EntitySet Name="tb_Country" EntityType="Self.tb_Country" />
           <EntitySet Name="tb_Customer" EntityType="Self.tb_Customer" />
-          <EntitySet Name="tb_CustomerDeliveryAddress" EntityType="Self.tb_CustomerDeliveryAddress" />
           <EntitySet Name="tb_DeliverySelection" EntityType="Self.tb_DeliverySelection" />
           <EntitySet Name="tb_Deposit" EntityType="Self.tb_Deposit" />
           <EntitySet Name="tb_District" EntityType="Self.tb_District" />
@@ -1929,6 +1992,18 @@
           <FunctionImport Name="sp_GetProductList" ReturnType="Collection(hirentModel.sp_GetProductList_Result)" />
           <FunctionImport Name="testStored1" ReturnType="Collection(hirentModel.testStored1_Result)" />
           <EntitySet Name="tb_Pre_Order_Details" EntityType="hirentModel.tb_Pre_Order_Details" />
+          <EntitySet Name="districts" EntityType="hirentModel.district" />
+          <EntitySet Name="provinces" EntityType="hirentModel.province" />
+          <EntitySet Name="wards" EntityType="hirentModel.ward" />
+          <AssociationSet Name="districts_province_code_fkey" Association="hirentModel.districts_province_code_fkey">
+            <End Role="province" EntitySet="provinces" />
+            <End Role="district" EntitySet="districts" />
+          </AssociationSet>
+          <AssociationSet Name="wards_district_code_fkey" Association="hirentModel.wards_district_code_fkey">
+            <End Role="district" EntitySet="districts" />
+            <End Role="ward" EntitySet="wards" />
+          </AssociationSet>
+          <EntitySet Name="tb_CustomerDeliveryAddress" EntityType="hirentModel.tb_CustomerDeliveryAddress" />
         </EntityContainer>
         <ComplexType Name="sp_GetProductList_Result">
           <Property Type="Int64" Name="ProductID" Nullable="false" />
@@ -2016,6 +2091,89 @@
           <Property Name="Ghichucoc2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Imagegc1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Imagegc2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="district">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="name_en" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="full_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="full_name_en" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="code_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="province_code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="administrative_unit_id" Type="Int32" />
+          <NavigationProperty Name="province" Relationship="hirentModel.districts_province_code_fkey" FromRole="district" ToRole="province" />
+          <NavigationProperty Name="wards" Relationship="hirentModel.wards_district_code_fkey" FromRole="district" ToRole="ward" />
+        </EntityType>
+        <EntityType Name="province">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="name_en" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="full_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="full_name_en" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="code_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="administrative_unit_id" Type="Int32" />
+          <Property Name="administrative_region_id" Type="Int32" />
+          <NavigationProperty Name="districts" Relationship="hirentModel.districts_province_code_fkey" FromRole="province" ToRole="district" />
+        </EntityType>
+        <EntityType Name="ward">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="name_en" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="full_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="full_name_en" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="code_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="district_code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="administrative_unit_id" Type="Int32" />
+          <NavigationProperty Name="district" Relationship="hirentModel.wards_district_code_fkey" FromRole="ward" ToRole="district" />
+        </EntityType>
+        <Association Name="districts_province_code_fkey">
+          <End Type="hirentModel.province" Role="province" Multiplicity="0..1" />
+          <End Type="hirentModel.district" Role="district" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="province">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="district">
+              <PropertyRef Name="province_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="wards_district_code_fkey">
+          <End Type="hirentModel.district" Role="district" Multiplicity="0..1" />
+          <End Type="hirentModel.ward" Role="ward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="district">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="ward">
+              <PropertyRef Name="district_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tb_CustomerDeliveryAddress">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int64" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="IsMacdinh" Type="Int32" />
+          <Property Name="provinces" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="districts" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="wards" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2228,20 +2386,6 @@
                 <ScalarProperty Name="ResetCode" ColumnName="ResetCode" />
                 <ScalarProperty Name="ResetStatus" ColumnName="ResetStatus" />
                 <ScalarProperty Name="ResetLastTime" ColumnName="ResetLastTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_CustomerDeliveryAddress">
-            <EntityTypeMapping TypeName="hirentModel.tb_CustomerDeliveryAddress">
-              <MappingFragment StoreEntitySet="tb_CustomerDeliveryAddress">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="FullName" ColumnName="FullName" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="IsMacdinh" ColumnName="IsMacdinh" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3002,6 +3146,65 @@
                 <ScalarProperty Name="rentalType" ColumnName="rentalType" />
                 <ScalarProperty Name="pOrderId" ColumnName="pOrderId" />
                 <ScalarProperty Name="pOrderDetailId" ColumnName="pOrderDetailId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="districts">
+            <EntityTypeMapping TypeName="hirentModel.district">
+              <MappingFragment StoreEntitySet="districts">
+                <ScalarProperty Name="administrative_unit_id" ColumnName="administrative_unit_id" />
+                <ScalarProperty Name="province_code" ColumnName="province_code" />
+                <ScalarProperty Name="code_name" ColumnName="code_name" />
+                <ScalarProperty Name="full_name_en" ColumnName="full_name_en" />
+                <ScalarProperty Name="full_name" ColumnName="full_name" />
+                <ScalarProperty Name="name_en" ColumnName="name_en" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="provinces">
+            <EntityTypeMapping TypeName="hirentModel.province">
+              <MappingFragment StoreEntitySet="provinces">
+                <ScalarProperty Name="administrative_region_id" ColumnName="administrative_region_id" />
+                <ScalarProperty Name="administrative_unit_id" ColumnName="administrative_unit_id" />
+                <ScalarProperty Name="code_name" ColumnName="code_name" />
+                <ScalarProperty Name="full_name_en" ColumnName="full_name_en" />
+                <ScalarProperty Name="full_name" ColumnName="full_name" />
+                <ScalarProperty Name="name_en" ColumnName="name_en" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="wards">
+            <EntityTypeMapping TypeName="hirentModel.ward">
+              <MappingFragment StoreEntitySet="wards">
+                <ScalarProperty Name="administrative_unit_id" ColumnName="administrative_unit_id" />
+                <ScalarProperty Name="district_code" ColumnName="district_code" />
+                <ScalarProperty Name="code_name" ColumnName="code_name" />
+                <ScalarProperty Name="full_name_en" ColumnName="full_name_en" />
+                <ScalarProperty Name="full_name" ColumnName="full_name" />
+                <ScalarProperty Name="name_en" ColumnName="name_en" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_CustomerDeliveryAddress">
+            <EntityTypeMapping TypeName="hirentModel.tb_CustomerDeliveryAddress">
+              <MappingFragment StoreEntitySet="tb_CustomerDeliveryAddress">
+                <ScalarProperty Name="wards" ColumnName="wards" />
+                <ScalarProperty Name="districts" ColumnName="districts" />
+                <ScalarProperty Name="provinces" ColumnName="provinces" />
+                <ScalarProperty Name="IsMacdinh" ColumnName="IsMacdinh" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

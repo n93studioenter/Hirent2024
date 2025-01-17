@@ -146,399 +146,409 @@
                             }
                         }
 
-                    <div class="dvBriefDescription">
-                        <div class="row">
-                            <div class="col-md-6 col-xs-12 productStatus1">
-                                <p style="display: inline;"><span id="MainContent_pdNew">@(ViewBag.lang == "vi" ? "Còn mới" : "New")</span>:</p>
-                                <div style="display: inline-block; width: 57px; font-weight: 600; color: #214F39;" class="dvProductValue">
-                                    <p id="MainContent_productPercentage" style="display: inline;">90</p>
-                                    <span>%</span>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-xs-12 productStatus" style="height:20px">
-                                <div style="padding: 5px 0 5px; display: inline-block;">
-                                    <div style="width: 160px; display: inline-block;" class="ttspl">
-                                        <h3 class="productDetail-lable" style="display: inline;"><span id="MainContent_pdCodition">@(ViewBag.lang == "vi" ? "Số lượng có thể thuê" : "Quantity available")</span>:</h3>
-                                    </div>
-                                    <div style="display: inline-block;" class="ttspr">
-                                        <p id="MainContent_idStatus" style="display: inline; text-align: left">@item.Soluongton</p>
+                        <div class="dvBriefDescription">
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12 productStatus1">
+                                    <p style="display: inline;"><span id="MainContent_pdNew">@(ViewBag.lang == "vi" ? "Còn mới" : "New")</span>:</p>
+                                    <div style="display: inline-block; width: 57px; font-weight: 600; color: #214F39;" class="dvProductValue">
+                                        <p id="MainContent_productPercentage" style="display: inline;">90</p>
+                                        <span>%</span>
                                     </div>
                                 </div>
+                                <div class="col-md-6 col-xs-12 productStatus" style="height:20px">
+                                    <div style="padding: 5px 0 5px; display: inline-block;">
+                                        <div style="width: 160px; display: inline-block;" class="ttspl">
+                                            <h3 class="productDetail-lable" style="display: inline;"><span id="MainContent_pdCodition">@(ViewBag.lang == "vi" ? "Số lượng có thể thuê" : "Quantity available")</span>:</h3>
+                                        </div>
+                                        <div style="display: inline-block;" class="ttspr">
+                                            <p id="MainContent_idStatus" style="display: inline; text-align: left">@item.Soluongton</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <p id="MainContent_BriefDescription">
-                            @item.ShortDescription
-                        </p>
-                        <div class="myhr">
-
-                        </div>
-                        <div class="cuahang_box">
-                            <div class="cuahang_box_left">
-                                <a onclick="toogle_cuahang()" style="cursor:pointer" class="btn_cuahang">
-                                    <strong class="wasehouse_info_title" id="ctl00_MainContent_cuahang">@(ViewBag.lang == "vi" ? "Cửa hàng :" : "Store :")</strong><span id="ctl00_MainContent_idWarehouse" class="tencuahang">@ViewBag.tb_WareHouse.WarehouseName.</span>
-                                </a>
-                            </div>
-                            <div class="cuahang_box_right">
-                                <a class="btn_cuahang" href="@ViewBag.tb_WareHouse.ChinhSach" target="_blank">
-                                    <strong>
-                                        <span class="tencuahang"><i style="margin-right:4px" class="fa fa-book"></i>  @(ViewBag.lang == "vi" ? "Chính sách cửa hàng" : "Store Policy")</span>
-                                    </strong>
-                                </a>
-                            </div>
-                            <div class="clearfix">
+                            <p id="MainContent_BriefDescription">
+                                @item.ShortDescription
+                            </p>
+                            <div class="myhr">
 
                             </div>
-                            <div class="cuahang_box_left">
-                                <a style="cursor:pointer" class="btn_cuahang">
-                                    <strong class="wasehouse_info_title">@(ViewBag.lang == "vi" ? "Khu vực nhận hàng :" : "Delivery Area :")</strong><span class="wasehouse_info_title" >@ViewBag.tb_WareHouse.WarehouseAddress</span>
-                                </a>
-                            </div>
-                            <div class="cuahang_box_right">
-                                <a class="btn_cuahang" onclick="togleMap()">
-                                    <strong>
-                                        <span class="tencuahang "><i style="margin-right:4px" class="fa fa-map-marker"></i>  @(ViewBag.lang == "vi" ? "Bản đồ vị trí" : "Location Map")</span>
-                                    </strong>
-                                </a>
-                            </div>
-                            <div class="clearfix">
+                            <div class="cuahang_box">
+                                <div class="cuahang_box_left">
+                                    <a onclick="toogle_cuahang()" style="cursor:pointer" class="btn_cuahang">
+                                        <strong class="wasehouse_info_title" id="ctl00_MainContent_cuahang">@(ViewBag.lang == "vi" ? "Cửa hàng :" : "Store :")</strong><span id="ctl00_MainContent_idWarehouse" class="tencuahang">@ViewBag.tb_WareHouse.WarehouseName.</span>
+                                    </a>
+                                </div>
+                                <div class="cuahang_box_right">
+                                    <a class="btn_cuahang" href="@ViewBag.tb_WareHouse.ChinhSach" target="_blank">
+                                        <strong>
+                                            <span class="tencuahang"><i style="margin-right:4px" class="fa fa-book"></i>  @(ViewBag.lang == "vi" ? "Chính sách cửa hàng" : "Store Policy")</span>
+                                        </strong>
+                                    </a>
+                                </div>
+                                <div class="clearfix">
 
-                            </div>
-                            <div class="cuahang_box_left">
-                                <a style="cursor:pointer" class="btn_cuahang">
-                                    <strong class="wasehouse_info_title">@(ViewBag.lang == "vi" ? "Làm việc các thứ :" : "Working Days :")</strong>
-                                    <span class="" style="color:black">
-                                        @if (ViewBag.ListTime != null)
-                                        {
-                                            foreach (HirentWeb2022.Models.tb_WareHouse_Time it in ViewBag.ListTime)
+                                </div>
+                                <div class="cuahang_box_left">
+                                    <a style="cursor:pointer" class="btn_cuahang">
+                                        <strong class="wasehouse_info_title">@(ViewBag.lang == "vi" ? "Khu vực nhận hàng :" : "Delivery Area :")</strong><span class="wasehouse_info_title">@ViewBag.tb_WareHouse.WarehouseAddress</span>
+                                    </a>
+                                </div>
+                                <div class="cuahang_box_right">
+                                    <a class="btn_cuahang" onclick="togleMap()">
+                                        <strong>
+                                            <span class="tencuahang "><i style="margin-right:4px" class="fa fa-map-marker"></i>  @(ViewBag.lang == "vi" ? "Bản đồ vị trí" : "Location Map")</span>
+                                        </strong>
+                                    </a>
+                                </div>
+                                <div class="clearfix">
+
+                                </div>
+                                <div class="cuahang_box_left">
+                                    <a style="cursor:pointer" class="btn_cuahang">
+                                        <strong class="wasehouse_info_title">@(ViewBag.lang == "vi" ? "Làm việc các thứ :" : "Working Days :")</strong>
+                                        <span class="" style="color:black">
+                                            @if (ViewBag.ListTime != null)
                                             {
-                                                <span class="wasehouse_info_title">@it.FromDayOfWeek</span>
+                                                foreach (HirentWeb2022.Models.tb_WareHouse_Time it in ViewBag.ListTime)
+                                                {
+                                                    <span class="wasehouse_info_title">@it.FromDayOfWeek</span>
+                                                }
                                             }
-                                        }
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="cuahang_box_right">
-                                <a class="btn_cuahang" onclick="tgTGLV()">
-                                    <strong>
-                                        <span class="tencuahang"><i style="margin-right:4px" class="fa fa-calendar"></i>  @(ViewBag.lang == "vi" ? "Thời gian làm việc" : "Working Time")</span>
-                                    </strong>
-                                </a>
-                            </div>
-                            <div class="clearfix">
-
-                            </div>
-                        </div>
-                        <div class="myhr">
-
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="chonthutheo">
-                                    <span id="chonthuetheo">@(ViewBag.lang == "vi" ? "Chọn thuê theo :" : "Type rent for :")</span>
+                                        </span>
+                                    </a>
                                 </div>
-                                <div id="giatheogio" style="padding: 5px 0 5px;">
-                                    <div class="giorow">
-                                        <div class="colgioleft">
-                                            <div class="dvRadioPrice">
-                                                <input checked type="radio" id="GiaChoChueTheoBlock" onchange="javascript: callMeOnChangeSelectRental(1)" name="rentalprice" value="1">
-                                            </div>
-                                            <div style="display: inline-block">
-                                                <h3 class="productDetail-lable" style="display: inline;"><span id="pdRentforhour" style="display: inline-block;">@(ViewBag.lang == "vi" ? "Giờ" : "Hour")</span>:</h3>
-                                            </div>
-                                        </div>
-                                        <div class="colgioright">
-                                            <div class="pgio">
-                                                @{ if (ViewBag.lang == "vi")
-                                                    {
-                                                        <p id="price_block_p" class="productDetail-price">@item.PricePerBlock</p>
-                                                    }
-                                                    else
-                                                    {
-                                                        <p id="price_block_p" class="productDetail-price">@ViewBag.Translate.PricePerBlock_EN</p>
-                                                    }
-                                                }
+                                <div class="cuahang_box_right">
+                                    <a class="btn_cuahang" onclick="tgTGLV()">
+                                        <strong>
+                                            <span class="tencuahang"><i style="margin-right:4px" class="fa fa-calendar"></i>  @(ViewBag.lang == "vi" ? "Thời gian làm việc" : "Working Time")</span>
+                                        </strong>
+                                    </a>
+                                </div>
+                                <div class="clearfix">
 
-                                            </div>
-                                            <span class="productDetail-price" style="display: none"></span>
-                                        </div>
-                                        <div class="clearfix">
+                                </div>
+                            </div>
+                            <div class="myhr">
 
-                                        </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="chonthutheo">
+                                        <span id="chonthuetheo">@(ViewBag.lang == "vi" ? "Chọn thuê theo :" : "Type rent for :")</span>
                                     </div>
-                                    <div id="giatheongay" class="giorow">
-                                        <div class="colgioleft">
-                                            <div class="dvRadioPrice">
-                                                <input type="radio" id="GiaChoChueTheoNgay" onchange="javascript: callMeOnChangeSelectRental(2)" name="rentalprice" value="2">
+                                    <div id="giatheogio" style="padding: 5px 0 5px;">
+                                        <div class="giorow">
+                                            <div class="colgioleft">
+                                                <div class="dvRadioPrice">
+                                                    <input checked type="radio" id="GiaChoChueTheoBlock" onchange="javascript: callMeOnChangeSelectRental(1)" name="rentalprice" value="1">
+                                                </div>
+                                                <div style="display: inline-block">
+                                                    <h3 class="productDetail-lable" style="display: inline;"><span id="pdRentforhour" style="display: inline-block;">@(ViewBag.lang == "vi" ? "Giờ" : "Hour")</span>:</h3>
+                                                </div>
                                             </div>
-                                            <div style="display: inline-block;">
-                                                <h3 class="productDetail-lable" style="display: inline;"><span id="pdRentforday" style="display:inline-block;">@(ViewBag.lang == "vi"? "Ngày" : "Day")</span>:</h3>
-                                            </div>
-                                        </div>
-                                        <div class="colgioright">
-                                            <div style="display: inline-block;">
-                                                @{
-                                                    if (ViewBag.lang == "vi")
-                                                    {
-                                                        <p id="price_day_p" class="productDetail-price" style="text-align: right;">@item.PricePerDay</p>
-
+                                            <div class="colgioright">
+                                                <div class="pgio">
+                                                    @{ if (ViewBag.lang == "vi")
+                                                        {
+                                                            <p id="price_block_p" class="productDetail-price">@item.PricePerBlock</p>
+                                                        }
+                                                        else
+                                                        {
+                                                            <p id="price_block_p" class="productDetail-price">@ViewBag.Translate.PricePerBlock_EN</p>
+                                                        }
                                                     }
-                                                    else
-                                                    {
-                                                        <p id="price_day_p" class="productDetail-price" style="text-align: right;">@ViewBag.Translate.PricePerDay_EN</p>
 
-                                                    }
-                                                }
-                                            </div>
-                                            <span class="productDetail-price" style="display: none"></span>
-                                        </div>
-                                        <div class="clearfix">
-
-                                        </div>
-                                    </div>
-
-                                    <div id="giatheothang" class="giorow">
-                                        <div class="colgioleft">
-                                            <div class="dvRadioPrice">
-                                                <input type="radio" id="GiaChoChueTheoThang" onchange="javascript: callMeOnChangeSelectRental(3)" name="rentalprice" value="3">
-                                            </div>
-                                            <div style="display: inline-block;">
-                                                <h3 class="productDetail-lable" style="display: inline;"><span id="pdRentformonth">@(ViewBag.lang == "vi"? "Tháng" : "Month")</span>:</h3>
-                                            </div>
-                                        </div>
-                                        <div class="colgioright">
-                                            <div style="display: inline-block;">
-                                                @{
-                                                    if (ViewBag.lang == "vi")
-                                                    {
-                                                        <p id="price_month_p" class="productDetail-price" style="text-align: right;">@item.PricePerMonth</p>
-                                                    }
-                                                    else
-                                                    {
-                                                        <p id="price_month_p" class="productDetail-price" style="text-align: right;">@ViewBag.Translate.PricePerMonth_EN</p>
-                                                    }
-                                                }
+                                                </div>
+                                                <span class="productDetail-price" style="display: none"></span>
                                             </div>
                                             <div class="clearfix">
+
                                             </div>
-                                            <span class="productDetail-price" style="display: none"></span>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chonthutheo">
-                            @(ViewBag.lang == "vi"? "Chọn thời gian thuê :" : "Time for rent")
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-5">
-                                <div class="select_time_container">
-                                    <i class="fas fa-calendar"></i>   <input onclick="chontgThue()" placeholder="@(ViewBag.lang == "vi"? "Chọn thời gian thuê :" : "Time for rent")" class="text-center pickTime" />
-
-                                </div>
-                            </div>
-                            <div class="col-sm-7">
-                                <div class="tgthue ctgts">
-                                    <span id="ctl00_MainContent_thoigianthue">@(ViewBag.lang == "vi"? "Thời gian thuê :" : "Time for rent :")</span> <span style="margin-left:10px;color:red;font-weight:bold" id="sogio">
-                                        @(ViewBag.lang == "vi"? "Vui lòng chọn thời gian..." : "select time...")
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                        <div id="dvBookTime" class="dvBookTime">
-
-                            <div class="row">
-                                <div class="col-md-5 col-xs-12">
-
-                                    <div class="chonthutheo">
-                                        <span id="sanphamchinh">@(ViewBag.lang == "vi"? "Sản phẩm chính :" : "Main product")</span>
-                                    </div>
-                                    <div>
-                                        <div class="accessories-checkbox">
-                                            <input disabled onchange="lkchange(1)" type="checkbox" id="selectedAccessories1" name="selectedAccessories1" value="">
-                                        </div>
-                                        <h3 class="productDetail-lable-accessories" style="display: inline;">
-                                            @{
-                                                if (ViewBag.lang == "vi")
-                                                {
-                                                    <a href="../productdetail?productID=1052" target="_blank">@item.ProductName</a>
-                                                }
-                                                else
-                                                {
-                                                    <a href="../productdetail?productID=1052" target="_blank">@ViewBag.Translate.ProductName_EN</a>
-
-                                                }
-                                            }
-
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="col-md-7 col-xs-12">
-                                    <div class="row mg-30">
-                                        <div class="col-sm-4 col-xs-3 tct">
-                                            <span class="gttt1"><span id="pdNumber">@(ViewBag.lang == "vi"? "Số lượng :" : "Quantity")</span> :</span>
-                                        </div>
-                                        <div class="col-sm-4 col-xs-4 tct">
-                                            <span class="gttt1"><span id="pdRentCost">@(ViewBag.lang == "vi"? "Giá thuê" : "Price")</span> :</span>
-                                        </div>
-                                        <div class="col-sm-4 col-xs-5 tct">
-                                            <span style="" class="gttt2"><span id="pdProductValue">@(ViewBag.lang == "vi"? "Giá trị SP" : "Value")</span>:</span>
-                                        </div>
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-4 col-xs-4 text-center">
-                                            <div class="qty-input">
-
-                                                <div class="myinput">
-                                                    <div class="asubtract">
-                                                        <a onclick="doSubtract('product_qty')">
-                                                            -
-                                                        </a>
-                                                    </div>
-                                                    <input class="input inputQuality" type="number" onchange="javascript:callMeOnChangeProductQty()" id="product_qty" min="1" max="100" value="0" fdprocessedid="tvki82">
-                                                    <div class="aplus">
-                                                        <a onclick="doPlus('product_qty')">
-                                                            +
-                                                        </a>
-                                                    </div>
+                                        <div id="giatheongay" class="giorow">
+                                            <div class="colgioleft">
+                                                <div class="dvRadioPrice">
+                                                    <input type="radio" id="GiaChoChueTheoNgay" onchange="javascript: callMeOnChangeSelectRental(2)" name="rentalprice" value="2">
                                                 </div>
+                                                <div style="display: inline-block;">
+                                                    <h3 class="productDetail-lable" style="display: inline;"><span id="pdRentforday" style="display:inline-block;">@(ViewBag.lang == "vi"? "Ngày" : "Day")</span>:</h3>
+                                                </div>
+                                            </div>
+                                            <div class="colgioright">
+                                                <div style="display: inline-block;">
+                                                    @{
+                                                        if (ViewBag.lang == "vi")
+                                                        {
+                                                            <p id="price_day_p" class="productDetail-price" style="text-align: right;">@item.PricePerDay</p>
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <p id="price_day_p" class="productDetail-price" style="text-align: right;">@ViewBag.Translate.PricePerDay_EN</p>
+
+                                                        }
+                                                    }
+                                                </div>
+                                                <span class="productDetail-price" style="display: none"></span>
+                                            </div>
+                                            <div class="clearfix">
 
                                             </div>
                                         </div>
-                                        <div class="col-sm-4 col-xs-3 text-center">
-                                            <div class="dvPriceTamTinh dvPriceTamTinh-BookTime">
-                                                <p style="display: inline" id="product_temp_p1">0</p>
-                                                <span>đ</span>
-                                                <input type="hidden" id="tongcha" value="0">
+
+                                        <div id="giatheothang" class="giorow">
+                                            <div class="colgioleft">
+                                                <div class="dvRadioPrice">
+                                                    <input type="radio" id="GiaChoChueTheoThang" onchange="javascript: callMeOnChangeSelectRental(3)" name="rentalprice" value="3">
+                                                </div>
+                                                <div style="display: inline-block;">
+                                                    <h3 class="productDetail-lable" style="display: inline;"><span id="pdRentformonth">@(ViewBag.lang == "vi"? "Tháng" : "Month")</span>:</h3>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-4 col-xs-5 text-center">
-                                            <div class="dvProductValue dvProductValue-BookTime">
-                                                <input name="giatrisanpham" type="text" id="giatrisanpham" style="display: none;" value="@item.ProductValue.Value">
-                                                <p style="display: inline" id="product_value_p1">@item.ProductValue.Value.ToString("#,##0")</p>
-                                                <span>đ</span>
+                                            <div class="colgioright">
+                                                <div style="display: inline-block;">
+                                                    @{
+                                                        if (ViewBag.lang == "vi")
+                                                        {
+                                                            <p id="price_month_p" class="productDetail-price" style="text-align: right;">@item.PricePerMonth</p>
+                                                        }
+                                                        else
+                                                        {
+                                                            <p id="price_month_p" class="productDetail-price" style="text-align: right;">@ViewBag.Translate.PricePerMonth_EN</p>
+                                                        }
+                                                    }
+                                                </div>
+                                                <div class="clearfix">
+                                                </div>
+                                                <span class="productDetail-price" style="display: none"></span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <hr />
-                        <div id="ctl00_MainContent_dvProductAccessoryList" class="dvBookAccessory">
-                            <div class="col-md-6 col-xs-12 accessories-titleBar">
-                                <p class="accessories-title"><span id="pdSelectAccom" runat="server">@(ViewBag.lang == "vi"? "Chọn thêm sản phẩm, phụ kiện đi kèm" : "Select additional products and accessories")</span> : </p>
+                            <div class="chonthutheo">
+                                @(ViewBag.lang == "vi"? "Chọn thời gian thuê :" : "Time for rent")
                             </div>
-                            <div class="clearfix">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <div class="select_time_container">
+                                        <i class="fas fa-calendar"></i>   <input onclick="chontgThue()" placeholder="@(ViewBag.lang == "vi"? "Chọn thời gian thuê :" : "Time for rent")" class="text-center pickTime" />
 
+                                    </div>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="tgthue ctgts">
+                                        <span id="ctl00_MainContent_thoigianthue">@(ViewBag.lang == "vi"? "Thời gian thuê :" : "Time for rent :")</span> <span style="margin-left:10px;color:red;font-weight:bold" id="sogio">
+                                            @(ViewBag.lang == "vi"? "Vui lòng chọn thời gian..." : "select time...")
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            @if (ViewBag.ListAcess != null)
-                            {
-                                foreach (var it in (IEnumerable<HirentWeb2022.Models.tb_Product>)ViewBag.ListAcess)
-                                {
-                                    <div class="row">
-                                        <div class="col-md-5 col-xs-12 BookAccessories-productName">
+                            <div id="dvBookTime" class="dvBookTime">
+
+                                <div class="row">
+                                    <div class="col-md-5 col-xs-12">
+
+                                        <div class="chonthutheo">
+                                            <span id="sanphamchinh">@(ViewBag.lang == "vi"? "Sản phẩm chính :" : "Main product")</span>
+                                        </div>
+                                        <div>
                                             <div class="accessories-checkbox">
-                                                <input onchange="lkchange(@it.ProductID)" type="checkbox" id="accessoriesCheckbox_@it.ProductID" class="selectedAccessories" value="@it.ProductID">
+                                                <input disabled onchange="lkchange(1)" type="checkbox" id="selectedAccessories1" name="selectedAccessories1" value="">
                                             </div>
-                                            <h3 class="productDetail-lable-accessories" style="display:inline;">
-                                                @if (ViewBag.lang == "vi")
-                                                {
-                                                    <a data-name="@it.ProductName" href="../productdetail?productID=350" target="_blank">
-                                                        @it.ProductName
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    HirentWeb2022.Models.HirentEntities db = new HirentWeb2022.Models.HirentEntities();
-                                                    HirentWeb2022.Models.tb_Product_Translation tb_Product_Translation = db.tb_Product_Translation.Where(m => m.Idproduct == item.ProductID).FirstOrDefault();
-                                                    if (tb_Product_Translation != null)
+                                            <h3 class="productDetail-lable-accessories" style="display: inline;">
+                                                @{
+                                                    if (ViewBag.lang == "vi")
                                                     {
-                                                        <a data-name="@it.ProductName" href="../productdetail?productID=350" target="_blank">
-                                                            @tb_Product_Translation.ProductName_EN
-                                                        </a>
+                                                        <a href="../productdetail?productID=1052" target="_blank">@item.ProductName</a>
                                                     }
+                                                    else
+                                                    {
+                                                        <a href="../productdetail?productID=1052" target="_blank">@ViewBag.Translate.ProductName_EN</a>
 
+                                                    }
                                                 }
 
                                             </h3>
                                         </div>
-                                        <div class="col-md-7 col-xs-12">
-                                            <div class="row">
-                                                <div class="col-sm-4 col-xs-4 text-center">
-                                                    <div class="qty-input">
-                                                        <div class="myinput">
-                                                            <div class="asubtract"><a onclick="doSubtract('access_qty_@it.ProductID')">-</a></div>
-                                                            <input disabled class="input inputQuality inputQtyAccessory" onchange="changeck('@it.ProductID')" type="number" id="access_qty_@it.ProductID" min="1" max="100" value="0" fdprocessedid="snl6g8">
-                                                            <div class="aplus"><a onclick="doPlus('access_qty_@it.ProductID')">+</a></div>
+                                    </div>
+                                    <div class="col-md-7 col-xs-12">
+                                        <div class="row mg-30">
+                                            <div class="col-sm-4 col-xs-3 tct">
+                                                <span class="gttt1"><span id="pdNumber">@(ViewBag.lang == "vi"? "Số lượng :" : "Quantity")</span> :</span>
+                                            </div>
+                                            <div class="col-sm-4 col-xs-4 tct">
+                                                <span class="gttt1"><span id="pdRentCost">@(ViewBag.lang == "vi"? "Giá thuê" : "Price")</span> :</span>
+                                            </div>
+                                            <div class="col-sm-4 col-xs-5 tct">
+                                                <span style="" class="gttt2"><span id="pdProductValue">@(ViewBag.lang == "vi"? "Giá trị SP" : "Value")</span>:</span>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 col-xs-4 text-center">
+                                                <div class="qty-input">
+
+                                                    <div class="myinput">
+                                                        <div class="asubtract">
+                                                            <a onclick="doSubtract('product_qty')">
+                                                                -
+                                                            </a>
+                                                        </div>
+                                                        <input class="input inputQuality" type="number" onchange="javascript:callMeOnChangeProductQty()" id="product_qty" min="1" max="100" value="0" fdprocessedid="tvki82">
+                                                        <div class="aplus">
+                                                            <a onclick="doPlus('product_qty')">
+                                                                +
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-xs-3 text-center">
+                                                <div class="dvPriceTamTinh dvPriceTamTinh-BookTime">
+                                                    <p style="display: inline" id="product_temp_p1">0</p>
+                                                    <span>đ</span>
+                                                    <input type="hidden" id="tongcha" value="0">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-xs-5 text-center">
+                                                <div class="dvProductValue dvProductValue-BookTime">
+                                                    <input name="giatrisanpham" type="text" id="giatrisanpham" style="display: none;" value="@item.ProductValue.Value">
+                                                    <p style="display: inline" id="product_value_p1">@item.ProductValue.Value.ToString("#,##0")</p>
+                                                    <span>đ</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="myhr">
+
+                            </div>
+                            <div id="ctl00_MainContent_dvProductAccessoryList" class="dvBookAccessory">
+                                <div class="col-md-6 col-xs-12 accessories-titleBar">
+                                    <p class="accessories-title"><span id="pdSelectAccom" runat="server">@(ViewBag.lang == "vi"? "Chọn thêm sản phẩm, phụ kiện đi kèm" : "Select additional products and accessories")</span> : </p>
+                                </div>
+                                <div class="clearfix">
+
+                                </div>
+                                @if (ViewBag.ListAcess != null)
+                                {
+                                    foreach (var it in (IEnumerable<HirentWeb2022.Models.tb_Product>)ViewBag.ListAcess)
+                                    {
+                                        <div class="row">
+                                            <div class="col-md-5 col-xs-12 BookAccessories-productName">
+                                                <div class="accessories-checkbox">
+                                                    <input onchange="lkchange(@it.ProductID)" type="checkbox" id="accessoriesCheckbox_@it.ProductID" class="selectedAccessories" value="@it.ProductID">
+                                                </div>
+                                                <h3 class="productDetail-lable-accessories" style="display:inline;">
+                                                    @if (ViewBag.lang == "vi")
+                                                    {
+                                                        <a data-name="@it.ProductName" href="../productdetail?productID=350" target="_blank">
+                                                            @it.ProductName
+                                                        </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        HirentWeb2022.Models.HirentEntities db = new HirentWeb2022.Models.HirentEntities();
+                                                        HirentWeb2022.Models.tb_Product_Translation tb_Product_Translation = db.tb_Product_Translation.Where(m => m.Idproduct == item.ProductID).FirstOrDefault();
+                                                        if (tb_Product_Translation != null)
+                                                        {
+                                                            <a data-name="@it.ProductName" href="../productdetail?productID=350" target="_blank">
+                                                                @tb_Product_Translation.ProductName_EN
+                                                            </a>
+                                                        }
+
+                                                    }
+
+                                                </h3>
+                                            </div>
+                                            <div class="col-md-7 col-xs-12">
+                                                <div class="row">
+                                                    <div class="col-sm-4 col-xs-4 text-center">
+                                                        <div class="qty-input">
+                                                            <div class="myinput">
+                                                                <div class="asubtract"><a onclick="doSubtract('access_qty_@it.ProductID')">-</a></div>
+                                                                <input disabled class="input inputQuality inputQtyAccessory" onchange="changeck('@it.ProductID')" type="number" id="access_qty_@it.ProductID" min="1" max="100" value="0" fdprocessedid="snl6g8">
+                                                                <div class="aplus"><a onclick="doPlus('access_qty_@it.ProductID')">+</a></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 col-xs-3 text-center ">
+                                                        <div class="dvPriceTamTinh gtttc3" style="display: inline-block;">
+                                                            <p style="display: inline-block;" id="access_tempDisplay_@it.ProductID">0</p> <span>đ</span>
+                                                            <input type="hidden" style="display: inline-block;" id="tongcon_@it.ProductID">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 col-xs-5 text-center">
+                                                        <div class="dvProductValue" style="display: inline-block;">
+                                                            <p datacheck="0" style="display: inline-block;" id="access_valueDisplay_@it.ProductID">@it.ProductValue.Value.ToString("#,##0")</p><span> đ</span>
+                                                            <input style="display: none;" id="access_value_@it.ProductID" value="@it.ProductValue" />
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4 col-xs-3 text-center ">
-                                                    <div class="dvPriceTamTinh gtttc3" style="display: inline-block;">
-                                                        <p style="display: inline-block;" id="access_tempDisplay_@it.ProductID">0</p> <span>đ</span>
-                                                        <input type="hidden" style="display: inline-block;" id="tongcon_@it.ProductID">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4 col-xs-5 text-center">
-                                                    <div class="dvProductValue" style="display: inline-block;">
-                                                        <p datacheck="0" style="display: inline-block;" id="access_valueDisplay_@it.ProductID">@it.ProductValue.Value.ToString("#,##0")</p><span> đ</span>
-                                                        <input style="display: none;" id="access_value_@it.ProductID" value="@it.ProductValue" />
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    }
+
                                 }
 
-                            }
+                            </div>
+                            <div onclick="mdMoreStore()" class="pickTime" style="display: inline-block; padding: 6px 11px;">
+                                <i style="margin-right:5px" class="fas fa-plus"></i>
+                                @(ViewBag.lang == "vi"? "Chọn thêm sản phẩm cùng cửa hàng :" : "Choose more items from this store :")
+                            </div>
+                            <div id="addmorepd">
 
-                        </div>
-                        <hr />
-                        <div class="dvBookSTotalpayment">
-                            <div class="row">
-                                <div class="col-sm-5 text-right hidden-xs">
-                                    <p style="display: inline; top:5px; position: relative; font-size: 16px;">
-                                        <span id="ctl00_MainContent_pdTotal">@(ViewBag.lang == "vi"? "Tổng cộng :" : "Total :")</span>
-                                    </p>
-                                </div>
-                                <div class="col-sm-7">
-                                    <div class="row productdetail-totalvalue">
-                                        <div class="col-sm-4 col-xs-3 text-center">
-                                            <p style="display: inline; top:5px; position: relative; font-size:15px;">
-                                                <span id="ctl00_MainContent_totalplus">0</span>
-                                            </p>
-                                        </div>
-                                        <div class="col-sm-4 col-xs-4">
-                                            <div class="dvPriceTamTinh dvPriceTamTinh-Total">
-                                                <p id="total_product_deposit_p">0 đ </p>
+                            </div>
+                            <div class="myhr">
+
+                            </div>
+                            <div class="dvBookSTotalpayment">
+                                <div class="row">
+                                    <div class="col-sm-5 text-right hidden-xs">
+                                        <p style="display: inline; top:5px; position: relative; font-size: 16px;">
+                                            <span id="ctl00_MainContent_pdTotal">@(ViewBag.lang == "vi"? "Tổng cộng :" : "Total :")</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <div class="row productdetail-totalvalue">
+                                            <div class="col-sm-4 col-xs-3 text-center">
+                                                <p style="display: inline; top:5px; position: relative; font-size:14px;">
+                                                    <span id="ctl00_MainContent_totalplus">0</span>
+                                                </p>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-4 col-xs-5 text-right">
-                                            <div class="dvProductValue dvProductValue-Total" style="margin-right:6px;">
-                                                <p id="total_product_value_p">0 đ</p>
+                                            <div class="col-sm-4 col-xs-4">
+                                                <div class="dvPriceTamTinh dvPriceTamTinh-Total">
+                                                    <p id="total_product_deposit_p">0 đ </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-xs-5 text-right">
+                                                <div class="dvProductValue dvProductValue-Total" style="margin-right:6px;">
+                                                    <p id="total_product_value_p">0 đ</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-6">
 
-                                </div>
-                                <div class="col-sm-6 text-right">
-                                    <div class="product-btns">
+                                    </div>
+                                    <div class="col-sm-6 text-right">
+                                        <div class="product-btns">
 
-                                        <button id="ctl00_MainContent_btnmuahang" class="add-to-cart" style="" onclick="javascript:return goToCart()">
+                                            <button id="ctl00_MainContent_btnmuahang" class="add-to-cart" style="" onclick="javascript:return goToCart()">
 
-                                            <i style=" font-size: 11px; top: -1px; position: relative; left: -3px;" class="fa-solid fa-cart-shopping"></i>  <span id="ctl00_MainContent_pdAddTocart">@(ViewBag.lang == "vi"? "THÊM VÀO GIỎ" : "ADD TO CART")</span>
-                                        </button>
+                                                <i style=" font-size: 11px; top: -1px; position: relative; left: -3px;" class="fa-solid fa-cart-shopping"></i>  <span id="ctl00_MainContent_pdAddTocart">@(ViewBag.lang == "vi"? "THÊM VÀO GIỎ" : "ADD TO CART")</span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
-                    </div>
                     </div>
 
                 }
@@ -611,7 +621,7 @@
                                     <p>@Html.Raw(ViewBag.Translate.ProductInstruction)</p>
                                 }
                             </div>
-                          
+
                             @*<div id="ctl00_MainContent_productInstructionDbYoutube" class="col-md-7 col-sm-6 col-xs-12"><iframe width="380" height="300" src="./SAVINA website - Tools Rental websitedt_files/saved_resource.html" style="height:255px; width: 365px;"></iframe></div>*@
                         </div>
                         <script async="" defer="" crossorigin="anonymous" src="./SAVINA website - Tools Rental websitedt_files/sdk(2).js.download" nonce="0iEjjCsN"></script>
@@ -1541,6 +1551,18 @@
     var totalSoLuong = 0;
 
     function goToCart() {
+        if (fromDate == null || toDate == null) {
+           if ('@ViewBag.lang' === 'vi')
+{
+     showToast("Cảnh báo", "Vui lòng chọn thời gian thuê!",1);
+}
+else
+{
+     showToast("Warning", "Please select the rental period !", 1);
+}
+            return;
+        }
+
         $.ajax({
             url: '/Productdetail/AddToCart',
             dataType: 'html',
@@ -1931,6 +1953,13 @@
                             $(".hourselecright option[value='" + o + "']").attr("disabled", false);
                             $(".hourselecright option[value='" + o + "']").removeClass("optiondisable");
                         }
+                        //Phải clear hết
+                        $('.hourselectleft option').each(function (index) {
+                            $(this).removeAttr("selected");
+                        });
+                        $('.hourselecright option').each(function (index) {
+                            $(this).removeAttr("selected");
+                        });
                         $(".hourselectleft option[value='" + getOpenTime + "']").attr('selected', 'selected').change();
                         $(".hourselecright option[value='" + getOpenTime + "']").attr('selected', 'selected').change();
                         //
@@ -2002,7 +2031,12 @@
     </style>
 </head>
 <body>
-    <div id="map"></div>
+    <div id="map2">
+        @Html.Raw(ViewBag.tb_WareHouse.LocationMap)
+    </div>
+    <div id="maps">
+
+    </div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
@@ -2077,7 +2111,7 @@
     });
     function togleMap() {
         $('html, body').animate({
-            scrollTop: $("#map").offset().top
+            scrollTop: $("#map2").offset().top
         }, 1000); // Thời gian cuộn (1000 ms = 1 giây)
     }
 
@@ -2088,83 +2122,139 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="mdTGLV" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+@Html.Action("WasehouseTime", "Productdetail",new { whId = ViewBag.tb_WareHouse.whId })
+<!-- Modal -->
+<div class="modal fade" id="mdStore" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header" style=" background-color: #10261b; color: white;">
-                <h5 class="modal-title" id="exampleModalLabel">@(ViewBag.lang == "vi"? "Thời gian làm việc" : "Working Hours :")</h5>
-            </div>
-            <div class="modal-body">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>
-                                @(ViewBag.lang == "vi"? "Thứ" : "Day")
-                            </th>
-                            <th>
-                                @(ViewBag.lang == "vi"? "Buổi sáng" : "Morning")
-                            </th>
-                            <th>
-                                @(ViewBag.lang == "vi"? "Buổi chiều" : "Afternoon")
-                            </th>
-                        </tr>
-                        @for (int i = 2; i <= 8; i++)
-                        {
-                            <tr>
-                                @if (i == 8)
-                                {
-                                    if (ViewBag.lang == "vi")
-                                    {
-                                        <td>
-                                            <span>Chủ nhật</span>
-                                        </td>
-                                    }
-                                    else
-                                    {
-                                        <td>
-                                            <span>Sunday</span>
-                                        </td>
-                                    }
-                                }
-                                else
-                                {
-                                    <td>
-                                        @i
-                                    </td>
-                                }
-                                @{
-                                    var getall = "";
-                                    foreach (HirentWeb2022.Models.tb_WareHouse_Time it in ViewBag.ListTime)
-                                    {
-                                        getall += it.FromDayOfWeek;
-                                    }
-                                }
-                                @foreach (HirentWeb2022.Models.tb_WareHouse_Time it in ViewBag.ListTime)
-                                {
-                                    var chk = getall.Contains(i.ToString());
-                                    if (it.FromDayOfWeek.Contains(i.ToString()))
-                                    {
-                                        <td>@it.whOpenTime - @it.whCloseTime</td>
-                                        <td>@it.whOpenTime2 - @it.whCloseTime2</td>
-                                    }
-                                    else
-                                    {
-                                        if (chk == false)
-                                        {
-                                            <td></td>
-                                            <td></td>
-                                        }
+          <div class="storemodal_box">
+              <div class="stormodal_left">
+                  <div class="stormodal_left_cate">
+                      @(ViewBag.lang == "vi"? "Danh mục" : "Category")
+                  </div>
+                  @if (ViewBag.Listmaincate != null)
+                  {
+                      <ul>
+                          <li>
+                              <a onclick="loadStoreProducts(0)">
+                                  @(ViewBag.lang == "vi"? "Tất cả" : "All")
+                              </a>
+                          </li>
+                          @foreach (HirentWeb2022.Models.tb_CategoryMain it in ViewBag.Listmaincate)
+                          {
+                              <li>
+                                  <a onclick="loadStoreProducts('@it.MainCateID')">
+                                      @it.MainCateName
+                                  </a>
+                              </li>
+                          }
+                      </ul>
+                  }
+              </div>
+              <div class="storemodal_right">
+                  <div class="modal-body">
+                      <div class="storemodal_right_left">
+                          @if (ViewBag.tb_WareHouse != null)
+                          {
+                              HirentWeb2022.Models.tb_WareHouse tb_WareHouse = (HirentWeb2022.Models.tb_WareHouse)ViewBag.tb_WareHouse;
+                              <img src="@tb_WareHouse.BannerImage" class="img-responsive" />
+                          }
+                      </div>
+                     <div class="storemodal_right_right">
+                         <ul>
+                             <li>
+                                 <a class="btn_cuahang" href="/image_Waswhouse/1. Chinh sach chung cua PACISOFT.pdf" target="_blank">
+                                     <strong>
+                                         <span class="tencuahang"><i style="margin-right:4px" class="fa fa-book"></i>  Chính sách cửa hàng</span>
+                                     </strong>
+                                 </a>
+                             </li>
+                             <li>
+                                 <a class="btn_cuahang" onclick="togleMap()">
+                                     <strong>
+                                         <span class="tencuahang "><i style="margin-right:4px" class="fa fa-map-marker"></i>  Bản đồ vị trí</span>
+                                     </strong>
+                                 </a>
+                             </li>
+                             <li>
+                                 <a class="btn_cuahang" onclick="tgTGLV()">
+                                     <strong>
+                                         <span class="tencuahang"><i style="margin-right:4px" class="fa fa-calendar"></i>  @(ViewBag.lang == "vi"? "Thời gian làm việc" : "Store time")</span>
+                                     </strong>
+                                 </a>
+                             </li>
+                         </ul>
+                     </div>
+                      <div class="clearfix">
 
-                                    }
+                      </div>
+                      <div id="storelistproduct">
 
-                                }
+                      </div>
+                  </div>
+              </div>
+              <div class="clearfix" >
 
-
-                            </tr>
-                        }
-                    </thead>
-                </table>
-            </div>
+              </div>
+          </div>
+           
+           
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        loadStoreProducts(0)
+    });
+    function mdMoreStore() {
+        $("#mdStore").modal("toggle");
+    }
+    function loadStoreProducts(id) {
+        var param = {
+            MainCateID:id
+        }
+        $.ajax({
+            url: '/Productdetail/ProductShopList',
+            dataType: 'html',
+            data: param,
+            type: "GET",
+            async: false,
+            success: function (data, status, xhr) {
+                $("#storelistproduct").html(data);
+            },
+            error: function (xhr, status, error) {
+                alert(status);
+            }
+        });
+    }
+    var arrayListsl = [];
+    function slmore(dis) {
+        $(dis).toggleClass('md_productshop_title3');
+        //Update lại array
+        arrayListsl = [];
+        $('.md_productshop_title3').each(function () {
+            arrayListsl.push($(this).attr("data-id"));
+        });
+        var getsplit = "";
+        for (i = 0; i < arrayListsl.length; i++) {
+            getsplit += arrayListsl[i] + ',';
+        }
+
+        var param = {
+            id: getsplit
+        }
+        $.ajax({
+            url: '/Productdetail/ProductAddmore',
+            dataType: 'html',
+            data: param,
+            type: "GET",
+            async: false,
+            success: function (data, status, xhr) {
+                $("#addmorepd").html(data);
+            },
+            error: function (xhr, status, error) {
+                alert(status);
+            }
+        });
+    }
+</script>

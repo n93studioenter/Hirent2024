@@ -24,9 +24,11 @@ namespace HirentWeb2022.Controllers
                 Session["Lang"] = "vi";
             }
             ViewBag.lang = getlang;
+
             HirentEntities db = new HirentEntities();
             ViewBag.pOrderId = pOrderId;
             var model = db.tb_ProductTermConditionDetails.Where(m => m.ProductId == productID).ToList();
+            ViewBag.whId = model.FirstOrDefault().WarehouseId;
             ViewBag.tran = db.tb_ProductTermConditionDetails_Translation.Where(m => m.ProductId == productID).FirstOrDefault();
             HttpCookie reqCookies = Request.Cookies["HirentLogin"];
             if (reqCookies != null)
@@ -55,6 +57,13 @@ namespace HirentWeb2022.Controllers
 
         public ActionResult LoadListAddrress()
         {
+            var getlang = Session["Lang"];
+            if (getlang == null)
+            {
+                getlang = "vi";
+                Session["Lang"] = "vi";
+            }
+            ViewBag.lang = getlang;
             HirentEntities db = new HirentEntities();
             HttpCookie reqCookies = Request.Cookies["HirentLogin"];
             List<tb_CustomerDeliveryAddress> model = new List<tb_CustomerDeliveryAddress>();
@@ -71,7 +80,7 @@ namespace HirentWeb2022.Controllers
         }
         [HttpPost]
         public bool InsertAdress(tb_CustomerDeliveryAddress data)
-        {
+            {
             try
             {
                 HirentEntities db = new HirentEntities();
@@ -81,6 +90,9 @@ namespace HirentWeb2022.Controllers
                     getdata.FullName = data.FullName;
                     getdata.PhoneNumber = data.PhoneNumber;
                     getdata.Address=data.Address;
+                    getdata.districts = data.districts;
+                    getdata.provinces = data.provinces;
+                    getdata.wards = data.wards;
                     db.SaveChanges();
                 }
                 else
@@ -427,7 +439,7 @@ namespace HirentWeb2022.Controllers
             HirentEntities db = new HirentEntities();
             var getcus = db.tb_CustomerDeliveryAddress.Find(id);
 
-            return getcus.FullName+"|"+ getcus.PhoneNumber+"|"+ getcus.Address;
+            return getcus.FullName+"|"+ getcus.PhoneNumber+"|"+ getcus.Address+"|"+getcus.provinces+"|"+getcus.districts+"|"+getcus.wards;
         }
     }
 }

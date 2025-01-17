@@ -86,6 +86,19 @@ namespace HirentWeb2022.ViewModel
         public string Giaotannha { get; set; }
         public string Nhantratannha { get; set; }
         public string Giaovanhantratannha { get; set; }
+        //en
+        public float CostInstallationEN  { get; set; }
+        public float CostDeliveryEN { get; set; }
+        public float CostInstallAndDeliveryEN { get; set; }
+        public string TulapdatEN { get; set; }
+        public string HuongdansudungEN { get; set; }
+        public string ThotoilapEN { get; set; }
+        public string ThotoithaoEN { get; set; }
+        public string ThodenlapvathaoEN { get; set; }
+        public string TuvanchuyenEN { get; set; }
+        public string GiaotannhaEN { get; set; }
+        public string NhantratannhaEN { get; set; }
+        public string GiaovanhantratannhaEN { get; set; }
         public List<objsub> lstProductAccessorySelection { get; set; }
         public string WarehouseName { get; set; }
     }

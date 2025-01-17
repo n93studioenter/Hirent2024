@@ -285,7 +285,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="col-md-6 col-sm-6 col-xs-12 hidden">
                                             <div class="form-group">
                                                 <label class="control-label col-md-4 col-sm-4 col-xs-12">Cọc giữ chỗ</label>
                                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -325,62 +325,62 @@
                                     <div class="col-md-4 col-sm-4 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12">Tự lặp đặt</label>
-                                            <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <textarea name="ctl00$ContentPlaceHolder1$Tulapdat" id="ContentPlaceHolder1_Tulapdat" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">53</textarea>
+                                            <div class="col-md-8 col-sm-8 col-xs-12"> 
+                                                <textarea name="ctl00$ContentPlaceHolder1$Tulapdat" id="ContentPlaceHolder1_Tulapdat" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">@(Model.tb_ProductTermConditionDetails!=null?Model.tb_ProductTermConditionDetails.Tulapdat:"")</textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12">Hướng dẫn sử dụng</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <textarea name="ctl00$ContentPlaceHolder1$Huongdansudung" id="ContentPlaceHolder1_Huongdansudung" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung"></textarea>
+                                                <textarea name="ctl00$ContentPlaceHolder1$Huongdansudung" id="ContentPlaceHolder1_Huongdansudung" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">@(Model.tb_ProductTermConditionDetails!=null?Model.tb_ProductTermConditionDetails.Huongdansudung : "")</textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12">Thợ đến lắp</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <textarea name="ctl00$ContentPlaceHolder1$Thotoilap" id="ContentPlaceHolder1_Thotoilap" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">Thời gian lắp mất 15 phút. Không lắp trên cao quá 2m, nếu lắp cao hơn phải có sẵn thang|6868</textarea>
+                                                <textarea name="ctl00$ContentPlaceHolder1$Thotoilap" id="ContentPlaceHolder1_Thotoilap" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">@(Model.tb_ProductTermConditionDetails!=null?Model.tb_ProductTermConditionDetails.Thotoilap : "")</textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12">Thợ đến tháo</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <textarea name="ctl00$ContentPlaceHolder1$Thotoithao" id="ContentPlaceHolder1_Thotoithao" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">Thời gian tháo mất 15 phút.|6868</textarea>
+                                                <textarea name="ctl00$ContentPlaceHolder1$Thotoithao" id="ContentPlaceHolder1_Thotoithao" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">@(Model.tb_ProductTermConditionDetails!=null?Model.tb_ProductTermConditionDetails.Thotoithao : "")</textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12">Thợ đến lắp và tháo</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <textarea name="ctl00$ContentPlaceHolder1$Thodenlapvathao" id="ContentPlaceHolder1_Thodenlapvathao" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">Thời gian lắp mất 30 phút và thời gian tháo 15 phút trước khi hết giờ|6868</textarea>
+                                                <textarea name="ctl00$ContentPlaceHolder1$Thodenlapvathao" id="ContentPlaceHolder1_Thodenlapvathao" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">@(Model.tb_ProductTermConditionDetails!=null?Model.tb_ProductTermConditionDetails.Thodenlapvathao : "")</textarea>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12">Tự vận chuyển</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <textarea name="ctl00$ContentPlaceHolder1$Tuvanchuyen" id="ContentPlaceHolder1_Tuvanchuyen" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">Quý khách vui lòng chuyển tiền thuê trước để shop giữ hàng lại.|6868</textarea>
+                                                <textarea name="ctl00$ContentPlaceHolder1$Tuvanchuyen" id="ContentPlaceHolder1_Tuvanchuyen" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">@(Model.tb_ProductTermConditionDetails!=null?Model.tb_ProductTermConditionDetails.Tuvanchuyen : "")</textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12">Giao tận nhà</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <textarea name="ctl00$ContentPlaceHolder1$Giaotannha" id="ContentPlaceHolder1_Giaotannha" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">Thời gian giao hàng khoảng 15 phút. Giao hàng trong bán kính 3 km, nếu xa hơn sẽ tính thêm phụ thu 5.000 / km|6868</textarea>
+                                                <textarea name="ctl00$ContentPlaceHolder1$Giaotannha" id="ContentPlaceHolder1_Giaotannha" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">@(Model.tb_ProductTermConditionDetails!=null?Model.tb_ProductTermConditionDetails.Giaotannha : "")</textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12">Nhận trả tận nhà</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <textarea name="ctl00$ContentPlaceHolder1$Nhantratannha" id="ContentPlaceHolder1_Nhantratannha" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">Vui lòng trả hàng sớm trước 15 phút giờ shop đóng cửa. Nhận hàng trong bán kính 3 km, nếu xa hơn sẽ tính thêm phụ thu 5.000 / km|6868</textarea>
+                                                <textarea name="ctl00$ContentPlaceHolder1$Nhantratannha" id="ContentPlaceHolder1_Nhantratannha" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">@(Model.tb_ProductTermConditionDetails!=null?Model.tb_ProductTermConditionDetails.Nhantratannha : "")</textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12">Giao và nhận trả tận nhà</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <textarea name="ctl00$ContentPlaceHolder1$Giaovanhantratannha" id="ContentPlaceHolder1_Giaovanhantratannha" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">6868|6868</textarea>
+                                                <textarea name="ctl00$ContentPlaceHolder1$Giaovanhantratannha" id="ContentPlaceHolder1_Giaovanhantratannha" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">@(Model.tb_ProductTermConditionDetails!=null?Model.tb_ProductTermConditionDetails.Giaovanhantratannha : "")</textarea>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-12 hidden">
                                         <div class="form-group">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12">Gửi giấy tờ </label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
@@ -1593,65 +1593,65 @@
                         </div>
                     </div>
                     <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12">Tự lặp đặt</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
-                                    <textarea name="ctl00$ContentPlaceHolder1$Textarea1" id="ContentPlaceHolder1_Textarea1" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung"></textarea>
+                                    <textarea id="ContentPlaceHolder1_TulapdatEN" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">@(Model.tb_ProductTermConditionDetails_Translation != null?Model.tb_ProductTermConditionDetails_Translation.Tulapdat:"")</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12">Hướng dẫn sử dụng</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
-                                    <textarea name="ctl00$ContentPlaceHolder1$Textarea2" id="ContentPlaceHolder1_Textarea2" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung"></textarea>
+                                    <textarea id="ContentPlaceHolder1_HuongdansudungEN" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">@(Model.tb_ProductTermConditionDetails_Translation != null?Model.tb_ProductTermConditionDetails_Translation.Huongdansudung : "")</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12">Thợ đến lắp</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
-                                    <textarea name="ctl00$ContentPlaceHolder1$Textarea3" id="ContentPlaceHolder1_Textarea3" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung"></textarea>
+                                    <textarea id="ContentPlaceHolder1_ThotoilapEN" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">@(Model.tb_ProductTermConditionDetails_Translation != null?Model.tb_ProductTermConditionDetails_Translation.Thotoilap : "")</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12">Thợ đến tháo</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
-                                    <textarea name="ctl00$ContentPlaceHolder1$Textarea4" id="ContentPlaceHolder1_Textarea4" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung"></textarea>
+                                    <textarea id="ContentPlaceHolder1_ThotoithaoEN" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">@(Model.tb_ProductTermConditionDetails_Translation != null?Model.tb_ProductTermConditionDetails_Translation.Thotoithao : "")</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12">Thợ đến lắp và tháo</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
-                                    <textarea name="ctl00$ContentPlaceHolder1$Textarea5" id="ContentPlaceHolder1_Textarea5" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung"></textarea>
+                                    <textarea id="ContentPlaceHolder1_ThodenlapvathaoEN" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">@(Model.tb_ProductTermConditionDetails_Translation != null?Model.tb_ProductTermConditionDetails_Translation.Thodenlapvathao : "")</textarea>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12">Tự vận chuyển</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
-                                    <textarea name="ctl00$ContentPlaceHolder1$Textarea6" id="ContentPlaceHolder1_Textarea6" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung"></textarea>
+                                    <textarea id="ContentPlaceHolder1_TuvanchuyeneEN" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">@(Model.tb_ProductTermConditionDetails_Translation != null?Model.tb_ProductTermConditionDetails_Translation.Tuvanchuyen : "")</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12">Giao tận nhà</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
-                                    <textarea name="ctl00$ContentPlaceHolder1$Textarea7" id="ContentPlaceHolder1_Textarea7" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung"></textarea>
+                                    <textarea id="ContentPlaceHolder1_GiaotannhaEN" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">@(Model.tb_ProductTermConditionDetails_Translation != null?Model.tb_ProductTermConditionDetails_Translation.Giaotannha : "")</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12">Nhận trả tận nhà</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
-                                    <textarea name="ctl00$ContentPlaceHolder1$Textarea8" id="ContentPlaceHolder1_Textarea8" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung"></textarea>
+                                    <textarea id="ContentPlaceHolder1_NhantratannhaEN" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">@(Model.tb_ProductTermConditionDetails_Translation != null?Model.tb_ProductTermConditionDetails_Translation.Nhantratannha : "")</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12">Giao và nhận trả tận nhà</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
-                                    <textarea name="ctl00$ContentPlaceHolder1$Textarea9" id="ContentPlaceHolder1_Textarea9" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung"></textarea>
+                                    <textarea id="ContentPlaceHolder1_GiaovanhantratannhaEN" class="resizable_textarea form-control" cols="20" placeholder="Nhập nội dung">@(Model.tb_ProductTermConditionDetails_Translation != null?Model.tb_ProductTermConditionDetails_Translation.Giaovanhantratannha : "")</textarea>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-12 hidden">
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12">Gửi giấy tờ </label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -2144,6 +2144,20 @@
             "Giaotannha": $("#ContentPlaceHolder1_Giaotannha").val(),
             "Nhantratannha": $("#ContentPlaceHolder1_Nhantratannha").val(),
             "Giaovanhantratannha": $("#ContentPlaceHolder1_Giaovanhantratannha").val(),
+            //
+            "CostInstallationEN": $("#ContentPlaceHolder1_WhCostInstallEN").val(),
+            "CostDeliveryEN": $("#ContentPlaceHolder1_WhCostDeliveryEN").val(),
+            "CostInstallAndDeliveryEN": $("#ContentPlaceHolder1_WhCostInstallDeliveryEN").val(),
+            "TulapdatEN": $("#ContentPlaceHolder1_TulapdatEN").val(),
+            "HuongdansudungEN": $("#ContentPlaceHolder1_HuongdansudungEN").val(),
+            "ThotoilapEN": $("#ContentPlaceHolder1_ThotoilapEN").val(),
+            "ThotoithaoEN": $("#ContentPlaceHolder1_ThotoithaoEN").val(),
+            "ThodenlapvathaoEN": $("#ContentPlaceHolder1_ThodenlapvathaoEN").val(),
+            "TuvanchuyenEN": $("#ContentPlaceHolder1_TuvanchuyeneEN").val(),
+            "GiaotannhaEN": $("#ContentPlaceHolder1_GiaotannhaEN").val(),
+            "NhantratannhaEN": $("#ContentPlaceHolder1_NhantratannhaEN").val(),
+            "GiaovanhantratannhaEN": $("#ContentPlaceHolder1_GiaovanhantratannhaEN").val(),
+            //
             "WarehouseId": $("#slwh").val(),
             "ProductName_EN": $("#ContentPlaceHolder1_productNameENs").val(),
             "ShortDescription_EN": $("#ContentPlaceHolder1_productDescriptionEN").val(),

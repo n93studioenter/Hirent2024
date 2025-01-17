@@ -47,6 +47,13 @@
                 $("#txtName2").val(spl[0]);
                 $("#txtPhone2").val(spl[1]);
                 $("#txtAddress2").val(spl[2]);
+                $("#txtName").val(spl[0]);
+                $("#txtPhone").val(spl[1]);
+                $("#txtAddress").val(spl[2]);
+                $("#slProvinces").val(spl[3]);
+                $("#txtdistricts").val(spl[4]);
+                $("#txtwards").val(spl[5]);
+                changeProvinces();
             },
             error: function (xhr, status, error) {
                 alert(status);
@@ -92,3 +99,15 @@
         });
     }
 </script>
+<style>
+    @@supports (-webkit-appearance: none) or (-moz-appearance: none) {
+    input[type='radio']:after {
+        width: 13px;
+        height: 14px;
+        background-color: #214F39;
+        border-radius: 50%;
+        opacity: 0;
+        transform: scale(var(--s, 0.5));
+    }
+}
+</style>
